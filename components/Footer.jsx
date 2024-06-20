@@ -46,6 +46,8 @@ function Footer() {
                     <p className="text-center text-lg-start">
                       Developed with 💛 by <br />
                       <a className="text-decoration-none text-white-50 copyrigth-hover" href="https://www.linkedin.com/in/gabriele-tosto/" target="_blank">Gabriele Mario Tosto</a> <br />
+                      Design by <a className="text-decoration-none text-white-50 copyrigth-hover" href="">GabuZz</a>
+                      <br />
                       &copy; 2024 - playxdefiant.it
                     </p>
                   </li>
