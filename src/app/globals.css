@@ -38,6 +38,8 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  --primary-bg-color: #132241;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -70,6 +72,8 @@
     --callout-border-rgb: 108, 108, 108;
     --card-rgb: 100, 100, 100;
     --card-border-rgb: 200, 200, 200;
+
+    --primary-bg-color: #132241;
   }
 }
 
@@ -87,12 +91,7 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--primary-bg-color);
 }
 
 a {
@@ -104,4 +103,10 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+
+/* CUSTOM BOOTSTRAP */
+.bg-body-tertiary {
+  background-color: var(--primary-bg-color) !important;
 }
