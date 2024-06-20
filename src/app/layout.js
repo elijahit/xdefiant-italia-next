@@ -2,6 +2,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import "./globals.css";
+import siteConfig from "../../siteConfig.json"
 
 
 export const metadata = {
@@ -11,16 +12,16 @@ export const metadata = {
   openGraph: {
     title: 'XDefiant Italia',
     description: 'Community italiana di XDefiant dal 2021. Su discord aggiorniamo i giocatori su novità, eventi e competizioni. Unisciti a noi per condividere esperienze, strategie e partecipare a tornei',
-    url: 'https://playxdefiant.it/',
+    url: siteConfig.site.baseUri,
     siteName: 'XDefiant Italia - Community',
     images: [
       {
-        url: 'http://localhost:3000/background-metadata/backgroundOg.jpg', // Must be an absolute URL
+        url: `${siteConfig.site.baseUri}background-metadata/backgroundOg.jpg`, // Must be an absolute URL
         width: 800,
         height: 600,
       },
       {
-        url: 'http://localhost:3000/background-metadata/backgroundOg.jpg', // Must be an absolute URL
+        url: `${siteConfig.site.baseUri}background-metadata/backgroundOg.jpg`, // Must be an absolute URL
         width: 1800,
         height: 1600,
         alt: 'Background XDefiant Italia',
