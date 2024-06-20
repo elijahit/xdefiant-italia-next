@@ -21,7 +21,7 @@ function Header({ isPage }) {
               <a className={isPage == "home" ? "nav-link active" : "nav-link"} aria-current="page" href="/">Home</a>
             </li>
             <li className="nav-item">
-              <a className={isPage == "about" ? "nav-link active" : "nav-link"} href="#">Chi siamo</a>
+              <a className={isPage == "about" ? "nav-link active" : "nav-link"} href="/about">Chi siamo</a>
             </li>
             <li className="nav-item">
               <a className={isPage == "news" ? "nav-link active" : "nav-link"} href="#">News</a>
