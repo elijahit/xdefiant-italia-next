@@ -1,13 +1,14 @@
 import styles from "./page.module.css";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 
 export default function Home() {
   return (
     <>
+      {/* HEADER */}
+      <Header isPage="home"></Header>
       <main>
-        {/* HEADER */}
-        <Header isPage="home"></Header>
         {/* HERO SECTION */}
         <div id="heroComponents" className={styles.hero + " d-flex flex-column justify-content-center align-items-center mb-5"}>
           <h1>TESTO SEGNAPOSTO</h1>
@@ -19,6 +20,8 @@ export default function Home() {
           </p>
         </div>
       </main>
+      {/* FOOTER */}
+      <Footer />
     </>
   );
 }
