@@ -10,3 +10,7 @@ const path = require("path");
   })
   export default db;
 
+  const post = await db.get("select titolo from article where titolo = ?", "titolo");
+
+  console.log(post)
+

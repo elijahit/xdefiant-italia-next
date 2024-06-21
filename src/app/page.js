@@ -1,7 +1,6 @@
 import styles from "./page.module.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import test from "../../scripts/database";
 
 
 export default function Home() {
@@ -19,9 +18,6 @@ export default function Home() {
           <p className="text-center mb-5">
             Siamo la community italiana di XDefiant, attiva dal 2021, dedicata a tenere i giocatori aggiornati su novità, eventi speciali e competizioni del gioco. Utilizziamo vari canali social per informare la community e creare un ambiente accogliente dove condividere esperienze, strategie e partecipare a tornei. Invitiamo tutti i fan a unirsi a noi per rimanere aggiornati e far parte di una community vibrante e attiva.
           </p>
-          <div>
-            {JSON.stringify(test)}
-          </div>
         </div>
       </main>
       {/* FOOTER */}
