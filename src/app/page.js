@@ -3,18 +3,8 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Hero from "../../components/Hero";
 import Image from "next/image";
-import Jimp from "jimp/es";
 import CardNewsHeader from "../../components/CardNewsHeader"
 import { notFound } from "next/navigation";
-
-Jimp.read("public/hero-images/2.png", (err, lenna) => {
-  if (err) throw err;
-  lenna
-    .resize(430, 330) // resize
-    .quality(60) // set JPEG quality
-    .greyscale() // set greyscale
-    .write("public/posts-images/post-1.webp"); // save
-});
 
 
 export default async function Home({ params }) {
