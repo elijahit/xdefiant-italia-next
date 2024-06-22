@@ -121,3 +121,7 @@ footer {
 .bg-body-tertiary {
   background-color: var(--primary-bg-color) !important;
 }
+
+.bg-primary-custom {
+  background-color: var(--primary-bg-color);
+}

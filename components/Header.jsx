@@ -23,13 +23,13 @@ function Header({ isPage }) {
                 <a className={isPage == "home" ? "nav-link active" : "nav-link"} aria-current="page" href="/">Home</a>
               </li>
               <li className="nav-item">
-                <a className={isPage == "about" ? "nav-link active" : "nav-link"} href="/about">Chi siamo</a>
+                <a className={isPage == "news" ? "nav-link active" : "nav-link"} href="/news">News</a>
               </li>
               <li className="nav-item">
-                <a className={isPage == "news" ? "nav-link active" : "nav-link"} href="#">News</a>
+                <a className={isPage == "contact" ? "nav-link active" : "nav-link"} href="/contact">Contact</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Discord</a>
+                <a className="nav-link" href="https://discord.com/servers/xdefiant-italia-1124809941744619602">Discord</a>
               </li>
             </ul>
           </div>

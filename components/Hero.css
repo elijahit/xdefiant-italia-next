@@ -1,0 +1,6 @@
+.hero {
+  background-image: url("/hero-images/background.webp");
+  background-position: center;
+  background-size: cover;
+  height: 30vh;
+}
