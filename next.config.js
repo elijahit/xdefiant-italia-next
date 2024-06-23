@@ -1,12 +1,20 @@
-module.exports = {
-  images: {
-    remotePatterns: [
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  async redirects() {
+    return [
       {
-        protocol: 'https',
-        hostname: 'playxdefiant.it',
-        port: '',
-        pathname: '/assets/**',
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.playxdefiant.it',
+          },
+        ],
+        destination: 'https://playxdefiant.it/:path*',
+        permanent: true,
       },
-    ],
+    ]
   },
 }
+
+module.exports = nextConfig
