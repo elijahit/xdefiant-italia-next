@@ -1,7 +1,7 @@
 // import { Inter } from "next/font/google";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
-import "./globals.css";
+import "../globals.css";
 import siteConfig from "../../../siteConfig.json"
 
 
