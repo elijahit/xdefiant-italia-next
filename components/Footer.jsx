@@ -8,20 +8,25 @@ function Footer() {
         {/* FOOTER PER DESKTOP */}
         <div className="row">
           <div className="col-12 mt-5 mb-4 d-flex justify-content-center d-lg-block">
-            <Image src={"/footer-images/logo.webp"} alt="Logo XDefiant Italia" width={20} height={20}></Image>
+            <Image src={"/footer-images/logo.webp"} alt="Logo XDefiant Italia" width={22} height={20}></Image>
           </div>
-          <div className="col-4 d-none d-lg-block">
+          <div className="col-2 d-none d-lg-block">
             <h6>Navigazione</h6>
-            <ul className="list-unstyled">
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/news">News</a>
-              </li>
-            </ul>
+            <nav aria-label="footer">
+              <ul className="list-unstyled">
+                <li>
+                  <a href="/">Home</a>
+                </li>
+                <li>
+                  <a href="/news">News</a>
+                </li>
+                <li>
+                  <a href="/discord">Discord</a>
+                </li>
+              </ul>
+              </nav>
           </div>
-          <div className="col-12 col-lg-8">
+          <div className="col-12 col-lg-10">
             <h6 className="text-center text-lg-start">Informazioni</h6>
             <p className="text-center text-lg-start">playxdefiant.it non è in nessun modo affiliato a <b>Ubisoft Entertainment</b></p>
             <p className="text-center text-lg-start">
@@ -30,7 +35,7 @@ function Footer() {
             </p>
           </div>
           <div className="col-12 d-flex flex-column align-items-center align-items-lg-end mb-5">
-            <div className="d-flex gap-3">
+            <div className="d-flex gap-3 mb-2">
               <div className="social-background d-flex justify-content-center align-items-center">
                 <a href="https://x.com/playxdefiant_it" target="_blank">
                   <i className="bi bi-twitter-x"></i>
@@ -47,6 +52,9 @@ function Footer() {
                 </a>
               </div>
             </div>
+            <p>
+              <u>&copy; 2024 - playxdefiant.it</u>
+            </p>
           </div>
         </div>
       </div>
