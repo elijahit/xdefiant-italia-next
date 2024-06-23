@@ -70,7 +70,7 @@ export default async function Page({ params }) {
               {dayCreate}/{monthCreate}/{createdDate.getFullYear()} | {hourCreate}:{minuteCreate} - {postData.author}
             </p>
           </div>
-          <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+          <div className="mb-5" dangerouslySetInnerHTML={{ __html: contentHtml }} />
         </article>
       </div>
       <div className="d-lg-none mb-2">
