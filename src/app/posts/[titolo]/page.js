@@ -1,8 +1,11 @@
+import Styles from "./page.module.css";
 import { notFound } from "next/navigation";
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
 import { remark } from 'remark';
 import html from 'remark-html';
+import Hero from "../../../../components/Hero";
+
 export async function generateMetadata({ params, }, parent) {
   try {
     // read route params
@@ -41,15 +44,42 @@ export default async function Page({ params }) {
     .process(postData.testo);
   const contentHtml = processedContent.toString();
 
+  // GESTIAMO LE DATE
+  const createdDate = new Date(+postData.createdAt * 1000);
+
+  const dayCreate = createdDate.getDate() >= 10 ? createdDate.getDate() : `0${createdDate.getDate()}`;
+  const monthCreate = createdDate.getMonth() + 1 >= 10 ? createdDate.getMonth() + 1 : `0${createdDate.getMonth() + 1}`;
+
+  const hourCreate = createdDate.getHours() >= 10 ? createdDate.getHours() : `0${createdDate.getHours()}`;
+  const minuteCreate = createdDate.getMinutes() >= 10 ? createdDate.getMinutes() : `0${createdDate.getMinutes()}`;
+
+
   return (
     <>
+      
+      {/* HEADER */}
       <Header />
-      <div className="container mt-5">
+      {/* HERO SECTION */}
+      <Hero />
+      <div className="container mt-2">
+        <section id="upPage">
+        </section>
         <article>
-          <h1 className="fs-2 text-center">{postData.titolo}</h1>
+          <h1 className="fs-4 text-center">{postData.titolo}</h1>
+          <div className="d-flex justify-content-center align-items-center">
+            <p className={Styles.author}>
+              {dayCreate}/{monthCreate}/{createdDate.getFullYear()} | {hourCreate}:{minuteCreate} - {postData.author}
+            </p>
+          </div>
           <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
-          <p className="text-end text-secondary">{postData.author} - Redazione di playxdefiant.it</p>
         </article>
+      </div>
+      <div className={Styles.banner + " mb-2  "} style={{backgroundImage: `url(${postData.imageUrl})`}}>
+      </div>
+      <div className="container">
+        <div className="d-flex justify-content-end">
+          <a href="#upPage" className={Styles.buttonUp + " mb-5"}>Torna all'inizio</a>
+        </div>
       </div>
       <Footer />
     </>
@@ -60,7 +90,7 @@ async function getData(params) {
   try {
     const res = await fetch(`http://localhost:3000/api/post?uri=${params.titolo}`);
 
-    const { id_article, titolo, testo, id_utente, image_url, username, email, discord_name } = await res.json();
+    const { id_article, titolo, testo, id_utente, image_url, created_at, username, email, discord_name } = await res.json();
 
     const articleObject = {
       id: id_article,
@@ -68,6 +98,7 @@ async function getData(params) {
       testo: testo,
       utenteId: id_utente,
       imageUrl: image_url,
+      createdAt: created_at,
       author: username,
       emailAuthor: email,
       discordAuthor: discord_name

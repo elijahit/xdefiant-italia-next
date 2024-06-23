@@ -5,7 +5,7 @@ import db from "../../../../scripts/database";
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams
   let query = searchParams.get('uri')
-  let res = await db.get("select a.id_article , a.titolo, a.testo, a.id_utente, a.image_url, u.username, u.email, u.discord_name from article a join utente u on u.id_utente = a.id_utente where uri_article = ?", query)
+  let res = await db.get("select a.id_article , a.titolo, a.testo, a.id_utente, a.image_url, a.created_at, u.username, u.email, u.discord_name from article a join utente u on u.id_utente = a.id_utente where uri_article = ?", query)
   return NextResponse.json(res);
 }
 
