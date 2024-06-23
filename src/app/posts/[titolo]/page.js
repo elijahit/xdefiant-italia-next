@@ -80,7 +80,7 @@ export default async function Page({ params }) {
       </div>
       <div className="container">
         <div className="d-flex justify-content-center justify-content-lg-end">
-          <a href="#upPage" className={Styles.buttonUp + " mb-5"}>Torna all'inizio</a>
+          <a href="#upPage" className={Styles.buttonUp + " mb-5"}>Torna all&apos;inizio</a>
         </div>
       </div>
       <Footer />
