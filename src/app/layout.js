@@ -16,12 +16,12 @@ export const metadata = {
     siteName: 'XDefiant Italia - Community',
     images: [
       {
-        url: `${siteConfig.site.baseUri}background-metadata/backgroundOg.jpg`, // Must be an absolute URL
+        url: `${siteConfig.site.baseUri}metadata/backgroundOg.jpg`, // Must be an absolute URL
         width: 800,
         height: 600,
       },
       {
-        url: `${siteConfig.site.baseUri}background-metadata/backgroundOg.jpg`, // Must be an absolute URL
+        url: `${siteConfig.site.baseUri}metadata/backgroundOg.jpg`, // Must be an absolute URL
         width: 1800,
         height: 1600,
         alt: 'Background XDefiant Italia',
