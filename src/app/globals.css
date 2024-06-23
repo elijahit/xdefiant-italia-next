@@ -125,3 +125,7 @@ footer {
 .bg-primary-custom {
   background-color: var(--primary-bg-color);
 }
+
+.bg-secondary-custom {
+  background-color: var(--secondary-bg-color);
+}

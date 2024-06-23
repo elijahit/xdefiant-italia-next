@@ -57,13 +57,12 @@ export default async function Page({ params }) {
   return (
     <>
       
+      <section id="upPage"></section>
       {/* HEADER */}
       <Header />
       {/* HERO SECTION */}
       <Hero />
       <div className="container mt-2">
-        <section id="upPage">
-        </section>
         <article>
           <h1 className="fs-4 text-center">{postData.titolo}</h1>
           <div className="d-flex justify-content-center align-items-center">
@@ -74,10 +73,13 @@ export default async function Page({ params }) {
           <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
         </article>
       </div>
-      <div className={Styles.banner + " mb-2  "} style={{backgroundImage: `url(${postData.imageUrl})`}}>
+      <div className="d-lg-none mb-2">
+        <img className="img-fluid" src={postData.imageUrl}></img>
+      </div>
+      <div className={Styles.banner + " mb-2 d-none  d-lg-block"} style={{backgroundImage: `url(${postData.imageUrl})`}}>
       </div>
       <div className="container">
-        <div className="d-flex justify-content-end">
+        <div className="d-flex justify-content-center justify-content-lg-end">
           <a href="#upPage" className={Styles.buttonUp + " mb-5"}>Torna all'inizio</a>
         </div>
       </div>
