@@ -6,10 +6,8 @@ import Image from "next/image";
 import CardNewsHeader from "../../components/CardNewsHeader"
 import { notFound } from "next/navigation";
 
-
-export default async function Home({ params }) {
-  const postData = await getData(params);
-  console.log(postData[0].titolo)
+export default async function Home() {
+  const postData = await getData();
 
   return (
     <>
@@ -21,7 +19,7 @@ export default async function Home({ params }) {
         {/* FIRST SECTION */}
         <section>
           <div className="container">
-            <p className="text-center mb-5">
+            <p className="text-center mb-5 fs-4">
               Siamo la community italiana di XDefiant, attiva dal 2021, dedicata a tenere i giocatori aggiornati su novità, eventi speciali e competizioni del gioco. Utilizziamo vari canali social per informare la community e creare un ambiente accogliente dove condividere esperienze, strategie e partecipare a tornei. Invitiamo tutti i fan a unirsi a noi per rimanere aggiornati e far parte di una community vibrante e attiva.
             </p>
           </div>
@@ -32,11 +30,17 @@ export default async function Home({ params }) {
           </svg>
         </div>
         <section>
-          <div className="container mb-5">  
+          <div className="container mb-5 d-flex flex-column align-items-center">  
             <h3 className="fs-5 text-center mb-4">LE ULTIME NEWS</h3>
-            <div className="flex-column flex-lg-row d-flex gap-5 justify-content-center align-items-center">
+            <div className="flex-column flex-lg-row d-flex gap-5 justify-content-center align-items-center mb-5">
               {postData.map((object, i) => <CardNewsHeader key={i} image={object.image_url} title={object.titolo.length > 49 ? object.titolo.slice(0, 49)+"..." : object.titolo} uri={object.uri_article}/>)}
             </div>
+            <a href="/news"  className="btn btn-outline-light">Visualizza tutti i nostri articoli</a>
+          </div>
+        </section>
+        <section className="mb-5">
+          <div>
+            <a href="https://discord.com/servers/xdefiant-italia-1124809941744619602" target="_blank"><Image src={"/home-images/discordbanner.png"} className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
           </div>
         </section>
       </main>
@@ -47,7 +51,7 @@ export default async function Home({ params }) {
 }
 
 
-async function getData(params) {
+async function getData() {
   try {
     const res = await fetch(`http://localhost:3000/api/postNews?limit=2`);
 
