@@ -2,7 +2,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import "./globals.css";
-import siteConfig from "../../siteConfig.json"
+import siteConfig from "../../../siteConfig.json"
 
 
 export const metadata = {
