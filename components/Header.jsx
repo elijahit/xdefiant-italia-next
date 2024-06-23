@@ -26,9 +26,6 @@ function Header({ isPage }) {
                 <a className={isPage == "news" ? "nav-link active" : "nav-link"} href="/news">News</a>
               </li>
               <li className="nav-item">
-                <a className={isPage == "contact" ? "nav-link active" : "nav-link"} href="/contact">Contact</a>
-              </li>
-              <li className="nav-item">
                 <a className="nav-link" href="https://discord.com/servers/xdefiant-italia-1124809941744619602">Discord</a>
               </li>
             </ul>
