@@ -8,7 +8,7 @@ function Footer() {
         {/* FOOTER PER DESKTOP */}
         <div className="row">
           <div className="col-12 mt-5 mb-4">
-            <Image src={"/footer-images/logo.webp"} width={20} height={20}></Image>
+            <Image src={"/footer-images/logo.webp"} alt="Logo XDefiant Italia" width={20} height={20}></Image>
           </div>
           <div className="col-4">
             <h6>Navigazione</h6>
