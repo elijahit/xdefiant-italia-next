@@ -39,8 +39,12 @@ export default async function Home() {
           </div>
         </section>
         <section className="mb-5">
-          <div>
+          <div className="d-none d-lg-block">
             <a href="https://discord.com/servers/xdefiant-italia-1124809941744619602" target="_blank"><Image src={"/home-images/discordbanner.png"} alt="Banner discord" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
+          </div>
+
+          <div className="d-block d-lg-none">
+            <a href="https://discord.com/servers/xdefiant-italia-1124809941744619602" target="_blank"><Image src={"/home-images/discordbannerMobile.png"} alt="Banner discord" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
           </div>
         </section>
       </main>

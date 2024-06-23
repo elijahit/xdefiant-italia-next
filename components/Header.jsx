@@ -18,17 +18,19 @@ function Header({ isPage }) {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className={isPage == "home" ? "nav-link active" : "nav-link"} aria-current="page" href="/">Home</a>
-              </li>
-              <li className="nav-item">
-                <a className={isPage == "news" ? "nav-link active" : "nav-link"} href="/news">News</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="https://discord.com/servers/xdefiant-italia-1124809941744619602">Discord</a>
-              </li>
-            </ul>
+            <nav aria-label="principale">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                  <a className={isPage == "home" ? "nav-link active" : "nav-link"} aria-current="page" href="/">Home</a>
+                </li>
+                <li className="nav-item">
+                  <a className={isPage == "news" ? "nav-link active" : "nav-link"} href="/news">News</a>
+                </li>
+                <li className="nav-item">
+                  <a className={isPage == "discord" ? "nav-link active" : "nav-link"} href="/discord">Discord</a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </nav>
