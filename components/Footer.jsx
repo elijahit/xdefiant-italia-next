@@ -31,17 +31,17 @@ function Footer() {
           </div>
           <div className="col-12 d-flex flex-column align-items-center align-items-lg-end mb-5">
             <div className="d-flex gap-3">
-              <div className="social-background">
+              <div className="social-background d-flex justify-content-center align-items-center">
                 <a href="https://x.com/playxdefiant_it" target="_blank">
                   <i className="bi bi-twitter-x"></i>
                 </a>
               </div>
-              <div className="social-background">
+              <div className="social-background d-flex justify-content-center align-items-center">
                 <a href="https://www.instagram.com/playxdefiant_IT/" target="_blank">
                   <i className="bi bi-instagram"></i>
                 </a>
               </div>
-              <div className="social-background">
+              <div className="social-background d-flex justify-content-center align-items-center">
                 <a href="https://www.facebook.com/PlayXDefiantIT/" target="_blank">
                   <i className="bi bi-facebook"></i>
                 </a>
