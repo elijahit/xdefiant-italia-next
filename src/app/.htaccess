@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+RewriteCond %{HTTP_HOST} ^www\.playxdefiant\.it [NC]
+RewriteRule ^(.*)$ http://playxdefiant.it/$1 [L,R=301]
+
