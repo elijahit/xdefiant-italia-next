@@ -6,5 +6,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
 
 RewriteCond %{HTTP_HOST} ^www\.playxdefiant\.it [NC]
-RewriteRule ^(.*)$ http://playxdefiant.it%{REQUEST_URI} [L,R=301]
+RewriteRule ^(.*)$ https://playxdefiant.it/$1 [L,R=301]
 
