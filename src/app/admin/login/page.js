@@ -4,9 +4,24 @@ import Footer from "../../../../components/Footer";
 import Hero from "../../../../components/Hero";
 import Image from "next/image";
 import CardNewsHeader from "../../../../components/CardNewsHeader"
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { cookies } from "next/headers";
+import db from "../../../../scripts/database";
 
 export default async function LoginStaff(params) {
+  // RENDERIZZO IN NEW POST IN BASE AL LOGIN SE E' EFFETTUATO O MENO
+  const auth = cookies().get("authToken")?.value;
+  const email = cookies().get("email")?.value;
+
+  if(email && auth) {
+    let res = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email, auth);
+    if(res) {
+      redirect("/admin/newpost");
+    } else {
+      cookies().delete("authToken");
+      cookies().delete("email");
+    }
+  }
 
   return (
     <>

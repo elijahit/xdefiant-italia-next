@@ -11,10 +11,10 @@ export async function GET(request) {
   const errorLogin = new URL('/admin/login?error=invalid', request.url)
   const postArticle = new URL('/admin/newpost', request.url)
   if(res) {
-    let response = NextResponse.next();
+    let response = NextResponse.redirect(postArticle);
     response.cookies.set('email', email);
     response.cookies.set('authToken', token);
-    return;
+    return response;
   } else {
     return NextResponse.redirect(errorLogin);
   }
