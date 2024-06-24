@@ -1,0 +1,39 @@
+.form input {
+  background-color: #0D182E;
+  text-align: center !important;
+  border: none;
+  padding: 15px 50px;
+}
+
+.form input:not(:placeholder-shown),
+.form input:-internal-autofill-selected.form,
+.form input:focus,
+.form input:active  {
+  background-color: white !important;
+}
+
+.form input::placeholder {
+  color: white;
+}
+
+.form button{
+  background-color: yellow;
+  color: black;
+  font-weight: 700;
+}
+
+.form button:hover{
+  background-color: #080f1d;
+  color: white;
+}
+
+
+.labelForm::after{
+  position: absolute;
+  inset: 1rem 0.375rem;
+  z-index: -1;
+  height: 1.5em;
+  content: "";
+  background-color: none !important;
+  border-radius: var(--bs-border-radius)
+}

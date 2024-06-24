@@ -6,9 +6,7 @@ import Image from "next/image";
 import CardNewsHeader from "../../../../components/CardNewsHeader"
 import { notFound } from "next/navigation";
 
-export default async function Home() {
-  const postData = await getData();
-  const postDataAll = await getDataAll();
+export default async function LoginStaff(params) {
 
   return (
     <>
@@ -20,15 +18,16 @@ export default async function Home() {
         {/* FIRST SECTION */}
         <div className="container">
           <h5 className="fs-5 text-center mb-5 mt-4">AREA RISERVATA ALLO STAFF</h5>
-          <form className={styles.form + " mb-5"}>
+          <form method="GET" action={"/api/loginAdmin"} className={styles.form + " mb-5"}>
+            {params.searchParams.error == "invalid" ? <p className="text-danger"><i className="bi bi-exclamation-octagon"></i> I dati inseriti non sono corretti, riprova.</p> : <p></p>}
             <div className="mb-3">
-              <input type="email" className="form-control" id="floatingInput" placeholder="Email" required/>
+              <input type="email" className={params.searchParams.error == "invalid" ? "is-invalid" +  " form-control" : "form-control"}  id="email" name="email" placeholder="Email" required/>
             </div>
             <div className="mb-3">
-              <input type="password" className="form-control" id="floatingPassword" placeholder="Auth Token" required/>
+              <input type="password" className={params.searchParams.error == "invalid" ? "is-invalid" +  " form-control" : "form-control"} id="auth" name="authToken" placeholder="Auth Token" required/>
             </div>
             <div className="d-flex justify-content-center">
-              <button type="submit" class="btn ps-5 pe-5">Accedi</button>
+              <button type="submit" className="btn ps-5 pe-5">Accedi</button>
             </div>
           </form>
         </div>
@@ -37,25 +36,4 @@ export default async function Home() {
       <Footer />
     </>
   );
-}
-
-
-async function getData() {
-  try {
-    const res = await fetch(`http://localhost:3000/api/postNews?limit=2`);
-
-    return await res.json();
-  } catch {
-    notFound();
-  }
-}
-
-async function getDataAll() {
-  try {
-    const res = await fetch(`http://localhost:3000/api/postNews`);
-
-    return await res.json();
-  } catch {
-    notFound();
-  }
 }
