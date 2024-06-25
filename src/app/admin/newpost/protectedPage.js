@@ -11,6 +11,10 @@ import { getCookies } from "cookies-next";
 
 export default function Post() {
 
+  // VARIABLE RESPONSE
+  const [responseError, setResponseError ] = useState("");
+  const [responseSuccess, setresponseSuccess ] = useState("");
+
   // VARIABLE ERROR
   const [titleError, setTitleError] = useState(0);
   const [contentError, setContentError] = useState(0);
@@ -36,12 +40,17 @@ export default function Post() {
   // FUNZIONI DI VALIDATE
   async function handleSubmit(event) {
     event.preventDefault();
+    setresponseSuccess("");
+    setResponseError("");
     if (title.length == 0) setTitleError(1);
     if (content.length == 0) setContentError(1);
     if (image.length == 0) setImageError(1);
     const imageFetching = await fetch(image);
     if (imageFetching.status != 200) setImageError(1);
     if (titleError == 0 && contentError == 0 && imageError == 0) {
+      setTitleError(0);
+      setContentError(0);
+      setImageError(0);
       fetch('/api/postAdd', {
         method: 'post',
         headers: {
@@ -55,8 +64,20 @@ export default function Post() {
       })
         .then(response => response.text())
         .then(body => {
-          console.log(body);
+          if(JSON.parse(body).success == 1) {
+            setresponseSuccess(JSON.parse(body).text);
+            setTitle("");
+            setContent("");
+            setImage("");
+            event.target[0].value = "";
+            event.target[1].value = "";
+            event.target[2].value = "";
+          } else {
+            setResponseError(JSON.parse(body).text);
+          }
         });
+    } else {
+      return;
     }
   }
 
@@ -115,7 +136,13 @@ export default function Post() {
                 </div>
               </div>
             </div>
-            <div className="d-flex justify-content-end">
+            {responseError.length > 0 ? <p className="text-center text-lg-start text-danger">
+            <i class="bi bi-emoji-expressionless"></i> {responseError}
+              </p> : ""}
+            {responseSuccess.length > 0 ? <p className="text-center text-lg-start text-success">
+            <i class="bi bi-check2-all"></i> {responseSuccess}
+            </p> : ""}
+            <div className="d-flex justify-content-center justify-content-lg-end">
               <button type="submit" className="btn ps-5 pe-5">Pubblica ora</button>
             </div>
           </form>
