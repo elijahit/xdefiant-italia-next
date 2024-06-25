@@ -45,7 +45,7 @@ export default async function Page({ params }) {
   const contentHtml = processedContent.toString();
 
   // GESTIAMO LE DATE
-  const createdDate = new Date(+postData.createdAt * 1000);
+  const createdDate = new Date(+postData.createdAt);
 
   const dayCreate = createdDate.getDate() >= 10 ? createdDate.getDate() : `0${createdDate.getDate()}`;
   const monthCreate = createdDate.getMonth() + 1 >= 10 ? createdDate.getMonth() + 1 : `0${createdDate.getMonth() + 1}`;

@@ -1,20 +1,21 @@
-.form input,
-.form textarea {
+.form input {
   background-color: #0D182E;
   text-align: center !important;
   border: none;
   padding: 15px 50px;
+  color: white;
 }
 
-.form input:not(:placeholder-shown),
-.form input:-internal-autofill-selected.form,
-.form input:focus,
-.form input:active,
-.form textarea:not(:placeholder-shown),
-.form textarea:-internal-autofill-selected.form,
-.form textarea:focus,
-.form textarea:active  {
-  background-color: white !important;
+.form textarea {
+  background-color: #0D182E;
+  text-align: start !important;
+  border: none;
+  padding: 15px 50px;
+  color: white;
+}
+
+.form textarea::placeholder {
+  text-align: center !important;
 }
 
 .form input::placeholder,
@@ -42,4 +43,32 @@
   content: "";
   background-color: none !important;
   border-radius: var(--bs-border-radius)
+}
+
+.preview {
+  border: 2px solid black;
+  border-radius: 10px;
+  min-height: 100vh;
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+.preview p {
+  width: 100%;
+}
+
+.previewCenteredText {
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 100vh;
+  width: 100%;
+}
+
+.imagePreview {
+  height: 600px;
+  width: 100%;
+}
+
+.imagePreviewBorder {
+  border-radius: 10px;
 }

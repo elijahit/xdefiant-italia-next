@@ -3,13 +3,7 @@
   text-align: center !important;
   border: none;
   padding: 15px 50px;
-}
-
-.form input:not(:placeholder-shown),
-.form input:-internal-autofill-selected.form,
-.form input:focus,
-.form input:active  {
-  background-color: white !important;
+  color: white;
 }
 
 .form input::placeholder {

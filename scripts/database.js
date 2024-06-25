@@ -12,5 +12,3 @@ const path = require("path");
 
   const post = await db.get("select titolo from article where titolo = ?", "titolo");
 
-  console.log(post)
-

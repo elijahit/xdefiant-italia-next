@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "XDefiant Italia - News",
+  title: "XDefiant Italia - Login Admin",
 };
 
 export default function RootLayout({ children }) {

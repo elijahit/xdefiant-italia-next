@@ -8,15 +8,10 @@ export async function GET(request) {
   let token = searchParams.get('authToken')
 
   let res = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email, token);
-  const errorLogin = new URL('/admin/login?error=invalid', request.url)
-  const postArticle = new URL('/admin/newpost', request.url)
   if(res) {
-    let response = NextResponse.redirect(postArticle);
-    response.cookies.set('email', email);
-    response.cookies.set('authToken', token);
-    return response;
+    return NextResponse.json(res, {status: 200});
   } else {
-    return NextResponse.redirect(errorLogin);
+    return NextResponse.json({ message: "invalido" }, { status: 400 });
   }
   
 
