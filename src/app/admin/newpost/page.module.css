@@ -1,4 +1,5 @@
-.form input {
+.form input,
+.form textarea {
   background-color: #0D182E;
   text-align: center !important;
   border: none;
@@ -8,11 +9,16 @@
 .form input:not(:placeholder-shown),
 .form input:-internal-autofill-selected.form,
 .form input:focus,
-.form input:active  {
+.form input:active,
+.form textarea:not(:placeholder-shown),
+.form textarea:-internal-autofill-selected.form,
+.form textarea:focus,
+.form textarea:active  {
   background-color: white !important;
 }
 
-.form input::placeholder {
+.form input::placeholder,
+.form textarea::placeholder {
   color: white;
 }
 
