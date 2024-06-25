@@ -8,8 +8,9 @@ export async function GET(request) {
   let token = searchParams.get('authToken')
 
   let res = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email, token);
-  const errorLogin = new URL('/admin/login?error=invalid', request.url)
-  const postArticle = new URL('/admin/newpost', request.url)
+  const originalUrl = request.nextUrl.protocol + request.headers.get('host') + request.nextUrl.pathname
+  const errorLogin = new URL('/admin/login?error=invalid', originalUrl)
+  const postArticle = new URL('/admin/newpost', originalUrl)
   if(res) {
     let response = NextResponse.redirect(postArticle);
     response.cookies.set('email', email);
