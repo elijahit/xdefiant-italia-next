@@ -9,7 +9,7 @@ import db from "../../scripts/database";
 
 export default async function Home() {
   let postData = await db.all("select a.id_article , a.titolo, a.testo, a.id_utente, a.image_url, a.uri_article, u.username, u.email, u.discord_name from article a join utente u on u.id_utente = a.id_utente ORDER BY a.id_article DESC LIMIT ?", 2);
-
+  await db.close()
   return (
     <>
       {/* HEADER */}
@@ -35,7 +35,6 @@ export default async function Home() {
             <h3 className="fs-5 text-center mb-4">LE ULTIME NEWS</h3>
             <div className="flex-column flex-lg-row d-flex gap-5 justify-content-center align-items-center mb-5">
               {postData.map((object, i) => <CardNewsHeader key={i} image={object.image_url} title={object.titolo.length > 49 ? object.titolo.slice(0, 49)+"..." : object.titolo} uri={object.uri_article}/>)}
-              {db.close()}
             </div>
             <a href="/news"  className="btn btn-outline-light">Visualizza tutti i nostri articoli</a>
           </div>
