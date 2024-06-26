@@ -16,7 +16,7 @@ export default async function LoginStaff(params) {
   if(email && auth) {
     let res = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email, auth);
     if(res) {
-      redirect("/admin/newpost");
+      redirect("/");
     } else {
       cookies().delete("authToken");
       cookies().delete("email");
