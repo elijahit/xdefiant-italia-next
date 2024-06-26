@@ -10,7 +10,7 @@ export async function GET(request) {
   let res = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email, token);
   const originalUrl = request.nextUrl.protocol + request.headers.get('host') + request.nextUrl.pathname
   const errorLogin = new URL('/admin/login?error=invalid', originalUrl)
-  const postArticle = new URL('/admin/newpost', originalUrl)
+  const postArticle = new URL('/', originalUrl)
   if(res) {
     let response = NextResponse.redirect(postArticle);
     response.cookies.set('email', email);
