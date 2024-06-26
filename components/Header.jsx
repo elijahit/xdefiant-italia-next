@@ -41,7 +41,7 @@ export default function Header({ isPage }) {
                   </a>
                   <ul className="dropdown-menu">
                     <li><a className="dropdown-item" href="/admin/newpost"><i className="bi bi-file-post"></i> Aggiungi Articolo</a></li>
-                    {adminLevel > 3 ? 
+                    {adminLevel >= 3 ? 
                     <li><a className="dropdown-item" href="/admin/approvepost"><i className="bi bi-file-earmark-post"></i> Approva Articoli</a></li> : ""}
                   </ul>
                 </li>
