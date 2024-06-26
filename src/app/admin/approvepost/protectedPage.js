@@ -23,7 +23,7 @@ export default function Post() {
 
 
   function buttonRifiuta(e) {
-    fetch('/api/postRemove', {
+    fetch('https://playxdefiant.it/api/postRemove', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ export default function Post() {
   }
 
   function buttonAccetta(e) {
-    fetch('/api/postApprove', {
+    fetch('https://playxdefiant.it/api/postApprove', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
@@ -117,7 +117,7 @@ export default function Post() {
 
 function getDataAll() {
   try {
-    const res = fetch(`http://localhost:3000/api/postNews?approved=0`, { next: { revalidate: 60 } });
+    const res = fetch(`https://playxdefiant.it/api/postNews?approved=0`, { next: { revalidate: 60 } });
     return res;
   } catch (error) {
     notFound();
