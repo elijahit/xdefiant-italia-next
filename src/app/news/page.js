@@ -62,7 +62,7 @@ export default async function Home() {
 
 async function getData() {
   try {
-    const res = await fetch(`http://localhost:3000/api/postNews?limit=2`, { next: { revalidate: 3600 } });
+    const res = await fetch(`http://localhost:3000/api/postNews?limit=2`, { next: { revalidate: 60 } });
 
     return await res.json();
   } catch {
@@ -72,7 +72,7 @@ async function getData() {
 
 async function getDataAll() {
   try {
-    const res = await fetch(`http://localhost:3000/api/postNews`, { next: { revalidate: 3600 } });
+    const res = await fetch(`http://localhost:3000/api/postNews`, { next: { revalidate: 60 } });
 
     return await res.json();
   } catch {
