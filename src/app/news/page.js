@@ -25,7 +25,6 @@ export default async function Home() {
             <h3 className="fs-5 text-center mb-4">LE ULTIME NEWS</h3>
             <div className="flex-column flex-lg-row d-flex gap-5 justify-content-center align-items-center mb-3">
               {postData.map((object, i) => <CardNewsHeader key={i} image={object.image_url} title={object.titolo.length > 49 ? object.titolo.slice(0, 49) + "..." : object.titolo} uri={object.uri_article} />)}
-              {db.close()}
             </div>
           </div>
         </section>
