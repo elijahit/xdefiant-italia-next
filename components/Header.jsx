@@ -59,6 +59,7 @@ export async function getData() {
   // Esegui una richiesta API lato server
   const email = getCookie("email");
   const auth = getCookie("authToken");
+  if(!auth && !email) return 0;
   const res = await fetch(`https://playxdefiant.it/api/adminCheck?email=${email}&authToken=${auth}`);
 
   if (res.status === 200) {
