@@ -15,6 +15,14 @@ const nextConfig = {
       },
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://playxdefiant.it/:path*',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
