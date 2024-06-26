@@ -7,8 +7,15 @@ import { redirect } from "next/navigation";
 
 // To handle a POST request to /api
 export async function POST(request) {
-  const email = cookies().get('email').value;
-  const auth = cookies().get('authToken').value;
+  const email = cookies().get('email');
+  const auth = cookies().get('authToken');
+
+  if(!email && !auth) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
+
+
+  const {id_utente, level_admin} = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email.value, auth.value);
+
+  if(level_admin < 2) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
 
   const {title, content, image} = await request.json();
 
@@ -22,13 +29,12 @@ export async function POST(request) {
 
   if(checkUri) return NextResponse.json({ text: "Abbiamo riscontrato un problema controlla il titolo del tuo post, sembra che già sia utilizzato.", success: 0 }, { status: 400 });
 
-  const {id_utente} = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email, auth);
   const date = new Date();
 
-  db.all("INSERT INTO article (titolo, testo, id_utente, image_url, uri_article, created_at) VALUES (?, ?, ?, ?, ?, ?)", title, content, id_utente, image, uri, `${date.getTime()}`);
+  db.all("INSERT INTO article (titolo, testo, id_utente, image_url, uri_article, created_at, isApproved) VALUES (?, ?, ?, ?, ?, ?, ?)", title, content, id_utente, image, uri, `${date.getTime()}`, 0);
 
 
-  return NextResponse.json({ text: "Il tuo articolo è stato caricato correttamente.", success: 1 }, { status: 200 });
+  return NextResponse.json({ text: "Il tuo articolo è stato caricato correttamente, attendi che venga approvato.", success: 1 }, { status: 200 });
 
   
 }

@@ -11,8 +11,8 @@ import { useState } from "react";
 export default function Post() {
 
   // VARIABLE RESPONSE
-  const [responseError, setResponseError ] = useState("");
-  const [responseSuccess, setresponseSuccess ] = useState("");
+  const [responseError, setResponseError] = useState("");
+  const [responseSuccess, setresponseSuccess] = useState("");
 
   // VARIABLE ERROR
   const [titleError, setTitleError] = useState(0);
@@ -56,14 +56,14 @@ export default function Post() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          title: title ,
-          content: contentNoHtml ,
+          title: title,
+          content: contentNoHtml,
           image: image
         })
       })
         .then(response => response.text())
         .then(body => {
-          if(JSON.parse(body).success == 1) {
+          if (JSON.parse(body).success == 1) {
             setresponseSuccess(JSON.parse(body).text);
             setTitle("");
             setContent("");
@@ -136,10 +136,10 @@ export default function Post() {
               </div>
             </div>
             {responseError.length > 0 ? <p className="text-center text-lg-start text-danger">
-            <i class="bi bi-emoji-expressionless"></i> {responseError}
-              </p> : ""}
+              <i className="bi bi-emoji-expressionless"></i> {responseError}
+            </p> : ""}
             {responseSuccess.length > 0 ? <p className="text-center text-lg-start text-success">
-            <i class="bi bi-check2-all"></i> {responseSuccess}
+              <i className="bi bi-check2-all"></i> {responseSuccess}
             </p> : ""}
             <div className="d-flex justify-content-center justify-content-lg-end">
               <button type="submit" className="btn ps-5 pe-5">Pubblica ora</button>

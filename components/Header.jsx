@@ -40,9 +40,9 @@ export default function Header({ isPage }) {
                     ACP
                   </a>
                   <ul className="dropdown-menu">
-                    <li><a className="dropdown-item" href="/admin/newpost"><i class="bi bi-file-post"></i> Aggiungi Articolo</a></li>
+                    <li><a className="dropdown-item" href="/admin/newpost"><i className="bi bi-file-post"></i> Aggiungi Articolo</a></li>
                     {adminLevel > 3 ? 
-                    <li><a className="dropdown-item" href="/admin/approvepost"><i class="bi bi-file-earmark-post"></i> Approva Articoli</a></li> : ""}
+                    <li><a className="dropdown-item" href="/admin/approvepost"><i className="bi bi-file-earmark-post"></i> Approva Articoli</a></li> : ""}
                   </ul>
                 </li>
                 : ""}
@@ -59,7 +59,6 @@ export async function getData() {
   // Esegui una richiesta API lato server
   const email = getCookie("email");
   const auth = getCookie("authToken");
-  console.log(auth, email)
   const res = await fetch(`http://localhost:3000/api/adminCheck?email=${email}&authToken=${auth}`);
 
   if (res.status === 200) {
