@@ -1,8 +1,13 @@
 "use client"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image.js";
+import { getCookie } from "cookies-next";
 
-function Header({ isPage }) {
+export default function Header({ isPage }) {
+  const [adminLevel, setAdminLevel] = useState(0);
+  getData().then((value) => {
+    setAdminLevel(value);
+  });
   useEffect(() => {
     require("../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
@@ -29,6 +34,18 @@ function Header({ isPage }) {
                 <li className="nav-item">
                   <a className={isPage == "discord" ? "nav-link active" : "nav-link"} href="/discord">Discord</a>
                 </li>
+                {adminLevel > 0 ? 
+                  <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ACP
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li><a className="dropdown-item" href="/admin/newpost"><i class="bi bi-file-post"></i> Aggiungi Articolo</a></li>
+                    {adminLevel > 3 ? 
+                    <li><a className="dropdown-item" href="/admin/approvepost"><i class="bi bi-file-earmark-post"></i> Approva Articoli</a></li> : ""}
+                  </ul>
+                </li>
+                : ""}
               </ul>
             </nav>
           </div>
@@ -38,4 +55,18 @@ function Header({ isPage }) {
   );
 }
 
-export default Header;
+export async function getData() {
+  // Esegui una richiesta API lato server
+  const email = getCookie("email");
+  const auth = getCookie("authToken");
+  console.log(auth, email)
+  const res = await fetch(`http://localhost:3000/api/adminCheck?email=${email}&authToken=${auth}`);
+
+  if (res.status === 200) {
+    const { admin_level } = await res.json();
+    return admin_level ? admin_level : 0;
+
+  } else {
+    return 0;
+  }
+}

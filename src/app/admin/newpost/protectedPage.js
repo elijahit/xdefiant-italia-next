@@ -6,7 +6,6 @@ import Hero from "../../../../components/Hero";
 import { remark } from 'remark';
 import html from 'remark-html';
 import { useState } from "react";
-import { getCookies } from "cookies-next";
 
 
 export default function Post() {
