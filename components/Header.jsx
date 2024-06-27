@@ -1,16 +1,28 @@
 "use client"
 import { useEffect, useState } from "react"
 import Image from "next/image.js";
-import { getCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
+import "./Header.css";
+import { useRouter } from "next/navigation.js";
 
 export default function Header({ isPage }) {
   const [adminLevel, setAdminLevel] = useState(0);
+  const [username, setUsername] = useState("");
   getData().then((value) => {
-    setAdminLevel(value);
+    setAdminLevel(value.admin_level);
+    if(value.admin_level > 0) {
+      setUsername(value.username);
+    }
   });
   useEffect(() => {
     require("../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
+  const router = useRouter();
+
+  function logout() {
+    deleteCookie("email");
+    deleteCookie("authToken");
+  }
 
   return (
     <header>
@@ -23,7 +35,7 @@ export default function Header({ isPage }) {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <nav aria-label="principale">
+            <nav aria-label="principale" className="d-block d-flex w-100">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <a className={isPage == "home" ? "nav-link active" : "nav-link"} aria-current="page" href="/">Home</a>
@@ -34,19 +46,35 @@ export default function Header({ isPage }) {
                 <li className="nav-item">
                   <a className={isPage == "discord" ? "nav-link active" : "nav-link"} href="/discord">Discord</a>
                 </li>
-                {adminLevel > 0 ? 
+                {adminLevel > 0 ?
                   <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    ACP
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li><a className="dropdown-item" href="/admin/newpost"><i className="bi bi-file-post"></i> Aggiungi Articolo</a></li>
-                    {adminLevel >= 3 ? 
-                    <li><a className="dropdown-item" href="/admin/approvepost"><i className="bi bi-file-earmark-post"></i> Approva Articoli</a></li> : ""}
-                  </ul>
-                </li>
-                : ""}
+                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      ACP
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li><a className="dropdown-item" href="/admin/newpost"><i className="bi bi-file-post"></i> Aggiungi Articolo</a></li>
+                      {adminLevel >= 3 ?
+                        <li><a className="dropdown-item" href="/admin/approvepost"><i className="bi bi-file-earmark-post"></i> Approva Articoli</a></li> : ""}
+                    </ul>
+                  </li>
+                  : ""}
               </ul>
+              <div className="align-lg-self-center align-self-end mb-2 mb-lg-0">
+                {adminLevel == 0 ? <button onClick={() => router.push("/admin/login")} className="login">
+                  <i className="bi bi-person-circle"></i> Login
+                </button> : ""}
+                {adminLevel > 0 ? 
+                <div className="dropdown">
+                  <button className="login dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i className="bi bi-person-circle"></i> {username}
+                  </button>
+                  <ul className="dropdown-menu">
+                    {adminLevel >= 2 ? <li><a className="dropdown-item" href="/admin/newpost">Pubblica nuovo articolo</a></li> : ""}
+                    {adminLevel >= 3 ? <li><a className="dropdown-item" href="/admin/approvepost">Gestione articoli</a></li> : ""}
+                    <li><a className="dropdown-item" href="" onClick={logout}>Logout</a></li>
+                  </ul>
+                </div> : ""}
+              </div>
             </nav>
           </div>
         </div>
@@ -59,11 +87,11 @@ export async function getData() {
   // Esegui una richiesta API lato server
   const email = getCookie("email");
   const auth = getCookie("authToken");
-  if(!auth && !email) return 0;
+  if (!auth && !email) return 0;
   const res = await fetch(`https://playxdefiant.it/api/adminCheck?email=${email}&authToken=${auth}`);
 
   if (res.status === 200) {
-    const { admin_level } = await res.json();
+    const { admin_level, username } = await res.json();
     return admin_level ? admin_level : 0;
 
   } else {

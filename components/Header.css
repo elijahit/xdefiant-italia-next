@@ -1,0 +1,19 @@
+.login {
+  background-color: #0D182E;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.dropdown-menu[data-bs-popper] {
+  left: -90px !important;
+  background-color: #0D182E !important;
+  border: unset;
+  border-radius: 5px;
+  text-align: end;
+  text-decoration: underline;
+}
+
+.dropdown-menu[data-bs-popper] a {
+  background-color: unset;
+}
