@@ -46,18 +46,6 @@ export default function Header({ isPage }) {
                 <li className="nav-item">
                   <a className={isPage == "discord" ? "nav-link active" : "nav-link"} href="/discord">Discord</a>
                 </li>
-                {adminLevel > 0 ?
-                  <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      ACP
-                    </a>
-                    <ul className="dropdown-menu">
-                      <li><a className="dropdown-item" href="/admin/newpost"><i className="bi bi-file-post"></i> Aggiungi Articolo</a></li>
-                      {adminLevel >= 3 ?
-                        <li><a className="dropdown-item" href="/admin/approvepost"><i className="bi bi-file-earmark-post"></i> Approva Articoli</a></li> : ""}
-                    </ul>
-                  </li>
-                  : ""}
               </ul>
               <div className="align-lg-self-center align-self-end mb-2 mb-lg-0">
                 {adminLevel == 0 ? <button onClick={() => router.push("/admin/login")} className="login">
@@ -92,6 +80,9 @@ export async function getData() {
 
   if (res.status === 200) {
     const { admin_level, username } = await res.json();
+    if(admin_level > 0) {
+      return {admin_level, username};
+    }
     return admin_level ? admin_level : 0;
 
   } else {
