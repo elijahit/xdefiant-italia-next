@@ -117,7 +117,7 @@ export default function Post() {
 
 function getDataAll() {
   try {
-    const res = fetch(`https://playxdefiant.it/api/postNews?approved=0`, { next: { revalidate: 60 } });
+    const res = fetch(`https://playxdefiant.it/api/postNews?approved=0`, { next: { revalidate: 1 } });
     return res;
   } catch (error) {
     notFound();

@@ -57,7 +57,7 @@ export default async function Home() {
 
 async function getData() {
   try {
-    const res = await fetch(`http://localhost:3000/api/postNews?limit=2`,  { next: { revalidate: 60 } });
+    const res = await fetch(`http://localhost:3000/api/postNews?limit=2`,  { next: { revalidate: 1 } });
 
     return await res.json();
   } catch {
