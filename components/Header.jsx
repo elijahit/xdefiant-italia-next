@@ -9,9 +9,11 @@ export default function Header({ isPage }) {
   const [adminLevel, setAdminLevel] = useState(0);
   const [username, setUsername] = useState("");
   getData().then((value) => {
-    setAdminLevel(value.admin_level);
-    if(value.admin_level > 0) {
-      setUsername(value.username);
+    if(value) {
+      setAdminLevel(value.admin_level);
+      if(value.admin_level > 0) {
+        setUsername(value.username);
+      }
     }
   });
   useEffect(() => {
@@ -80,10 +82,12 @@ export async function getData() {
 
   if (res.status === 200) {
     const { admin_level, username } = await res.json();
-    if(admin_level > 0) {
+    if(admin_level) {
       return {admin_level, username};
     }
-    return admin_level ? admin_level : 0;
+    else {
+      return null;
+    }
 
   } else {
     return 0;
