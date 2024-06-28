@@ -56,7 +56,7 @@ export default function Header({ isPage }) {
                 {adminLevel > 0 ? 
                 <div className="dropdown">
                   <button className="login dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i className="bi bi-person-circle"></i> {username} Elijah
+                  <i className="bi bi-person-circle"></i> {username}
                   </button>
                   <ul className="dropdown-menu">
                     {adminLevel >= 2 ? <li><a className="dropdown-item" href="/admin/newpost">Pubblica nuovo articolo</a></li> : ""}
