@@ -50,17 +50,18 @@ export default function Header({ isPage }) {
                 </li>
               </ul>
               <div className="align-lg-self-center align-self-end mb-2 mb-lg-0">
-                {adminLevel == 0 ? <button onClick={() => router.push("/admin/login")} className="login">
+                {adminLevel > 0 ? <button onClick={() => router.push("/admin/login")} className="login">
                   <i className="bi bi-person-circle"></i> Login
                 </button> : ""}
-                {adminLevel > 0 ? 
+                {adminLevel == 0 ? 
                 <div className="dropdown">
                   <button className="login dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i className="bi bi-person-circle"></i> {username}
+                  <i className="bi bi-person-circle"></i> {username} Elijah
                   </button>
                   <ul className="dropdown-menu">
                     {adminLevel >= 2 ? <li><a className="dropdown-item" href="/admin/newpost">Pubblica nuovo articolo</a></li> : ""}
                     {adminLevel >= 3 ? <li><a className="dropdown-item" href="/admin/approvepost">Gestione articoli</a></li> : ""}
+                    <li><hr className="dropdown-divider" /></li>
                     <li><a className="dropdown-item" href="" onClick={logout}>Logout</a></li>
                   </ul>
                 </div> : ""}
