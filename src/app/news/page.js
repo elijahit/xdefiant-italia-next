@@ -3,7 +3,7 @@ import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import Hero from "../../../components/Hero";
 import Image from "next/image";
-import CardNewsHeader from "../../../components/CardNewsHeader"
+import CardNewsHeader from "../../../components/CardNews"
 import { notFound } from "next/navigation";
 
 export default async function Home() {
