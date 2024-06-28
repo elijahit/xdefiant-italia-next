@@ -36,7 +36,7 @@ export default function Post() {
   }
 
   function buttonAccetta(e) {
-    fetch('api/postApprove', {
+    fetch('/api/postApprove', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
