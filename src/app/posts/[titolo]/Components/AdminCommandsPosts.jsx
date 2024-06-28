@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import "./AdminCommandsPosts.css";
-import Modal from "../../../../components/Modal";
+import Modal from "../../../../../components/Modal";
 
 
 export default function AdminCommands({ adminLevel, author, author_id, request_username, request_id, post_id }) {

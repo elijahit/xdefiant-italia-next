@@ -2,7 +2,7 @@ import Styles from "./page.module.css";
 import { notFound } from "next/navigation";
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
-import AdminCommands from "./AdminCommandsPosts";
+import AdminCommands from "./Components/AdminCommandsPosts";
 import { remark } from 'remark';
 import html from 'remark-html';
 import Hero from "../../../../components/Hero";
