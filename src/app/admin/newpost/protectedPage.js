@@ -50,7 +50,7 @@ export default function Post() {
       setTitleError(0);
       setContentError(0);
       setImageError(0);
-      fetch('https://playxdefiant.it/api/postAdd', {
+      fetch('/api/postAdd', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
