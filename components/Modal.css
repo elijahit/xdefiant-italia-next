@@ -1,0 +1,32 @@
+.modal {
+  --bs-modal-bg: #0D182E;
+  --bs-modal-footer-border-color: #0D182E;
+  --bs-modal-header-border-color: #0D182E;
+}
+
+.modal-header {
+  display: block;
+  text-align: center;
+  padding: unset;
+}
+
+.modal-body {
+  padding: 0 40px;
+}
+
+.modal-footer {
+  padding: unset;
+  justify-content: center;
+}
+
+.btn-no, .btn-si {
+  color: white;
+  font-weight: 700;
+  background-color: #660000;
+  padding: 3px 25px;
+  border-radius: 5px;
+}
+
+.btn-si {
+  background-color: #006A11;
+}
