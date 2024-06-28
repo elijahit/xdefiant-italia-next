@@ -1,12 +1,3 @@
-.author {
-  display: inline;
-  background-color: yellow;
-  color: black;
-  font-weight: 700;
-  border-radius: 20px;
-  padding: 0 10px;
-}
-
 .banner {
   width: auto;
   height: 600px;

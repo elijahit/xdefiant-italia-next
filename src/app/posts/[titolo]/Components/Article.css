@@ -1,0 +1,15 @@
+.author {
+  display: inline;
+  background-color: yellow;
+  color: black;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 0 10px;
+}
+
+.button-custom {
+  background-color: #0D182E;
+  border-radius: 10px;
+  border: unset;
+  padding: 10px 60px;
+}

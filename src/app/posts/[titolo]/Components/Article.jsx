@@ -1,11 +1,10 @@
 "use client"
-
+import "./Article.css";
 import { useState } from "react";
-import "./AdminCommandsPosts.css";
 import Modal from "../../../../../components/Modal";
 
 
-export default function AdminCommands({ adminLevel, author, author_id, request_username, request_id, post_id }) {
+export default function Article({ adminLevel, author, author_id, request_username, request_id, post_id, titolo, day, month, year, hour, minute, html, testoNoHtml, modify }) {
 
   const [deleteRes, setDeleteRes] = useState("");
   const [deleteResSuccess, setDeleteResSuccess] = useState(null);
@@ -49,6 +48,17 @@ export default function AdminCommands({ adminLevel, author, author_id, request_u
 
       {/* MODALE */}
       <Modal id="modalConfirmCancel" titolo="ATTENZIONE!!!" testo="Stai cercando di eliminare un articolo, sei sicuro di volerlo fare ?" click={() => deleteArticle()} />
+        
+      {/* ARTICOLO */}
+      <article>
+        <h1 className="fs-4 text-center">{titolo}</h1>
+        <div className="d-flex justify-content-center align-items-center">
+          <p className="author">
+            {day}/{month}/{year} | {hour}:{minute} - {author}
+          </p>
+        </div>
+        <div className="mb-5" dangerouslySetInnerHTML={{ __html: html }} />
+      </article>
     </>
-  );
+  )
 }
