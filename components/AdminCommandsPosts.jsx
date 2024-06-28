@@ -35,20 +35,20 @@ export default function AdminCommands({ adminLevel, author, author_id, request_u
         <div className="row mb-4 mt-4">
           {deleteResSuccess != null ? <div className="col-12">
             {deleteResSuccess == 0 ?
-              <p className="text-danger text-center">{deleteRes}</p>
-              : <p className="text-success text-center">{deleteRes}</p>}
+              <p className="text-danger text-center"><i className="bi bi-exclamation-octagon"></i> {deleteRes}</p>
+              : <p className="text-success text-center"><i class="bi bi-check"></i> {deleteRes}</p>}
           </div> : ""}
-          <div className="col-6 d-flex justify-content-end">
+          <div className=" mb-3 mb-lg-0 col-12 col-lg-6 d-flex justify-content-center justify-content-lg-end">
             <button className="button-custom"><i className="bi bi-pencil-square"></i> Modifica articolo</button>
           </div>
-          <div className="col-6 d-flex justify-content-start">
+          <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
             <button data-bs-toggle="modal" data-bs-target="#modalConfirmCancel" className="button-custom"><i className="bi bi-backspace"></i> Elimina articolo</button>
           </div>
         </div>
         : ""}
 
       {/* MODALE */}
-      <Modal id="modalConfirmCancel" titolo="ATTENZIONE!!!" testo="Stai cercando di eliminare un articolo, sei sicuro di volerlo fare ?" />
+      <Modal id="modalConfirmCancel" titolo="ATTENZIONE!!!" testo="Stai cercando di eliminare un articolo, sei sicuro di volerlo fare ?" click={() => deleteArticle()} />
     </>
   );
 }
