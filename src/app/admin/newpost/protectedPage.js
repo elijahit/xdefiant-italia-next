@@ -50,7 +50,7 @@ export default function Post() {
       setTitleError(0);
       setContentError(0);
       setImageError(0);
-      fetch('/api/postAdd', {
+      fetch('/api/post', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'

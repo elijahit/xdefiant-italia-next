@@ -11,7 +11,7 @@ export default function AdminCommands({ adminLevel, author, author_id, request_u
   const [deleteResSuccess, setDeleteResSuccess] = useState(null);
 
   function deleteArticle() {
-    fetch('/api/postRequestRemove', {
+    fetch('/api/postRequest', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json'

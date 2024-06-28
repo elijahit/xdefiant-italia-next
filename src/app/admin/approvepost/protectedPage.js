@@ -23,8 +23,8 @@ export default function Post() {
 
 
   function buttonRifiuta(e) {
-    fetch('/api/postRemove', {
-      method: 'post',
+    fetch('/api/post', {
+      method: 'delete',
       headers: {
         'Content-Type': 'application/json'
       },
