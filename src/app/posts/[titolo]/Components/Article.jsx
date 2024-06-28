@@ -48,7 +48,7 @@ export default function Article({ adminLevel, author, author_id, request_usernam
 
       {/* MODALE */}
       <Modal id="modalConfirmCancel" titolo="ATTENZIONE!!!" testo="Stai cercando di eliminare un articolo, sei sicuro di volerlo fare ?" click={() => deleteArticle()} />
-        
+
       {/* ARTICOLO */}
       <article>
         <h1 className="fs-4 text-center">{titolo}</h1>
