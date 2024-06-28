@@ -7,7 +7,7 @@
 }
 
 .dropdown-menu[data-bs-popper] {
-  left: -200% !important;
+  left: -120% !important;
   background-color: #0D182E !important;
   border: unset;
   border-radius: 5px;
