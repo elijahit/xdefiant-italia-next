@@ -49,14 +49,13 @@ export async function POST(request) {
   const requestAuthorId = FormData.get("requestAuthorId");
   const authorId = FormData.get("authorId");
   const image = FormData.get("image");
-  console.log(image.type)
 
   if (!email && !auth) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
 
 
   const { level_admin } = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email.value, auth.value);
 
-  if (level_admin >= 3 || authorId == requestAuthorId) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
+  if (level_admin < 3 || authorId != requestAuthorId) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
 
 
   if (title.length == 0) return NextResponse.json({ text: "Abbiamo riscontrato un problema, controllo il titolo del tuo post.", success: 0 }, { status: 400 });
@@ -81,7 +80,7 @@ export async function POST(request) {
         return NextResponse.json({ text: "Il file inserito non è tra i formati consentiti (png, jpg, jpeg, webp)", success: 0 }, { status: 400 });
       }
     } else {
-      await db.run("INSERT INTO actions_article (id_article, id_utente, action, titolo, testo) VALUES(?, ?, ?, ?, ?, ?)", idPost, requestAuthorId, 1, title, content);
+      await db.run("INSERT INTO actions_article (id_article, id_utente, action, titolo, testo) VALUES(?, ?, ?, ?, ?)", idPost, requestAuthorId, 1, title, content);
     }
     return NextResponse.json({ text: "La tua richiesta di modifica è stata inoltrata con successo, attendi che un responsabile approvi la tua richiesta.", success: 1 }, { status: 200 });
   } else {
