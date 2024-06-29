@@ -6,10 +6,10 @@ import { remark } from 'remark';
 import htmlRemark from 'remark-html';
 
 
-export default function Article({ image, adminLevel, author, author_id, request_username, request_id, post_id, titolo, day, month, year, hour, minute, html, testoNoHtml, modify }) {
+export default function Article({ image, adminLevel, author, author_id, request_username, request_id, post_id, titolo, day, month, year, hour, minute, html, testoNoHtml }) {
 
-  const [deleteRes, setDeleteRes] = useState("");
-  const [deleteResSuccess, setDeleteResSuccess] = useState(null);
+  const [APIRes, setAPIRes] = useState("");
+  const [APIResSuccess, setAPIResSuccess] = useState(null);
 
   const [modifyEnable, setModifyEnable] = useState(0);
   const [previewEnable, setPreviewEnable] = useState(0);
@@ -17,6 +17,7 @@ export default function Article({ image, adminLevel, author, author_id, request_
 
   const [valueTitolo, setValueTitolo] = useState(titolo);
   const [valueContent, setValueContent] = useState(testoNoHtml);
+  const [imageModify, setImageModify] = useState(null);
 
   function deleteArticle() {
     fetch('/api/postRequest', {
@@ -31,8 +32,8 @@ export default function Article({ image, adminLevel, author, author_id, request_
       })
     }).then(value => {
       value.text().then(text => {
-        setDeleteRes(JSON.parse(text).text);
-        setDeleteResSuccess(JSON.parse(text).success)
+        setAPIRes(JSON.parse(text).text);
+        setAPIResSuccess(JSON.parse(text).success)
       })
     });
   }
@@ -58,16 +59,58 @@ export default function Article({ image, adminLevel, author, author_id, request_
   async function handlePreview() {
     await markHtml(valueContent);
     setPreviewEnable(1);
+    console.log(imageModify.target.files[0])
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("idPost", post_id);
+    formData.append("title", valueTitolo);
+    formData.append("content", valueContent);
+    formData.append("authorId", author_id);
+    formData.append("requestAuthor", request_username);
+    formData.append("requestAuthorId", request_id);
+    if(imageModify) {
+      formData.append("image", imageModify.target.files[0]);
+    }
+
+    if (valueTitolo.length > 0 && valueContent.length > 0) {
+      fetch('/api/postRequest', {
+        method: 'post',
+        headers: {
+        },
+        body: formData
+      })
+        .then(response => response.text())
+        .then(body => {
+          const res = JSON.parse(body);
+          if(res.success == 1) {
+            window.scrollTo(0, 0)
+            setModifyEnable(0);
+            setAPIRes(res.text);
+            setAPIResSuccess(1);
+          } else {
+            window.scrollTo(0, 0)
+            setModifyEnable(0);
+            setAPIRes(res.text);
+            setAPIResSuccess(0);
+          }
+        });
+    } else {
+      return;
+    }
   }
 
   return (
     <>
       {adminLevel >= 3 || author_id == request_id ?
         <div className="row mb-4 mt-4">
-          {deleteResSuccess != null ? <div className="col-12">
-            {deleteResSuccess == 0 ?
-              <p className="text-danger text-center"><i className="bi bi-exclamation-octagon"></i> {deleteRes}</p>
-              : <p className="text-success text-center"><i class="bi bi-check"></i> {deleteRes}</p>}
+          {APIResSuccess != null ? <div className="col-12">
+            {APIResSuccess == 0 ?
+              <p className="text-danger text-center"><i className="bi bi-exclamation-octagon"></i> {APIRes}</p>
+              : <p className="text-success text-center"><i className="bi bi-check"></i> {APIRes}</p>}
           </div> : ""}
           {modifyEnable == 0 ?
             <>
@@ -115,7 +158,7 @@ export default function Article({ image, adminLevel, author, author_id, request_
         <div className="container mt-2">
           <h1 className="fs-4 text-center mb-1">MODIFICA ARTICOLO</h1>
           <p className="text-center mb-4">{titolo} | {author}</p>
-          <form action="">
+          <form>
             <div className="mb-3">
               <input type="text" className={" form-control"} id="titolo" name="titolo" placeholder="Titolo" value={valueTitolo} onChange={(e) => formValueChange(e, setValueTitolo)} required />
             </div>
@@ -128,11 +171,11 @@ export default function Article({ image, adminLevel, author, author_id, request_
               <div className="custom-file d-flex flex-column align-items-center mb-5">
                 <label className="custom-file-label fs-4" htmlFor="bannerFile"><i className="bi bi-card-image"></i> Banner</label>
                 <p>Se non vuoi modificare il banner, non caricare nessun file</p>
-                <input type="file" className="custom-file-input" id="bannerFile" accept="image/*" />
+                <input type="file" onChange={(t) => setImageModify(t)} name="bannerFile" className="custom-file-input" id="bannerFile" accept="image/*" />
               </div>
             </div>
             <div className="d-flex justify-content-center justify-content-lg-end gap-2 mb-5">
-              <button className="btn buttonSalva">Salva</button>
+              <button onClick={(e) => handleSubmit(e)} className="btn buttonSalva">Salva</button>
               <button onClick={() => previewEnable == 0 ? handlePreview() : setPreviewEnable(0)} type="button" className="btn buttonPreview">Preview</button>
               <button type="button" data-bs-toggle="modal" data-bs-target="#modalModifyCancel" className="btn buttonAnnulla">Annulla</button>
             </div>
@@ -148,7 +191,7 @@ export default function Article({ image, adminLevel, author, author_id, request_
               </div>
               <div>
                 <div className="d-flex justify-content-center align-items-end">
-                  <img className="imagePreview imagePreviewBorder d-none d-lg-flex" src={image}></img>
+                  <img className="imagePreview imagePreviewBorder d-none d-lg-flex" src={imageModify ? URL.createObjectURL(imageModify.target.files[0]) : image}></img>
                   <img className="imagePreviewBorder d-lg-none img-fluid" src={image}></img>
                 </div>
               </div>
