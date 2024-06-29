@@ -29,7 +29,8 @@ export default function Post() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id_article: e.id_article
+        id_article: e.id_article,
+        image: e.image_url
       })
     });
     window.location.reload();

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import db from "../../../../scripts/database";
 import { cookies } from "next/headers";
 import { convert } from 'url-slug'
-import { writeFile } from 'fs';
+import { writeFile, unlink } from 'fs';
 
 // To handle a GET request to /api
 export async function GET(request) {
@@ -39,7 +39,7 @@ export async function POST(request) {
   const buffer = Buffer.from(arrbuf);
 
   const imageFormat = ["image/png", "image/jpeg", "image/webp", "image/jpg"]
-  if(!imageFormat.find((value) => value == image.type)) return NextResponse.json({ text: "Il file inserito non è tra i formati consentiti (png, jpg, jpeg, webp)", success: 0 }, { status: 400 });
+  if (!imageFormat.find((value) => value == image.type)) return NextResponse.json({ text: "Il file inserito non è tra i formati consentiti (png, jpg, jpeg, webp)", success: 0 }, { status: 400 });
 
   writeFile(`./public/posts-images/${randomFileName}.webp`, buffer, function (err) {
     if (err) {
@@ -79,7 +79,11 @@ export async function DELETE(request) {
 
   if (level_admin < 2) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
 
-  const { id_article } = await request.json();
+  const { id_article, image } = await request.json();
+
+  unlink(`./public${image}`, function (err) {
+    if (err) return console.log(err);
+  });
 
 
   db.run("DELETE FROM article WHERE id_article = ?", id_article);
