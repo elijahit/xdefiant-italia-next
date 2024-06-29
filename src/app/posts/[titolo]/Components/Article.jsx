@@ -41,6 +41,7 @@ export default function Article({ image, adminLevel, author, author_id, request_
   function modifyArticle() {
     if (modifyEnable == 0) {
       setModifyEnable(1);
+      setAPIResSuccess(null);
     }
   }
 
@@ -59,7 +60,6 @@ export default function Article({ image, adminLevel, author, author_id, request_
   async function handlePreview() {
     await markHtml(valueContent);
     setPreviewEnable(1);
-    console.log(imageModify.target.files[0])
   }
 
   async function handleSubmit(event) {

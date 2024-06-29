@@ -25,7 +25,7 @@ export default function Post() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [contentNoHtml, setcontentNoHtml] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
 
   // FUNZIONE PER HTML MARKDOWN
   async function handleContent(e) {
@@ -47,19 +47,18 @@ export default function Post() {
     const imageFetching = await fetch(image);
     if (imageFetching.status != 200) setImageError(1);
     if (titleError == 0 && contentError == 0 && imageError == 0) {
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('content', content);
+      formData.append('image', image?.target?.files[0]);
       setTitleError(0);
       setContentError(0);
       setImageError(0);
       fetch('/api/post', {
         method: 'post',
         headers: {
-          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          title: title,
-          content: contentNoHtml,
-          image: image
-        })
+        body: formData
       })
         .then(response => response.text())
         .then(body => {
@@ -89,7 +88,7 @@ export default function Post() {
         <Hero />
         {/* FIRST SECTION */}
         <div className="container">
-          <h1 className="fs-4 text-center mt-3 mb-5">AREA REDAZIONE</h1>
+          <h1 className="fs-4 text-center mt-3 mb-5">PUBBLICA ARTICOLO</h1>
           <form onSubmit={handleSubmit} method="POST" action="" className={styles.form + " mb-5"}>
             <div className="mb-3">
               <input onChange={(e) => setTitle(e.target.value)} type="text" className={titleError == 1 ? "is-invalid" + " form-control" : "" + " form-control"} id="titolo" name="titolo" placeholder="Titolo" required />
@@ -104,9 +103,11 @@ export default function Post() {
                 <h3 className="text-center fs-5">MARKDOWN</h3>
               </div>
             </div>
-            <div className="mb-5">
-              <input onChange={(e) => setImage(e.target.value)} type="text" className={imageError == 1 ? "is-invalid" + " form-control" : "" + " form-control"} id="image" name="image" placeholder="Link immagine" required />
-            </div>
+            <div className={styles.customFile + " d-flex flex-column align-items-center mb-5"}>
+                <label className={styles.customFileLabel + " fs-4"} htmlFor="bannerFile"><i className="bi bi-card-image"></i> Banner</label>
+                <p>Se non vuoi modificare il banner, non caricare nessun file</p>
+                <input type="file" onChange={(t) => setImage(t)} name="bannerFile" className={styles.customFileInput} id="bannerFile" accept="image/*" required/>
+              </div>
             <div className="d-flex flex-column align-items-center mb-5">
               <svg className="mb-5" width="267" height="1" viewBox="0 0 267 1" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <line x1="-0.00390625" y1="0.5" x2="267.004" y2="0.5" stroke="white" />
@@ -126,10 +127,10 @@ export default function Post() {
                   }
                 </div>
                 <div>
-                  {image.length > 0 ?
+                  {image?.target?.files[0] ?
                     <div className="d-flex justify-content-center align-items-end">
-                      <img className={styles.imagePreview + " " + styles.imagePreviewBorder + " d-none d-lg-flex"} src={image}></img>
-                      <img className={styles.imagePreviewBorder + " d-lg-none img-fluid"} src={image}></img>
+                      <img className={styles.imagePreview + " " + styles.imagePreviewBorder + " d-none d-lg-flex"} src={URL.createObjectURL(image.target.files[0])}></img>
+                      <img className={styles.imagePreviewBorder + " d-lg-none img-fluid"} src={URL.createObjectURL(image.target.files[0])}></img>
                     </div>
                     : ""}
                 </div>
