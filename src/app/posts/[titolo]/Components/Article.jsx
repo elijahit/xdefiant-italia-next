@@ -9,6 +9,8 @@ export default function Article({ adminLevel, author, author_id, request_usernam
   const [deleteRes, setDeleteRes] = useState("");
   const [deleteResSuccess, setDeleteResSuccess] = useState(null);
 
+  const [modifyEnable, setModifyEnaable] = useState(0);
+
   function deleteArticle() {
     fetch('/api/postRequest', {
       method: 'delete',
@@ -28,6 +30,10 @@ export default function Article({ adminLevel, author, author_id, request_usernam
     });
   }
 
+  function modifyArticle() {
+    setModifyEnaable(1);
+  }
+
   return (
     <>
       {adminLevel >= 3 || author_id == request_id ?
@@ -38,7 +44,7 @@ export default function Article({ adminLevel, author, author_id, request_usernam
               : <p className="text-success text-center"><i class="bi bi-check"></i> {deleteRes}</p>}
           </div> : ""}
           <div className=" mb-3 mb-lg-0 col-12 col-lg-6 d-flex justify-content-center justify-content-lg-end">
-            <button className="button-custom"><i className="bi bi-pencil-square"></i> Modifica articolo</button>
+            <button onClick={() => modifyArticle()} className="button-custom"><i className="bi bi-pencil-square"></i> Modifica articolo</button>
           </div>
           <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
             <button data-bs-toggle="modal" data-bs-target="#modalConfirmCancel" className="button-custom"><i className="bi bi-backspace"></i> Elimina articolo</button>
@@ -50,7 +56,7 @@ export default function Article({ adminLevel, author, author_id, request_usernam
       <Modal id="modalConfirmCancel" titolo="ATTENZIONE!!!" testo="Stai cercando di eliminare un articolo, sei sicuro di volerlo fare ?" click={() => deleteArticle()} />
 
       {/* ARTICOLO */}
-      <article>
+      {modifyEnable == 0 ? <article>
         <h1 className="fs-4 text-center">{titolo}</h1>
         <div className="d-flex justify-content-center align-items-center">
           <p className="author">
@@ -58,7 +64,20 @@ export default function Article({ adminLevel, author, author_id, request_usernam
           </p>
         </div>
         <div className="mb-5" dangerouslySetInnerHTML={{ __html: html }} />
-      </article>
+      </article> :
+        <form action="">
+          <div className="mb-3">
+            <input type="text" className={" form-control"} id="titolo" name="titolo" placeholder="Titolo" value={titolo} required />
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <div>
+                <textarea className={" form-control mb-3"} placeholder="Inserisci qui il tuo contenuto" id="contenuto" name="contenuto" rows={20} value={testoNoHtml} required></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      }
     </>
   )
 }
