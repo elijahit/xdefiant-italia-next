@@ -13,3 +13,88 @@
   border: unset;
   padding: 10px 60px;
 }
+
+.banner {
+  width: auto;
+  height: 600px;
+  background-position: center;
+  background-size: cover;
+  content: "s";
+}
+
+.buttonUp {
+  background-color: yellow;
+  color: black;
+  font-weight: 700;
+  padding: 0 15px;
+  border-radius: 20px;
+}
+
+.buttonUp:hover {
+  scale: 1.1;
+  transition: scale .1s ease-in-out;
+}
+
+.buttonSalva {
+  background-color: green;
+  color: white;
+  font-weight: 600;
+}
+
+.buttonSalva:hover {
+  background-color: rgb(0, 99, 0);
+  color: white;
+  font-weight: 600;
+}
+
+.buttonPreview {
+  background-color: rgb(185, 121, 1);
+  color: white;
+  font-weight: 600;
+}
+
+.buttonPreview:hover {
+  background-color: rgb(153, 100, 2);
+  color: white;
+  font-weight: 600;
+}
+
+.buttonAnnulla {
+  background-color: rgb(133, 2, 2);
+  color: white;
+  font-weight: 600;
+}
+
+.buttonAnnulla:hover {
+  background-color: rgb(94, 3, 3);
+  color: white;
+  font-weight: 600;
+}
+
+.preview {
+  border: 2px solid black;
+  border-radius: 10px;
+  min-height: 0vh;
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+.preview p {
+  width: 100%;
+}
+
+.previewCenteredText {
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 100vh;
+  width: 100%;
+}
+
+.imagePreview {
+  height: 600px;
+  width: 100%;
+}
+
+.imagePreviewBorder {
+  border-radius: 10px;
+}

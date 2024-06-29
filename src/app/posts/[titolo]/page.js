@@ -63,19 +63,7 @@ export default async function Page({ params }) {
       <Header />
       {/* HERO SECTION */}
       <Hero />
-      <div className="container mt-2">
-        <Article titolo={postData.titolo} day={dayCreate} month={monthCreate} year={createdDate.getFullYear()} hour={hourCreate} minute={minuteCreate} author={postData.author} id={postData.id} html={contentHtml} testoNoHtml={postData.testo} adminLevel={userData.admin_level} author_id={postData.utenteId} request_username={userData.username} request_id={userData.id_utente} post_id={postData.id} />
-      </div>
-      <div className="d-lg-none mb-2">
-        <img className="img-fluid" src={postData.imageUrl}></img>
-      </div>
-      <div className={Styles.banner + " mb-2 d-none  d-lg-block"} style={{ backgroundImage: `url(${postData.imageUrl})` }}>
-      </div>
-      <div className="container">
-        <div className="d-flex justify-content-center justify-content-lg-end">
-          <a href="#upPage" className={Styles.buttonUp + " mb-5"}>Torna all&apos;inizio</a>
-        </div>
-      </div>
+        <Article titolo={postData.titolo} day={dayCreate} month={monthCreate} year={createdDate.getFullYear()} hour={hourCreate} minute={minuteCreate} author={postData.author} id={postData.id} html={contentHtml} testoNoHtml={postData.testo} adminLevel={userData.admin_level} author_id={postData.utenteId} request_username={userData.username} request_id={userData.id_utente} post_id={postData.id} image={postData.imageUrl} />
       <Footer />
     </>
   );

@@ -2,7 +2,7 @@ import "./Modal.css";
 
 export default function Modal({titolo, testo, id, click}) {
   return (
-    <div className="modal fade text-white" id={id} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal fade text-white" id={id} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog modal-custom" role="document">
         <div className="modal-content">
           <div className="modal-header">
