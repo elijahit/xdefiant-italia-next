@@ -367,7 +367,7 @@ export default function Post() {
                 </div> : ""}
               </div>
             </div>
-          ) : <div className={styles.row + " text-center mb-5"}>Non ci sono post da approvarne l'eliminazione in questo momento</div>}
+          ) : <div className={styles.row + " text-center mb-5"}>Non ci sono post da approvarne l&apos;eliminazione in questo momento</div>}
         </div>
       </main >
       {/* FOOTER */}
