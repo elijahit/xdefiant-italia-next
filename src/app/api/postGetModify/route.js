@@ -48,8 +48,10 @@ export async function DELETE(request) {
 
   const { id_article, image, id_utente } = await request.json();
 
-  if(image) {
-    unlink(`./public${image}`, function (err) {
+  if (image) {
+    const imageResolver = image.split('/');
+    imageResolver.length - 1
+    unlink(`./public${imageResolver[imageResolver.length - 1]}`, function (err) {
       if (err) return console.log(err);
     });
   }
@@ -67,18 +69,20 @@ export async function POST(request) {
   const email = cookies().get('email');
   const auth = cookies().get('authToken');
 
-  if(!email && !auth) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
+  if (!email && !auth) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
 
 
-  const {id_utente, level_admin} = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email.value, auth.value);
+  const { id_utente, level_admin } = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email.value, auth.value);
 
-  if(level_admin < 2) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
+  if (level_admin < 2) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
 
-  const {idPost, idUtenteRichiesta, image, titolo, contenuto} = await request.json();
+  const { idPost, idUtenteRichiesta, image, titolo, contenuto } = await request.json();
 
-  if(image) {
+  if (image) {
     const imageDb = await db.get('SELECT image_url FROM article WHERE id_article = ?', idPost);
-    unlink(`./public${imageDb.image_url}`, function (err) {
+    const imageResolver = imageDb.image_url.split('/');
+    imageResolver.length - 1
+    unlink(`./public${imageResolver[imageResolver.length - 1]}`, function (err) {
       if (err) return console.log(err);
     });
     db.run("UPDATE article SET titolo = ?, testo = ?, image_url = ? WHERE id_article = ?", titolo, contenuto, image, idPost);
@@ -90,5 +94,5 @@ export async function POST(request) {
 
   return NextResponse.json({ text: "L'articolo è stato modificato.", success: 1 }, { status: 200 });
 
-  
+
 }

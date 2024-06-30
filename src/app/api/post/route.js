@@ -80,8 +80,9 @@ export async function DELETE(request) {
   if (level_admin < 2) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
 
   const { id_article, image } = await request.json();
-
-  unlink(`./public${image}`, function (err) {
+  const imageResolver = image.split('/');
+  imageResolver.length-1
+  unlink(`./public${imageResolver[imageResolver.length-1]}`, function (err) {
     if (err) return console.log(err);
   });
 
