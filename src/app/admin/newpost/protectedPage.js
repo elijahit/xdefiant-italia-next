@@ -130,8 +130,8 @@ export default function Post() {
                 <div>
                   {image?.target?.files[0] ?
                     <div className="d-flex justify-content-center align-items-end">
-                      <Image className={styles.imagePreview + " " + styles.imagePreviewBorder + " d-none d-lg-flex"} src={URL.createObjectURL(image.target.files[0])} alt="Immagine di gestione"></Image>
-                      <Image className={styles.imagePreviewBorder + " d-lg-none img-fluid"} src={URL.createObjectURL(image.target.files[0])} alt="Immagine di gestione"></Image>
+                      <Image className={styles.imagePreview + " " + styles.imagePreviewBorder + " d-none d-lg-flex"} src={URL.createObjectURL(image.target.files[0])} alt="Immagine di gestione" width={1000} height={0}></Image>
+                      <Image className={styles.imagePreviewBorder + " d-lg-none img-fluid"} src={URL.createObjectURL(image.target.files[0])} alt="Immagine di gestione" width={1000} height={0}></Image>
                     </div>
                     : ""}
                 </div>
