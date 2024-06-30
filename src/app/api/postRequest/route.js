@@ -78,7 +78,7 @@ export async function POST(request) {
             return console.log(err);
           }
         });
-        await db.run("INSERT INTO actions_article (id_article, id_utente, action, titolo, testo, image) VALUES(?, ?, ?, ?, ?, ?)", idPost, requestAuthorId, 1, title, content, `/posts-images/${randomFileName + "_" + idPost}.webp`);
+        await db.run("INSERT INTO actions_article (id_article, id_utente, action, titolo, testo, image) VALUES(?, ?, ?, ?, ?, ?)", idPost, requestAuthorId, 1, title, content, `https://images.playxdefiant.it/posts-images/${randomFileName + "_" + idPost}.webp`);
       } else {
         return NextResponse.json({ text: "Il file inserito non è tra i formati consentiti (png, jpg, jpeg, webp)", success: 0 }, { status: 400 });
       }
