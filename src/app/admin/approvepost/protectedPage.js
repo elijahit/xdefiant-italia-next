@@ -145,7 +145,7 @@ export default function Post() {
       body: JSON.stringify({
         idPost: e.idArticle,
         idUtenteRichiesta: e.richiestaDaID,
-        image: e.immagineNuova
+        image: e.immagine
       })
     });
     window.location.reload();
