@@ -51,7 +51,7 @@ export async function DELETE(request) {
   if (image) {
     const imageResolver = image.split('/');
     imageResolver.length - 1
-    unlink(`./public${imageResolver[imageResolver.length - 1]}`, function (err) {
+    unlink(`./public/posts-images/${imageResolver[imageResolver.length - 1]}`, function (err) {
       if (err) return console.log(err);
     });
   }
@@ -82,7 +82,7 @@ export async function POST(request) {
     const imageDb = await db.get('SELECT image_url FROM article WHERE id_article = ?', idPost);
     const imageResolver = imageDb.image_url.split('/');
     imageResolver.length - 1
-    unlink(`./public${imageResolver[imageResolver.length - 1]}`, function (err) {
+    unlink(`./public/posts-images/${imageResolver[imageResolver.length - 1]}`, function (err) {
       if (err) return console.log(err);
     });
     db.run("UPDATE article SET titolo = ?, testo = ?, image_url = ? WHERE id_article = ?", titolo, contenuto, image, idPost);
