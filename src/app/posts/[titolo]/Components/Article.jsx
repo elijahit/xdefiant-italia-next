@@ -116,10 +116,10 @@ export default function Article({ image, adminLevel, author, author_id, request_
           {modifyEnable == 0 ?
             <>
               <div className=" mb-3 mb-lg-0 col-12 col-lg-6 d-flex justify-content-center justify-content-lg-end">
-                <button onClick={() => modifyArticle()} className="button-custom"><i className="bi bi-pencil-square"></i> Modifica articolo</button>
+                <button onClick={() => modifyArticle()} className="button-custom text-white"><i className="bi bi-pencil-square"></i> Modifica articolo</button>
               </div>
               <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
-                <button data-bs-toggle="modal" data-bs-target="#modalConfirmCancel" className="button-custom"><i className="bi bi-backspace"></i> Elimina articolo</button>
+                <button data-bs-toggle="modal" data-bs-target="#modalConfirmCancel" className="button-custom text-white"><i className="bi bi-backspace"></i> Elimina articolo</button>
               </div>
             </>
             : ""}
@@ -172,7 +172,7 @@ export default function Article({ image, adminLevel, author, author_id, request_
               <div className="custom-file d-flex flex-column align-items-center mb-5">
                 <label className="custom-file-label fs-4" htmlFor="bannerFile"><i className="bi bi-card-image"></i> Banner</label>
                 <p>Se non vuoi modificare il banner, non caricare nessun file</p>
-                <input type="file" onChange={(t) => setImageModify(t)} name="bannerFile" className="custom-file-input" id="bannerFile" accept="image/*" />
+                <input type="file" onChange={(t) => setImageModify(t)} name="bannerFile" className="custom-file-input text-white" id="bannerFile" accept="image/*" />
               </div>
             </div>
             <div className="d-flex justify-content-center justify-content-lg-end gap-2 mb-5">
