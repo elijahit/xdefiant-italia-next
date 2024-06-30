@@ -6,6 +6,7 @@ import Hero from "../../../../components/Hero";
 import { remark } from 'remark';
 import html from 'remark-html';
 import { useState } from "react";
+import Image from "next/image";
 
 
 export default function Post() {
@@ -129,8 +130,8 @@ export default function Post() {
                 <div>
                   {image?.target?.files[0] ?
                     <div className="d-flex justify-content-center align-items-end">
-                      <img className={styles.imagePreview + " " + styles.imagePreviewBorder + " d-none d-lg-flex"} src={URL.createObjectURL(image.target.files[0])}></img>
-                      <img className={styles.imagePreviewBorder + " d-lg-none img-fluid"} src={URL.createObjectURL(image.target.files[0])}></img>
+                      <Image className={styles.imagePreview + " " + styles.imagePreviewBorder + " d-none d-lg-flex"} src={URL.createObjectURL(image.target.files[0])} alt="Immagine di gestione"></Image>
+                      <Image className={styles.imagePreviewBorder + " d-lg-none img-fluid"} src={URL.createObjectURL(image.target.files[0])} alt="Immagine di gestione"></Image>
                     </div>
                     : ""}
                 </div>

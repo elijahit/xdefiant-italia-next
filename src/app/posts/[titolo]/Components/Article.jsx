@@ -4,6 +4,7 @@ import { useState } from "react";
 import Modal from "../../../../../components/Modal";
 import { remark } from 'remark';
 import htmlRemark from 'remark-html';
+import Image from "next/image";
 
 
 export default function Article({ image, adminLevel, author, author_id, request_username, request_id, post_id, titolo, day, month, year, hour, minute, html, testoNoHtml }) {
@@ -143,7 +144,7 @@ export default function Article({ image, adminLevel, author, author_id, request_
             </article>
           </div>
           <div className="d-lg-none mb-2">
-            <img className="img-fluid" src={image}></img>
+            <Image className="img-fluid" src={image} alt="Immagine di gestione"></Image>
           </div>
           <div className="banner mb-2 d-none  d-lg-block" style={{ backgroundImage: `url(${image})` }}>
           </div>
@@ -191,8 +192,8 @@ export default function Article({ image, adminLevel, author, author_id, request_
               </div>
               <div>
                 <div className="d-flex justify-content-center align-items-end">
-                  <img className="imagePreview imagePreviewBorder d-none d-lg-flex" src={imageModify ? URL.createObjectURL(imageModify.target.files[0]) : image}></img>
-                  <img className="imagePreviewBorder d-lg-none img-fluid" src={image}></img>
+                  <Image className="imagePreview imagePreviewBorder d-none d-lg-flex" src={imageModify ? URL.createObjectURL(imageModify.target.files[0]) : image} alt="Immagine di gestione"></Image>
+                  <Image className="imagePreviewBorder d-lg-none img-fluid" src={image} alt="Immagine articolo"></Image>
                 </div>
               </div>
             </div> : ""}

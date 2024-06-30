@@ -8,6 +8,7 @@ import html from 'remark-html';
 import { useEffect, useState } from "react";
 import { redirect } from "next/dist/server/api-utils";
 import { marked } from "marked";
+import Image from "next/image";
 
 
 export default function Post() {
@@ -180,7 +181,7 @@ export default function Post() {
                   <h1 className="fs-3 text-center">{value.titolo}</h1>
                   <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testo) }} />
                   <div className="d-flex justify-content-center">
-                    <img src={value.image_url} className="img-fluid " width={600} height={0} />
+                    <Image src={value.image_url} className="img-fluid " width={600} height={0} alt="Immagine di gestione" />
                   </div>
                 </div> : ""}
               </div>
@@ -198,7 +199,7 @@ export default function Post() {
                   <h1 className="fs-3 text-center">{value.titolo}</h1>
                   <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testo) }} />
                   <div className="d-flex justify-content-center">
-                    <img src={value.image_url} className="img-fluid " width={600} height={0} />
+                    <Image src={value.image_url} className="img-fluid " width={600} height={0} alt="Immagine di gestione" />
                   </div>
                 </div> : ""}
               </div>
@@ -237,7 +238,7 @@ export default function Post() {
                             <h1 className="fs-3 text-center">{value.titoloVecchio}</h1>
                             <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testoVecchio) }} />
                             <div className="d-flex justify-content-center">
-                              <img src={value.immagineVecchia} className="img-fluid " width={600} height={0} />
+                              <Image src={value.immagineVecchia} className="img-fluid " width={600} height={0} alt="Immagine di gestione" />
                             </div>
                           </div>
                         </div>
@@ -256,8 +257,8 @@ export default function Post() {
                             <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testoNuovo) }} />
                             <div className="d-flex justify-content-center">
                               {value.immagineNuova ?
-                                <img src={value.immagineNuova} className="img-fluid" width={600} height={0} /> :
-                                <img src={value.immagineVecchia} className="img-fluid" width={600} height={0} />}
+                                <Image src={value.immagineNuova} className="img-fluid" width={600} height={0} alt="Immagine di gestione" /> :
+                                <Image src={value.immagineVecchia} className="img-fluid" width={600} height={0} alt="Immagine di gestione" />}
                             </div>
                           </div>
                         </div>
@@ -290,7 +291,7 @@ export default function Post() {
                             <h1 className="fs-3 text-center">{value.titoloVecchio}</h1>
                             <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testoVecchio) }} />
                             <div className="d-flex justify-content-center">
-                              <img src={value.immagineVecchia} className="img-fluid " width={600} height={0} />
+                              <Image src={value.immagineVecchia} className="img-fluid " width={600} height={0} alt="Immagine di gestione" />
                             </div>
                           </div>
                         </div>
@@ -309,8 +310,8 @@ export default function Post() {
                             <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testoNuovo) }} />
                             <div className="d-flex justify-content-center">
                               {value.immagineNuova ?
-                                <img src={value.immagineNuova} className="img-fluid" width={600} height={0} /> :
-                                <img src={value.immagineVecchia} className="img-fluid" width={600} height={0} />}
+                                <Image src={value.immagineNuova} className="img-fluid" width={600} height={0} alt="Immagine di gestione" /> :
+                                <Image src={value.immagineVecchia} className="img-fluid" width={600} height={0} alt="Immagine di gestione" />}
                             </div>
                           </div>
                         </div>
@@ -344,7 +345,7 @@ export default function Post() {
                   <h1 className="fs-3 text-center">{value.titolo}</h1>
                   <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testo) }} />
                   <div className="d-flex justify-content-center">
-                    <img src={value.immagine} className="img-fluid " width={600} height={0} />
+                    <Image src={value.immagine} className="img-fluid " width={600} height={0} alt="Immagine di gestione" />
                   </div>
                 </div> : ""}
               </div>
@@ -362,7 +363,7 @@ export default function Post() {
                   <h1 className="fs-3 text-center">{value.titolo}</h1>
                   <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testo) }} />
                   <div className="d-flex justify-content-center">
-                    <img src={value.immagine} className="img-fluid " width={600} height={0} />
+                    <Image src={value.immagine} className="img-fluid " width={600} height={0} alt="Immagine di gestione" />
                   </div>
                 </div> : ""}
               </div>
