@@ -144,7 +144,7 @@ export default function Article({ image, adminLevel, author, author_id, request_
             </article>
           </div>
           <div className="d-lg-none mb-2">
-            <Image className="img-fluid" width={1000} height={0} src={image} alt="Immagine di gestione"></Image>
+            <Image className="img-fluid" width={1000} height={0} src={image} alt="Immagine di gestione" unoptimized></Image>
           </div>
           <div className="banner mb-2 d-none  d-lg-block" style={{ backgroundImage: `url(${image})` }}>
           </div>
@@ -192,8 +192,8 @@ export default function Article({ image, adminLevel, author, author_id, request_
               </div>
               <div>
                 <div className="d-flex justify-content-center align-items-end">
-                  <Image className="imagePreview imagePreviewBorder d-none d-lg-flex" src={imageModify ? URL.createObjectURL(imageModify.target.files[0]) : image} alt="Immagine di gestione"></Image>
-                  <Image className="imagePreviewBorder d-lg-none img-fluid" src={image} alt="Immagine articolo"></Image>
+                  <Image className="imagePreview imagePreviewBorder d-none d-lg-flex" src={imageModify ? URL.createObjectURL(imageModify.target.files[0]) : image} alt="Immagine di gestione" unoptimized ></Image>
+                  <Image className="imagePreviewBorder d-lg-none img-fluid" src={image} alt="Immagine articolo" unoptimized ></Image>
                 </div>
               </div>
             </div> : ""}
