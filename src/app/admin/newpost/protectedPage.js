@@ -49,7 +49,7 @@ export default function Post() {
     if (titleError == 0 && contentError == 0 && imageError == 0) {
       const formData = new FormData();
       formData.append('title', title);
-      formData.append('content', content);
+      formData.append('content', contentNoHtml);
       formData.append('image', image?.target?.files[0]);
       setTitleError(0);
       setContentError(0);

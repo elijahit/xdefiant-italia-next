@@ -11,6 +11,11 @@
 }
 
 .accordion {
-  background-color: #132241;
-  color: white;
+  --bs-accordion-active-color: black;
+  --bs-accordion-color: black;
+  --bs-accordion-btn-bg: #132241;
+  --bs-accordion-btn-color: white;
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+  margin-top: 20px;
+  padding: 0 100px;
 }

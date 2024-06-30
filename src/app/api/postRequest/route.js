@@ -54,8 +54,11 @@ export async function POST(request) {
 
 
   const { level_admin } = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email.value, auth.value);
-
-  if (level_admin < 3 || authorId != requestAuthorId) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
+  if (level_admin < 3) {
+    if(authorId != requestAuthorId) {
+      return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
+    }
+  }
 
 
   if (title.length == 0) return NextResponse.json({ text: "Abbiamo riscontrato un problema, controllo il titolo del tuo post.", success: 0 }, { status: 400 });

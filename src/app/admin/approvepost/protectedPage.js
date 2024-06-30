@@ -68,9 +68,43 @@ export default function Post() {
   }
 
   function buttonPreviewModify(e) {
+    console.log(previewModify)
     if (previewModify == e) return setPreviewModify(-1);
     return setPreviewModify(e);
   }
+
+  function buttonRifiutaModify(e) {
+    fetch('/api/postGetModify', {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id_article: e.idArticle,
+        image: e.immagineNuova,
+        id_utente: e.richiestaDaID
+      })
+    });
+    window.location.reload();
+  }
+
+  function buttonApprovaModify(e) {
+    fetch('/api/postGetModify', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        idPost: e.idArticle,
+        idUtenteRichiesta: e.richiestaDaID,
+        image: e.immagineNuova,
+        titolo: e.titoloNuovo,
+        contenuto: e.testoNuovo
+      })
+    });
+    window.location.reload();
+  }
+
 
   return (
     <>
@@ -92,9 +126,9 @@ export default function Post() {
                   {value.username}
                 </div>
                 <div className="col-3 d-flex justify-content-center gap-2">
-                  <button onClick={() => buttonApproveRifiuta(value)} type="button" className="btn btn-danger" title="Rifiuta post"><i className="bi bi-trash2-fill"></i></button>
+                  <button onClick={() => buttonApproveRifiuta(value)} type="button" className="btn btn-danger" title="Rifiuta modifiche"><i className="bi bi-trash2-fill"></i></button>
                   <button onClick={() => buttonPreview(value.id_article)} type="button" className="btn btn-light" title="Guarda la preview"><i className="bi bi-eye-fill"></i></button>
-                  <button onClick={() => buttonApproveAccetta(value)} type="button" className="btn btn-success" title="Accetta post"><i className="bi bi-send-check-fill"></i></button>
+                  <button onClick={() => buttonApproveAccetta(value)} type="button" className="btn btn-success" title="Accetta modifiche"><i className="bi bi-send-check-fill"></i></button>
                 </div>
                 {previewApprove == value.id_article ? <div className="container">
                   <h1 className="fs-3 text-center">{value.titolo}</h1>
@@ -110,9 +144,9 @@ export default function Post() {
                   {value.titolo} ({value.username})
                 </div>
                 <div className="col-12 d-flex gap-2 justify-content-center">
-                  <button onClick={() => buttonApproveRifiuta(value)} type="button" className="btn btn-danger" title="Rifiuta post"><i data-id-post={value.id_article} className="bi bi-trash2-fill"></i></button>
+                  <button onClick={() => buttonApproveRifiuta(value)} type="button" className="btn btn-danger" title="Rifiuta modifiche"><i data-id-post={value.id_article} className="bi bi-trash2-fill"></i></button>
                   <button onClick={() => buttonPreview(value.id_article)} type="button" className="btn btn-light" title="Guarda la preview"><i className="bi bi-eye-fill"></i></button>
-                  <button onClick={() => buttonApproveAccetta(value)} type="button" className="btn btn-success" title="Accetta post"><i className="bi bi-send-check-fill"></i></button>
+                  <button onClick={() => buttonApproveAccetta(value)} type="button" className="btn btn-success" title="Accetta modifiche"><i className="bi bi-send-check-fill"></i></button>
                 </div>
                 {previewApprove == value.id_article ? <div className="container">
                   <h1 className="fs-3 text-center">{value.titolo}</h1>
@@ -127,7 +161,7 @@ export default function Post() {
         </div>
 
         {/* APPROVE MODIFY SECTION */}
-        <h2 className="fs-4 text-center mt-3 mb-3">APPROVA MODIFICHE POST</h2>
+        <h2 className="fs-4 text-center mt-5 mb-3">APPROVA MODIFICHE POST</h2>
         <div className="container">
           {postModifyArray.length > 0 ? postModifyArray.map((value, i) =>
             <div key={i}>
@@ -139,15 +173,15 @@ export default function Post() {
                   {value.richiestDa}
                 </div>
                 <div className="col-3 d-flex justify-content-center gap-2">
-                  <button onClick={() => buttonModifyRifiuta(value)} type="button" className="btn btn-danger" title="Rifiuta post"><i className="bi bi-trash2-fill"></i></button>
-                  <button onClick={() => buttonPreviewModify(value.id_article)} type="button" className="btn btn-light" title="Guarda la preview"><i className="bi bi-eye-fill"></i></button>
-                  <button onClick={() => buttonModifyAccetta(value)} type="button" className="btn btn-success" title="Accetta post"><i className="bi bi-send-check-fill"></i></button>
+                  <button onClick={() => buttonRifiutaModify(value)} type="button" className="btn btn-danger" title="Rifiuta post"><i className="bi bi-trash2-fill"></i></button>
+                  <button onClick={() => buttonPreviewModify(value.idArticle)} type="button" className="btn btn-light" title="Guarda la preview"><i className="bi bi-eye-fill"></i></button>
+                  <button onClick={() => buttonApprovaModify(value)} type="button" className="btn btn-success" title="Accetta post"><i className="bi bi-send-check-fill"></i></button>
                 </div>
                 {previewModify == value.idArticle ?
-                  <div className="accordion" id="modifyCollapse">
+                  <div className={styles.accordion + " accordion"} id="modifyCollapse">
                     <div className="accordion-item">
                       <h2 className="accordion-header">
-                        <button className={styles.accordion +" accordion-button collapsed"} type="button" data-bs-toggle="collapse" data-bs-target="#contenutoOriginale" aria-expanded="false" aria-controls="contenutoOriginale">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#contenutoOriginale" aria-expanded="false" aria-controls="contenutoOriginale">
                           Vecchio contenuto
                         </button>
                       </h2>
@@ -157,7 +191,7 @@ export default function Post() {
                             <h1 className="fs-3 text-center">{value.titoloVecchio}</h1>
                             <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testoVecchio) }} />
                             <div className="d-flex justify-content-center">
-                              <img src={value.immaggineVecchia} className="img-fluid " width={600} height={0} />
+                              <img src={value.immagineVecchia} className="img-fluid " width={600} height={0} />
                             </div>
                           </div>
                         </div>
@@ -165,17 +199,19 @@ export default function Post() {
                     </div>
                     <div className="accordion-item">
                       <h2 className="accordion-header">
-                        <button className={styles.accordion +" accordion-button collapsed"} type="button" data-bs-toggle="collapse" data-bs-target="#contenutoModificato" aria-expanded="false" aria-controls="contenutoModificato">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#contenutoModificato" aria-expanded="false" aria-controls="contenutoModificato">
                           Nuovo contenuto
                         </button>
                       </h2>
                       <div id="contenutoModificato" className="accordion-collapse collapse" data-bs-parent="#modifyCollapse">
                         <div className="accordion-body">
                           <div className="container">
-                            <h1 className="fs-3 text-center">{value.titoloVecchio}</h1>
-                            <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testoVecchio) }} />
+                            <h1 className="fs-3 text-center">{value.titoloNuovo}</h1>
+                            <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testoNuovo) }} />
                             <div className="d-flex justify-content-center">
-                              <img src={value.immaggineVecchia} className="img-fluid " width={600} height={0} />
+                              {value.immagineNuova ?
+                                <img src={value.immagineNuova} className="img-fluid" width={600} height={0} /> :
+                                <img src={value.immagineVecchia} className="img-fluid" width={600} height={0} />}
                             </div>
                           </div>
                         </div>
@@ -190,15 +226,50 @@ export default function Post() {
                   {value.titoloVecchio} ({value.richiestDa})
                 </div>
                 <div className="col-12 d-flex gap-2 justify-content-center">
-                  <button onClick={() => buttonModifyRifiuta(value)} type="button" className="btn btn-danger" title="Rifiuta post"><i data-id-post={value.id_article} className="bi bi-trash2-fill"></i></button>
-                  <button onClick={() => buttonModifyPreview(value.id_article)} type="button" className="btn btn-light" title="Guarda la preview"><i className="bi bi-eye-fill"></i></button>
-                  <button onClick={() => buttonModifyAccetta(value)} type="button" className="btn btn-success" title="Accetta post"><i className="bi bi-send-check-fill"></i></button>
+                  <button onClick={() => buttonRifiutaModify(value)} type="button" className="btn btn-danger" title="Rifiuta post"><i data-id-post={value.idArticle} className="bi bi-trash2-fill"></i></button>
+                  <button onClick={() => buttonPreviewModify(value.idArticle)} type="button" className="btn btn-light" title="Guarda la preview"><i className="bi bi-eye-fill"></i></button>
+                  <button onClick={() => buttonApprovaModify(value)} type="button" className="btn btn-success" title="Accetta post"><i className="bi bi-send-check-fill"></i></button>
                 </div>
                 {previewModify == value.idArticle ? <div className="container">
-                  <h1 className="fs-3 text-center">{value.titoloVecchio}</h1>
-                  <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testoVecchio) }} />
-                  <div className="d-flex justify-content-center">
-                    <img src={value.immaggineVecchia} className="img-fluid " width={600} height={0} />
+                  <div className={styles.accordion + " accordion"} id="modifyCollapse">
+                    <div className="accordion-item">
+                      <h2 className="accordion-header">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#contenutoOriginale" aria-expanded="false" aria-controls="contenutoOriginale">
+                          Vecchio contenuto
+                        </button>
+                      </h2>
+                      <div id="contenutoOriginale" className="accordion-collapse collapse" data-bs-parent="#modifyCollapse">
+                        <div className="accordion-body">
+                          <div className="container">
+                            <h1 className="fs-3 text-center">{value.titoloVecchio}</h1>
+                            <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testoVecchio) }} />
+                            <div className="d-flex justify-content-center">
+                              <img src={value.immagineVecchia} className="img-fluid " width={600} height={0} />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="accordion-item">
+                      <h2 className="accordion-header">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#contenutoModificato" aria-expanded="false" aria-controls="contenutoModificato">
+                          Nuovo contenuto
+                        </button>
+                      </h2>
+                      <div id="contenutoModificato" className="accordion-collapse collapse" data-bs-parent="#modifyCollapse">
+                        <div className="accordion-body">
+                          <div className="container">
+                            <h1 className="fs-3 text-center">{value.titoloNuovo}</h1>
+                            <p dangerouslySetInnerHTML={{ __html: marked.parse(value.testoNuovo) }} />
+                            <div className="d-flex justify-content-center">
+                              {value.immagineNuova ?
+                                <img src={value.immagineNuova} className="img-fluid" width={600} height={0} /> :
+                                <img src={value.immagineVecchia} className="img-fluid" width={600} height={0} />}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div> : ""}
               </div>
@@ -225,7 +296,6 @@ function getDataApproveAll() {
 function getDataModifyApproveAll() {
   try {
     const res = fetch(`/api/postGetModify`, { next: { revalidate: 1 } });
-    console.log(res, "testInside")
     return res;
   } catch (error) {
     notFound();
