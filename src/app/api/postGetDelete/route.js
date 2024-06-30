@@ -70,7 +70,7 @@ export async function POST(request) {
   if (image) {
     const imageResolver = image.split('/');
     imageResolver.length - 1
-    unlink(`./public${imageResolver[imageResolver.length - 1]}`, function (err) {
+    unlink(`./public/posts-images/${imageResolver[imageResolver.length - 1]}`, function (err) {
       if (err) return console.log(err);
     });
   }

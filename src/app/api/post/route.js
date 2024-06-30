@@ -82,7 +82,7 @@ export async function DELETE(request) {
   const { id_article, image } = await request.json();
   const imageResolver = image.split('/');
   imageResolver.length-1
-  unlink(`./public${imageResolver[imageResolver.length-1]}`, function (err) {
+  unlink(`./public/posts-images/${imageResolver[imageResolver.length-1]}`, function (err) {
     if (err) return console.log(err);
   });
 
