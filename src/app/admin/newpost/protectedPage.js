@@ -102,6 +102,15 @@ export default function Post() {
               </div>
               <div className="col-lg-3 d-none d-lg-block">
                 <h3 className="text-center fs-5">MARKDOWN</h3>
+                <p><b>Titolo sezioni</b>: <code>### Testo</code><br />
+                (Vietato utilizzare <code>## / #</code> i post che li contengono vengono rifiutati)</p>
+                <p><b>Corsivo</b>: <code>*Testo*</code></p>
+                <p><b>Grassetto</b>: <code>**Testo**</code></p>
+                <p><b>Link formattati</b>: <code>[Testo del link](URL)</code></p>
+                <p><b>Immagini</b>: <code>![Alt text](URL Immagine)</code></p>
+                <p><b>Blocchi di codice</b>: <code>```testo```</code></p>
+                <p><b>Linea</b>: <code>---</code></p>
+                <p>Per <b>andare a capo</b>, bisogna lasciare uno spazio bianco fra una riga e un altra, prima di inviare un post controllane la preview</p>
               </div>
             </div>
             <div className={styles.customFile + " d-flex flex-column align-items-center mb-5"}>

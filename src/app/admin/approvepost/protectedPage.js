@@ -225,7 +225,7 @@ export default function Post() {
                   <button onClick={() => buttonApprovaModify(value)} type="button" className="btn btn-success" title="Accetta post"><i className="bi bi-send-check-fill"></i></button>
                 </div>
                 {previewModify == value.idArticle ?
-                  <div className={styles.accordion + " accordion"} id="modifyCollapse">
+                  <div className={styles.accordion + " accordion ps-5 pe-5"} id="modifyCollapse">
                     <div className="accordion-item">
                       <h2 className="accordion-header">
                         <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#contenutoOriginale" aria-expanded="false" aria-controls="contenutoOriginale">
