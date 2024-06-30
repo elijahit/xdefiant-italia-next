@@ -58,7 +58,7 @@ export async function DELETE(request) {
   db.run("DELETE FROM actions_article WHERE id_article = ? AND id_utente = ?", id_article, id_utente);
 
 
-  return NextResponse.json({ text: "L'articolo è stato rimosso con successo.", success: 1 }, { status: 200 });
+  return NextResponse.json({ text: "L'articolo non è stato modificato, la richiesta è stata rifiutata con successo", success: 1 }, { status: 200 });
 
 
 }
