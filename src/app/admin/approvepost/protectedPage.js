@@ -137,7 +137,7 @@ export default function Post() {
   }
 
   function buttonApprovaDelete(e) {
-    fetch('/api/postGetModify', {
+    fetch('/api/postGetDelete', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
@@ -145,9 +145,7 @@ export default function Post() {
       body: JSON.stringify({
         idPost: e.idArticle,
         idUtenteRichiesta: e.richiestaDaID,
-        image: e.immagineNuova,
-        titolo: e.titoloNuovo,
-        contenuto: e.testoNuovo
+        image: e.immagineNuova
       })
     });
     window.location.reload();
@@ -338,9 +336,9 @@ export default function Post() {
                   {value.richiestDa}
                 </div>
                 <div className="col-3 d-flex justify-content-center gap-2">
-                  <button onClick={() => buttonRifiutaDelete(value)} type="button" className="btn btn-danger" title="Rifiuta modifiche"><i className="bi bi-trash2-fill"></i></button>
+                  <button onClick={() => buttonRifiutaDelete(value)} type="button" className="btn btn-danger" title="Rifiuta eliminazione"><i className="bi bi-trash2-fill"></i></button>
                   <button onClick={() => buttonPreviewDelete(value.idArticle)} type="button" className="btn btn-light" title="Guarda la preview"><i className="bi bi-eye-fill"></i></button>
-                  <button onClick={() => buttonApprovaDelete(value)} type="button" className="btn btn-success" title="Accetta modifiche"><i className="bi bi-send-check-fill"></i></button>
+                  <button onClick={() => buttonApprovaDelete(value)} type="button" className="btn btn-success" title="Accetta eliminazione"><i className="bi bi-send-check-fill"></i></button>
                 </div>
                 {previewApprove == value.idArticle ? <div className="container">
                   <h1 className="fs-3 text-center">{value.titolo}</h1>
@@ -356,9 +354,9 @@ export default function Post() {
                   {value.titolo} ({value.richiestDa})
                 </div>
                 <div className="col-12 d-flex gap-2 justify-content-center">
-                  <button onClick={() => buttonRifiutaDelete(value)} type="button" className="btn btn-danger" title="Rifiuta modifiche"><i data-id-post={value.idArticle} className="bi bi-trash2-fill"></i></button>
+                  <button onClick={() => buttonRifiutaDelete(value)} type="button" className="btn btn-danger" title="Rifiuta eliminazione"><i data-id-post={value.idArticle} className="bi bi-trash2-fill"></i></button>
                   <button onClick={() => buttonPreviewDelete(value.idArticle)} type="button" className="btn btn-light" title="Guarda la preview"><i className="bi bi-eye-fill"></i></button>
-                  <button onClick={() => buttonApprovaDelete(value)} type="button" className="btn btn-success" title="Accetta modifiche"><i className="bi bi-send-check-fill"></i></button>
+                  <button onClick={() => buttonApprovaDelete(value)} type="button" className="btn btn-success" title="Accetta eliminazione"><i className="bi bi-send-check-fill"></i></button>
                 </div>
                 {previewApprove == value.idArticle ? <div className="container">
                   <h1 className="fs-3 text-center">{value.titolo}</h1>

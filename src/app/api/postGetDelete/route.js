@@ -53,3 +53,30 @@ export async function DELETE(request) {
 
 
 }
+
+export async function POST(request) {
+  const email = cookies().get('email');
+  const auth = cookies().get('authToken');
+
+  if(!email && !auth) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
+
+
+  const {id_utente, level_admin} = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email.value, auth.value);
+
+  if(level_admin < 2) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
+
+  const {idPost, idUtenteRichiesta, image, titolo, contenuto} = await request.json();
+
+  if(image) {
+    unlink(`./public${image}`, function (err) {
+      if (err) return console.log(err);
+    });
+  } 
+  db.run("DELETE FROM actions_article WHERE id_article = ? AND id_utente = ?", idPost, idUtenteRichiesta);
+  db.run("DELETE FROM article WHERE id_article = ?", idPost);
+
+
+  return NextResponse.json({ text: "L'articolo è stato eliminato.", success: 1 }, { status: 200 });
+
+  
+}

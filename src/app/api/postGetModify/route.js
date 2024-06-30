@@ -85,7 +85,7 @@ export async function POST(request) {
   } else {
     db.run("UPDATE article SET titolo = ?, testo = ? WHERE id_article = ?", titolo, contenuto, idPost);
   }
-  db.run("DELETE FROM actions_article WHERE id_article = ?", idPost);
+  db.run("DELETE FROM actions_article WHERE id_article = ? AND id_utente", idPost, idUtenteRichiesta);
 
 
   return NextResponse.json({ text: "L'articolo è stato modificato.", success: 1 }, { status: 200 });
