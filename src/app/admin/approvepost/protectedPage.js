@@ -56,8 +56,9 @@ export default function Post() {
         id_article: e.id_article,
         image: e.image_url
       })
+    }).finally(() => {
+      window.location.reload();
     });
-    window.location.reload();
   }
 
   function buttonApproveAccetta(e) {
@@ -69,8 +70,9 @@ export default function Post() {
       body: JSON.stringify({
         id: e.id_article
       })
+    }).finally(() => {
+      window.location.reload();
     });
-    window.location.reload();
   }
 
   function buttonPreview(e) {
@@ -95,8 +97,9 @@ export default function Post() {
         image: e.immagineNuova,
         id_utente: e.richiestaDaID
       })
+    }).finally(() => {
+      window.location.reload();
     });
-    window.location.reload();
   }
 
   function buttonApprovaModify(e) {
@@ -112,8 +115,9 @@ export default function Post() {
         titolo: e.titoloNuovo,
         contenuto: e.testoNuovo
       })
+    }).finally(() => {
+      window.location.reload();
     });
-    window.location.reload();
   }
 
   function buttonPreviewDelete(e) {
@@ -133,8 +137,9 @@ export default function Post() {
         image: e.immagineNuova,
         id_utente: e.richiestaDaID
       })
+    }).finally(() => {
+      window.location.reload();
     });
-    window.location.reload();
   }
 
   function buttonApprovaDelete(e) {
@@ -148,8 +153,9 @@ export default function Post() {
         idUtenteRichiesta: e.richiestaDaID,
         image: e.immagine
       })
+    }).finally(() => {
+      window.location.reload();
     });
-    window.location.reload();
   }
 
 
