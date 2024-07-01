@@ -134,7 +134,7 @@ export default function Article({ image, adminLevel, author, author_id, request_
         <>
           <div className="container mt-2">
             <article>
-              <h1 className="fs-3 text-center">{titolo}</h1>
+              <h1 className="fs-1 text-center">{titolo}</h1>
               <div className="d-flex justify-content-center align-items-center">
                 <p className="author">
                   {day}/{month}/{year} | {hour}:{minute} - {author}
@@ -186,7 +186,7 @@ export default function Article({ image, adminLevel, author, author_id, request_
             <div className="container">
               <div className="preview position-relative">
                 <div className="container ">
-                  <h1 className="fs-3 text-center">{valueTitolo}</h1>
+                  <h1 className="fs-1 text-center">{valueTitolo}</h1>
                   <p dangerouslySetInnerHTML={{ __html: contentPreviewHtml}} />
                 </div>
               </div>

@@ -127,7 +127,7 @@ export default function Post() {
                 <div className={title.length > 0 ? styles.preview + " position-relative" : styles.previewCenteredText}>
                   {title.length > 0 ?
                     <div className="container ">
-                      <h1 className="fs-3 text-center">{title}</h1>
+                      <h1 className="fs-1 text-center">{title}</h1>
                       <p dangerouslySetInnerHTML={{ __html: content }} />
                     </div>
                     :
