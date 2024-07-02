@@ -20,7 +20,12 @@ export async function POST(request) {
   const {id} = await request.json();
 
   db.run("UPDATE article SET isApproved = ? WHERE id_article = ?", 1, id);
+  const {uri_article} = await db.get("SELECT * FROM article WHERE id_article = ?", id);
 
+  // INDEX NOW PROTOCOL FOR BING
+  fetch(`https://bing.com/indexnow?url=https://playxdefiant.it/posts/${uri_article}&key=2b74988ce52cfaf5ab0e7e1d10a8d8fc`);
+
+  
 
   return NextResponse.json({ text: "L'articolo è stato approvato.", success: 1 }, { status: 200 });
 
