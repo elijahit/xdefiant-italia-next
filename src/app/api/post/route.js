@@ -59,7 +59,7 @@ export async function POST(request) {
 
   const date = new Date();
 
-  db.all("INSERT INTO article (titolo, testo, id_utente, image_url, uri_article, created_at, isApproved) VALUES (?, ?, ?, ?, ?, ?, ?)", title, content, id_utente, `https://images.playxdefiant.it/posts-images/${randomFileName}.webp`, uri, `${date.getTime()}`, 0);
+  db.all("INSERT INTO article (titolo, testo, id_utente, image_url, uri_article, created_at, isApproved) VALUES (?, ?, ?, ?, ?, ?, ?)", title, content, id_utente, `https://postimage.playxdefiant.it/${randomFileName}.webp`, uri, `${date.getTime()}`, 0);
 
 
   return NextResponse.json({ text: "Il tuo articolo è stato caricato correttamente, attendi che venga approvato.", success: 1 }, { status: 200 });
