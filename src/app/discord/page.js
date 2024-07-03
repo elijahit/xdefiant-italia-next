@@ -17,6 +17,7 @@ export default async function Home() {
       <main>
         {/* HERO SECTION */}
         <Hero />
+        <h1 className="d-none">Entra sul discord di XDefiant Italia</h1>
         {/* FIRST SECTION DESKTOP*/}
         <section className="d-none d-lg-block">
           <div className="position-relative h-100">

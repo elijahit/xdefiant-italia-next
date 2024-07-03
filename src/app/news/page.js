@@ -18,6 +18,7 @@ export default async function Home() {
         {/* HERO SECTION */}
         <Hero />
         {/* FIRST SECTION */}
+        <h1 className="d-none">Le novità di XDefiant Italia</h1>
         <section className="mt-5">
           <div className="container mb-5 d-flex flex-column align-items-center">
             <h3 className="fs-5 text-center mb-4">LE ULTIME NEWS</h3>
