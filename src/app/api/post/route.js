@@ -3,6 +3,7 @@ import db from "../../../../scripts/database";
 import { cookies } from "next/headers";
 import { convert } from 'url-slug'
 import { writeFile, unlink } from 'fs';
+import sizeOf from "image-size";
 
 // To handle a GET request to /api
 export async function GET(request) {
@@ -37,6 +38,9 @@ export async function POST(request) {
 
   const arrbuf = await image.arrayBuffer();
   const buffer = Buffer.from(arrbuf);
+
+  let sizeImage = sizeOf(buffer);
+  if(sizeImage.height != 720 || sizeImage.width != 1280) return NextResponse.json({ text: "La dimensione consentita per la tua immagine è 1280 x 720.", success: 0 }, { status: 400 });
 
   const imageFormat = ["image/png", "image/jpeg", "image/webp", "image/jpg"]
   if (!imageFormat.find((value) => value == image.type)) return NextResponse.json({ text: "Il file inserito non è tra i formati consentiti (png, jpg, jpeg, webp)", success: 0 }, { status: 400 });

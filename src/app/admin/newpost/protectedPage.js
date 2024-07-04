@@ -114,7 +114,7 @@ export default function Post() {
               </div>
             </div>
             <div className={styles.customFile + " d-flex flex-column align-items-center mb-5"}>
-                <label className={styles.customFileLabel + " fs-4"} htmlFor="bannerFile"><i className="bi bi-card-image"></i> Banner</label>
+                <label className={styles.customFileLabel + " fs-4"} htmlFor="bannerFile"><i className="bi bi-card-image"></i> Banner (1280 x 720)</label>
                 <input type="file" onChange={(t) => setImage(t)} name="bannerFile" className={styles.customFileInput} id="bannerFile" accept="image/*" required/>
               </div>
             <div className="d-flex flex-column align-items-center mb-5">

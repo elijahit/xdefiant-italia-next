@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import db from "../../../../scripts/database";
 import { cookies } from "next/headers";
 import { writeFile } from 'fs';
+import sizeOf from "image-size";
 
 
 // To handle a POST request to /api
@@ -12,7 +13,7 @@ export async function DELETE(request) {
   if (!email && !auth) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
 
 
-  const { id_utente, level_admin } = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email.value, auth.value);
+  const { level_admin } = await db.get("SELECT * FROM utente WHERE email = ? AND authorization_token = ?", email.value, auth.value);
 
 
   const { id_article, id_request, id_author } = await request.json();
@@ -70,9 +71,14 @@ export async function POST(request) {
   if (checkPresent.length == 0) {
     if (image) {
       const imageFormat = ["image/png", "image/jpeg", "image/webp", "image/jpg"]
+      
       if(imageFormat.find((value) => value == image.type)) {
         const arrbuf = await image.arrayBuffer();
         const buffer = Buffer.from(arrbuf);
+
+        let sizeImage = sizeOf(buffer);
+        if(sizeImage.height != 720 || sizeImage.width != 1280) return NextResponse.json({ text: "La dimensione consentita per la tua immagine è 1280 x 720.", success: 0 }, { status: 400 });
+
         writeFile(`./public/posts-images/${randomFileName + "_" + idPost}.webp`, buffer, function (err) {
           if (err) {
             return console.log(err);

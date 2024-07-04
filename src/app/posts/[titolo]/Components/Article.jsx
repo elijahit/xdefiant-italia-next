@@ -170,7 +170,7 @@ export default function Article({ image, adminLevel, author, author_id, request_
                 </div>
               </div>
               <div className="custom-file d-flex flex-column align-items-center mb-5">
-                <label className="custom-file-label fs-4" htmlFor="bannerFile"><i className="bi bi-card-image"></i> Banner</label>
+                <label className="custom-file-label fs-4" htmlFor="bannerFile"><i className="bi bi-card-image"></i> Banner (1280 x 720)</label>
                 <p>Se non vuoi modificare il banner, non caricare nessun file</p>
                 <input type="file" onChange={(t) => setImageModify(t)} name="bannerFile" className="custom-file-input text-white" id="bannerFile" accept="image/*" />
               </div>
