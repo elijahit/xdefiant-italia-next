@@ -45,8 +45,6 @@ export default function Post() {
     if (title.length == 0) setTitleError(1);
     if (content.length == 0) setContentError(1);
     if (image.length == 0) setImageError(1);
-    const imageFetching = await fetch(image, { next: { revalidate: 1 } });
-    if (imageFetching.status != 200) setImageError(1);
     if (titleError == 0 && contentError == 0 && imageError == 0) {
       const formData = new FormData();
       formData.append('title', title);
