@@ -24,7 +24,14 @@ import Image from "next/image";
 
 
 export default function AdminLogs() {
-  const data = getDataAll();
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    getDataAll().then( async value => {
+      let res = await value.json();
+      setData(res);
+    })
+
+  }, [])
 
   return (
     <>
@@ -36,8 +43,12 @@ export default function AdminLogs() {
           {/* DA INSERIRE FILTERING */}
         </div>
         <div className="mb-5">
-          <AuditLogAccordion audit_id={1} username={"EazY"} azione_id={1} timestamp={0} />
-          <AuditLogAccordion audit_id={2} username={"EazY"} azione_id={2} timestamp={0} />
+          {data != null ? data.map((value) =>
+            <AuditLogAccordion key={value.id_admin_logs} audit_id={value.id_admin_logs} username={value.username} azione_id={value.azione} timestamp={+value.timestamp} />
+          ) : 
+            <div className={styles.noData}>
+              <p className="text-center m-0">Non ci sono dati disponibili</p>
+            </div>}
         </div>
       </div>
       <Footer />
@@ -45,9 +56,12 @@ export default function AdminLogs() {
   );
 }
 
-function getDataAll() {
+async function getDataAll() {
   try {
-    const res = fetch(`/api/auditLogs`, { next: { revalidate: 1 } });
+    const res = await fetch(`http://localhost:3000/api/auditLogs`, { next: { revalidate: 1 } });
+    if(res.status == 400) {
+      return "";
+    }
     return res;
   } catch (error) {
     notFound();

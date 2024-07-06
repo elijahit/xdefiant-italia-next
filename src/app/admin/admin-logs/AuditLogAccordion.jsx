@@ -6,7 +6,7 @@ export default function AuditLogAccordion({ audit_id, azione_id, username, times
   let textSpoiler = "";
 
   // GESTORE DATE
-  let date = new Date(1720210347593);
+  let date = new Date(timestamp);
 
   const dayCreate = date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`;
   const monthCreate = date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
