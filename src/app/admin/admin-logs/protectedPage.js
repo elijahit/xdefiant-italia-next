@@ -58,7 +58,7 @@ export default function AdminLogs() {
 
 async function getDataAllByLimit() {
   try {
-    const res = await fetch(`http://localhost:3000/api/auditLogs`, { next: { revalidate: 1 } });
+    const res = await fetch(`/api/auditLogs`, { next: { revalidate: 1 } });
     if(res.status == 400) {
       return "";
     }
