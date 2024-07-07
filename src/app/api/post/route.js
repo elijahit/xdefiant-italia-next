@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { convert } from 'url-slug'
 import { writeFile, unlink } from 'fs';
 import sizeOf from "image-size";
+import { headers } from "next/headers";
 
 // To handle a GET request to /api
 export async function GET(request) {
@@ -63,7 +64,13 @@ export async function POST(request) {
 
   const date = new Date();
 
-  db.all("INSERT INTO article (titolo, testo, id_utente, image_url, uri_article, created_at, isApproved) VALUES (?, ?, ?, ?, ?, ?, ?)", title, content, id_utente, `https://postimage.playxdefiant.it/${randomFileName}.webp`, uri, `${date.getTime()}`, 0);
+  await db.all("INSERT INTO article (titolo, testo, id_utente, image_url, uri_article, created_at, isApproved) VALUES (?, ?, ?, ?, ?, ?, ?)", title, content, id_utente, `https://postimage.playxdefiant.it/${randomFileName}.webp`, uri, `${date.getTime()}`, 0);
+
+  const {id_article} = await db.get("SELECT * FROM article WHERE uri_article = ?", uri);
+  const headersList = headers();
+  const ip = headersList.get("x-forwarded-for");
+
+  await db.run("INSERT INTO admin_logs (id_utente, id_article, azione, timestamp, ip) VALUES(?, ?, 4, ?, ?)", id_utente, id_article, new Date().getTime(), ip);
 
 
   return NextResponse.json({ text: "Il tuo articolo è stato caricato correttamente, attendi che venga approvato.", success: 1 }, { status: 200 });

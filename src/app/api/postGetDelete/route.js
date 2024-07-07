@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import db from "../../../../scripts/database";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { unlink } from 'fs';
 
 export async function GET() {
@@ -74,6 +74,11 @@ export async function POST(request) {
       if (err) return console.log(err);
     });
   }
+  const headersList = headers();
+  const ip = headersList.get("x-forwarded-for");
+
+  await db.run("INSERT INTO admin_logs (id_utente, id_utente_perform, azione, timestamp, ip) VALUES(?, ?, 7, ?, ?)", id_utente, idUtenteRichiesta, new Date().getTime(), ip);
+
   db.run("DELETE FROM actions_article WHERE id_article = ? AND id_utente = ?", idPost, idUtenteRichiesta);
   db.run("DELETE FROM article WHERE id_article = ?", idPost);
 
