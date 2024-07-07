@@ -104,6 +104,6 @@ img {
   height: auto;
 }
 
-a {
+.article-inside a {
   color: #585858;
 }

@@ -132,7 +132,7 @@ export default function Article({ image, adminLevel, author, author_id, request_
       {/* ARTICOLO */}
       {modifyEnable == 0 ?
         <>
-          <div className="container mt-2">
+          <div className="container article-inside mt-2">
             <article>
               <h1 className="fs-1 text-center">{titolo}</h1>
               <div className="d-flex justify-content-center align-items-center">
