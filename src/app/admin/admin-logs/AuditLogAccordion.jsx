@@ -1,6 +1,18 @@
 import styles from "./page.module.css";
 
-export default function AuditLogAccordion({ audit_id, azione_id, username, timestamp }) {
+export default function AuditLogAccordion({ auditId, azioneId, username, timestamp, idUtentePerform, ip, idArticle, articleName, articleAuthor, articleUri, utentePerform }) {
+  /* 
+  AZIONI ID DB:
+  ID: 1 - Ha effettuato il login
+  ID: 2 - Ha effettuaot il logout
+  ID: 3 - Ha approvato la pubblicazione di un articolo (id_article)
+  ID: 4 - Ha inviato un articolo in attesa di approvazione (id_article)
+  ID: 5 - Ha eliminato un articolo in attesa di approvazione (id_article)
+  ID: 6 - Ha modificato un articolo in attesa di approvazione (id_article)
+  ID: 7 - Ha approvato l'eliminazione di un articolo (id_article)
+  ID: 8 - Ha approvato la modifica di un articolo (id_article)
+*/
+
   let iconElements;
   let textAction = "";
   let textSpoiler = "";
@@ -15,24 +27,55 @@ export default function AuditLogAccordion({ audit_id, azione_id, username, times
   const minuteCreate = date.getMinutes() >= 10 ? date.getMinutes() : `0${date.getMinutes()}`;
   ///////////////////////////////////////////////
 
-  switch (azione_id) {
+  switch (azioneId) {
     case 1:
       iconElements = <i className="bi bi-box-arrow-in-right"></i>;
-      textAction = "ha effettuato il Log in";
-      textSpoiler = "Ha effettuato l'accesso al sito"
+      textAction = `ha effettuato il Log in`;
+      textSpoiler = `${username} ha effettuato l'accesso al sito`
       break;
     case 2:
       iconElements = <i className="bi bi-box-arrow-in-left"></i>;
-      textAction = "ha effettuato il Log out";
+      textAction = `${username} ha effettuato il Log out`;
       textSpoiler = "Si è disconnesso dal sito"
       break;
+    case 3:
+      iconElements = <i className="bi bi-check-square-fill"></i>;
+      textAction = "ha approvato un articolo";
+      textSpoiler = `${username} ha approvato l\'articolo ${articleName ? articleName : "(Non più disponibile)"} di ${articleAuthor ? articleAuthor : "(Autore non disponibile)"} `
+      break;
+    case 4:
+      iconElements = <i className="bi bi-paperclip"></i>;
+      textAction = "ha pubblicato un nuovo articolo";
+      textSpoiler = `${username} ha pubblicato un nuovo articolo (in approvazione) con titolo ${articleName ? articleName : "(Non più disponibile)"}`
+      break;
+    case 5:
+      iconElements = <i className="bi bi-trash"></i>;
+      textAction = "ha eliminato un articolo";
+      textSpoiler = `${username} ha eliminato un articolo (in approvazione) con titolo ${articleName ? articleName : "(Non più disponibile)"} di ${articleAuthor ? articleAuthor : "(Autore non disponibile)"}`
+      break;
+    case 6:
+      iconElements = <i className="bi bi-pencil-fill"></i>;
+      textAction = "ha modificato un articolo";
+      textSpoiler = `${username} ha modificato un articolo (in approvazione) con titolo ${articleName ? articleName : "(Non più disponibile)"} di ${articleAuthor ? articleAuthor : "(Autore non disponibile)"}`
+      break;
+    case 7:
+      iconElements = <i className="bi bi-trash"></i>;
+      textAction = "ha approvato l\'eliminazione dell\'articolo";
+      textSpoiler = `${username} ha approvato l\'eliminazione di ${utentePerform}`
+      break;
+    case 8:
+      iconElements = <i className="bi bi-pencil-fill"></i>;
+      textAction = "ha approvato la modifica dell\'articolo";
+      textSpoiler = `${username} ha approvato la modifica dell\'articolo di ${utentePerform}`
+      break;
+
   }
 
   return (
     <div className={styles.accordion + " accordion"} id="accordionAuditLogs">
       <div className="accordion-item">
         <h2 className="accordion-header">
-          <button className="accordion-button collapsed d-block" type="button" data-bs-toggle="collapse" data-bs-target={"#collapse"+audit_id} aria-expanded="false" aria-controls={"collapse"+audit_id}>
+          <button className="accordion-button collapsed d-block" type="button" data-bs-toggle="collapse" data-bs-target={"#collapse" + auditId} aria-expanded="false" aria-controls={"collapse" + auditId}>
             <div className="row">
               <div className="col-12 col-lg-8 d-flex align-items-center">
                 <p className="fs-3 me-3 mb-0">{iconElements}</p>
@@ -49,9 +92,10 @@ export default function AuditLogAccordion({ audit_id, azione_id, username, times
             </div>
           </button>
         </h2>
-        <div id={"collapse"+audit_id} className="accordion-collapse collapse" data-bs-parent="#accordionAuditLogs">
+        <div id={"collapse" + auditId} className="accordion-collapse collapse" data-bs-parent="#accordionAuditLogs">
           <div className="accordion-body">
             <p className="text-center fs-5">{textSpoiler}</p>
+            <p className="text-center fs-5"><code>IP: {ip}</code></p>
           </div>
         </div>
       </div>

@@ -17,9 +17,15 @@ export async function GET(request) {
 
   if(level_admin < 4) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
 
-  const res = await db.all(`SELECT a.azione, a.id_admin_logs, a.id_article, u.id_utente, u.username, a.timestamp, a.id_utente_perform, a.ip 
+  const res = await db.all(`SELECT a.azione as azioneId, a.id_admin_logs as idLogs, a.id_article as idArticle, u.id_utente as utenteLogsId, u.username, a.timestamp, a.id_utente_perform as idUtentePerform, a.ip, ar.titolo as titoloArticle, ar.uri_article as uriArticle, ur.username as authorArticle, up.username as utentePerform
   FROM admin_logs a 
-  JOIN utente u ON u.id_utente = a.id_utente`);
+  JOIN utente u ON u.id_utente = a.id_utente
+  LEFT JOIN article ar ON a.id_article = ar.id_article
+  LEFT JOIN utente ur ON ar.id_utente = ur.id_utente
+  LEFT JOIN utente up on a.id_utente_perform = up.id_utente
+  ORDER BY a.id_admin_logs DESC LIMIT 20`);
+
+  console.log(res)
   
 
   return NextResponse.json(res, { status: 200 });

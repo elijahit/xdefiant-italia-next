@@ -26,7 +26,7 @@ import Image from "next/image";
 export default function AdminLogs() {
   const [data, setData] = useState(null);
   useEffect(() => {
-    getDataAll().then( async value => {
+    getDataAllByLimit().then( async value => {
       let res = await value.json();
       setData(res);
     })
@@ -44,7 +44,7 @@ export default function AdminLogs() {
         </div>
         <div className="mb-5">
           {data != null ? data.map((value) =>
-            <AuditLogAccordion key={value.id_admin_logs} audit_id={value.id_admin_logs} username={value.username} azione_id={value.azione} timestamp={+value.timestamp} />
+            <AuditLogAccordion key={value.idLogs} auditId={value.idLogs} username={value.username} azioneId={value.azioneId} timestamp={+value.timestamp} idUtentePerform={value.idUtentePerform} ip={value.ip} idArticle={value.idArticle} articleName={value.titoloArticle} articleAuthor={value.authorArticle} articleUri={value.uriArticle} utentePerform={value.utentePerform} />
           ) : 
             <div className={styles.noData}>
               <p className="text-center m-0">Non ci sono dati disponibili</p>
@@ -56,7 +56,7 @@ export default function AdminLogs() {
   );
 }
 
-async function getDataAll() {
+async function getDataAllByLimit() {
   try {
     const res = await fetch(`http://localhost:3000/api/auditLogs`, { next: { revalidate: 1 } });
     if(res.status == 400) {
