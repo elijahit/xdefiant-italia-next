@@ -61,6 +61,7 @@ export default function Header({ isPage }) {
                   <ul className="dropdown-menu">
                     {adminLevel >= 2 ? <li><a className="dropdown-item" href="/admin/newpost">Pubblica nuovo articolo</a></li> : ""}
                     {adminLevel >= 3 ? <li><a className="dropdown-item" href="/admin/approvepost">Gestione articoli</a></li> : ""}
+                    {adminLevel >= 4 ? <li><a className="dropdown-item" href="/admin/admin-logs">Audit Logs</a></li> : ""}
                     <li><hr className="dropdown-divider" /></li>
                     <li><a className="dropdown-item" href="" onClick={logout}>Logout</a></li>
                   </ul>
