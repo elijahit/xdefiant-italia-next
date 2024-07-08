@@ -17,7 +17,7 @@ async function generateDynamicSitemap() {
     {
       url: 'https://playxdefiant.it/news',
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: 'hourly',
       priority: 0.8,
     },
     {
@@ -36,7 +36,7 @@ async function generateDynamicSitemap() {
         url: `https://playxdefiant.it/posts/${value.uri_article}`,
         lastModified: new Date(+value.created_at),
         changeFrequency: 'monthly',
-        priority: 0.8,
+        priority: 0.7,
       }
     )
   }
