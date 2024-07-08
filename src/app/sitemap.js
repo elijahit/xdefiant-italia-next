@@ -27,7 +27,7 @@ async function generateDynamicSitemap() {
   ];
   
   // GENERO LA SITEMAP PER I POSTS
-  const products = await db.all("SELECT uri_article, created_at FROM article");
+  const products = await db.all("SELECT uri_article, created_at FROM article WHERE isApproved = 1");
   for(const value of products) {
     siteMapResolve.push(
       {
