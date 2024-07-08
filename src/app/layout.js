@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import "./globals.css";
 import siteConfig from "../../siteConfig.json"
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 
 export const metadata = {
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="it">
       <body>{children}</body>
+      <GoogleAnalytics gaId="G-4YW7FLVCPY" />
     </html>
   );
 }
