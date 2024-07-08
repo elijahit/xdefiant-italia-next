@@ -1,5 +1,7 @@
 import db from "../../scripts/database"
 
+export const revalidate = 40;
+
 export default function sitemap() {
   return generateDynamicSitemap();
 }
