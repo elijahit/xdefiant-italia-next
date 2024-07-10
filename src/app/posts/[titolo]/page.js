@@ -63,8 +63,8 @@ export default async function Page({ params }) {
       "@type": "Person",
       "name": `${postData.author}`
     },
-    "datePublished": `${createdDate.getFullYear()}-${monthCreate}-${dayCreate}`,
-    "dateModified": `${createdDate.getFullYear()}-${monthCreate}-${dayCreate}`,
+    "datePublished": `${createdDate.getFullYear()}-${monthCreate}-${dayCreate}T:${hourCreate}:${minuteCreate}`,
+    "dateModified": `${createdDate.getFullYear()}-${monthCreate}-${dayCreate}T:${hourCreate}:${minuteCreate}`,
     "publisher": {
       '@type': 'Organization',
       'name': 'XDefiant Italia',
