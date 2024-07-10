@@ -10,6 +10,34 @@ export default async function Home() {
   const postData = await getData();
   const postDataAll = await getDataAll();
 
+  const schemaSite = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "https://playxdefiant.it/news",
+    "image": '/header-images/logo.webp',
+    "name": "XDefiant Italia - Discord",
+    "description": "Discod ufficiale di XDefiant Italia, vieni subito e trova i tuoi teammate per le tue partite sul titolo!",
+    "isPartOf": {
+      "@type": "WebSite",
+      "url": "https://playxdefiant.it",
+      "name": "XDefiant Italia"
+    },
+    "publisher": {
+      '@type': 'Organization',
+      'name': 'XDefiant Italia',
+      'logo': '/header-images/logo.webp',
+      'keywords': 'xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord',
+      'founder': [{
+        '@type': 'Person',
+        'name': 'Gabriele Mario Tosto',
+        'description': 'CEO e Developer di XDefiant Italia, lavora attualmente come sviluppatore attivo.',
+        'jobTitle': 'Software Engineer',
+        'givenName': 'Gabriele',
+        'email': 'gabriele.tosto@outlook.com'
+      }]
+    }
+  }
+
   return (
     <>
       {/* HEADER */}
@@ -34,6 +62,13 @@ export default async function Home() {
       </main>
       {/* FOOTER */}
       <Footer />
+      <script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schemaSite),
+        }}
+      />
     </>
   );
 }

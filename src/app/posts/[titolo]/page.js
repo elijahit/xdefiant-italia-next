@@ -54,6 +54,43 @@ export default async function Page({ params }) {
   const hourCreate = createdDate.getHours() >= 10 ? createdDate.getHours() : `0${createdDate.getHours()}`;
   const minuteCreate = createdDate.getMinutes() >= 10 ? createdDate.getMinutes() : `0${createdDate.getMinutes()}`;
 
+  const schemaSite = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": `${postData.titolo}`,
+    "description": `${postdata.testo}`,
+    "author": {
+      "@type": "Person",
+      "name": `${postData.author}`
+    },
+    "datePublished": `${createdDate.getFullYear()}-${monthCreate}-${dayCreate}`,
+    "dateModified": `${createdDate.getFullYear()}-${monthCreate}-${dayCreate}`,
+    "publisher": {
+      '@type': 'Organization',
+      'name': 'XDefiant Italia',
+      'logo': '/header-images/logo.webp',
+      'keywords': 'xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord',
+      'founder': [{
+        '@type': 'Person',
+        'name': 'Gabriele Mario Tosto',
+        'description': 'CEO e Developer di XDefiant Italia, lavora attualmente come sviluppatore attivo.',
+        'jobTitle': 'Software Engineer',
+        'givenName': 'Gabriele',
+        'email': 'gabriele.tosto@outlook.com'
+      }]
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://playxdefiant.it/posts/${params}`
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": `${postData.imageUrl}`,
+      "height": 720,
+      "width": 1280
+    }
+  }
+
 
   return (
     <>
@@ -63,7 +100,7 @@ export default async function Page({ params }) {
       <Header />
       {/* HERO SECTION */}
       <Hero />
-        <Article titolo={postData.titolo} day={dayCreate} month={monthCreate} year={createdDate.getFullYear()} hour={hourCreate} minute={minuteCreate} author={postData.author} id={postData.id} html={contentHtml} testoNoHtml={postData.testo} adminLevel={userData.admin_level} author_id={postData.utenteId} request_username={userData.username} request_id={userData.id_utente} post_id={postData.id} image={postData.imageUrl} />
+      <Article titolo={postData.titolo} day={dayCreate} month={monthCreate} year={createdDate.getFullYear()} hour={hourCreate} minute={minuteCreate} author={postData.author} id={postData.id} html={contentHtml} testoNoHtml={postData.testo} adminLevel={userData.admin_level} author_id={postData.utenteId} request_username={userData.username} request_id={userData.id_utente} post_id={postData.id} image={postData.imageUrl} />
       <Footer />
     </>
   );
