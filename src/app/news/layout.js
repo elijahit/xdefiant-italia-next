@@ -1,15 +1,15 @@
-import Script from "next/script";
+import { schemaSite } from "../layout";
 
 export const metadata = {
   title: "XDefiant Italia - News",
 };
 
-export const schemaSite = {
+schemaSite = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "url": "https://playxdefiant.it/news",
   "image": '/header-images/logo.webp',
-  "name": "News",
+  "name": "XDefiant Italia - News",
   "description": "Notizie sul gioco di XDefiant e approfondimenti forniti dalla redazione di XDefiant Italia",
   "isPartOf": {
     "@type": "WebSite",

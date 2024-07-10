@@ -6,12 +6,12 @@ import siteConfig from "../../siteConfig.json"
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from "next/script";
 
-const schemaSite = {
+export const schemaSite = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "url": "https://playxdefiant.it",
   "image": '/header-images/logo.webp',
-  "name": "Home",
+  "name": "XDefiant Italia - Community",
   "description": "Community italiana di XDefiant dal 2021. Su discord aggiorniamo i giocatori su novità, eventi e competizioni. Unisciti a noi per condividere esperienze, strategie e partecipare a tornei.",
   "isPartOf": {
     "@type": "WebSite",
