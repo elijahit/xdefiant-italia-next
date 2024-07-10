@@ -23,7 +23,7 @@ export default async function Home() {
     "publisher": {
       '@type': 'Organization',
       'name': 'XDefiant Italia',
-      'logo': '/header-images/logo.webp',
+      'logo': '/header-images/logos1.jpg',
       'keywords': 'xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord',
       'founder': [{
         '@type': 'Person',
@@ -41,7 +41,7 @@ export default async function Home() {
     "@type": "Organization",
     "name": "XDefiant Italia",
     "url": "https://playxdefiant.it",
-    "logo": "/header-images/logo.webp",
+    "logo": "/header-images/logos1.jpg",
     "keywords": "xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord",
     "founder": [{
       "@type": "Person",
