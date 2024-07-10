@@ -6,7 +6,7 @@ import siteConfig from "../../siteConfig.json"
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from "next/script";
 
-export const schemaSite = {
+export let schemaSite = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "url": "https://playxdefiant.it",
