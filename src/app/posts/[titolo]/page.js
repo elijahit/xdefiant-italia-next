@@ -103,7 +103,7 @@ export default async function Page({ params }) {
       <Article titolo={postData.titolo} day={dayCreate} month={monthCreate} year={createdDate.getFullYear()} hour={hourCreate} minute={minuteCreate} author={postData.author} id={postData.id} html={contentHtml} testoNoHtml={postData.testo} adminLevel={userData.admin_level} author_id={postData.utenteId} request_username={userData.username} request_id={userData.id_utente} post_id={postData.id} image={postData.imageUrl} />
       <Footer />
       <script
-        id="faq-schema"
+        id="page-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaSite),

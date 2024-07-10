@@ -54,7 +54,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="it">
       <Script
-        id="faq-schema"
+        id="orgs-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaOrgs),

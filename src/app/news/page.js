@@ -84,7 +84,7 @@ export default async function Home() {
       {/* FOOTER */}
       <Footer />
       <script
-        id="faq-schema"
+        id="page-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(schemaSite),
