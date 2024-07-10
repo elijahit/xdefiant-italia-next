@@ -6,20 +6,32 @@ import siteConfig from "../../siteConfig.json"
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from "next/script";
 
-const schemaOrgs = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  'name': 'XDefiant Italia',
-  'logo': '/header-images/logo.webp',
-  'keywords': 'xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord',
-  'founder': [{
-    '@type': 'Person',
-    'name': 'Gabriele Mario Tosto',
-    'description': 'CEO e Developer di XDefiant Italia, lavora attualmente come sviluppatore attivo.',
-    'jobTitle': 'Software Engineer',
-    'givenName': 'Gabriele',
-    'email': 'gabriele.tosto@outlook.com'
-  }]
+const schemaSite = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "url": "https://playxdefiant.it",
+  "image": '/header-images/logo.webp',
+  "name": "Home",
+  "description": "Community italiana di XDefiant dal 2021. Su discord aggiorniamo i giocatori su novità, eventi e competizioni. Unisciti a noi per condividere esperienze, strategie e partecipare a tornei.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": "https://playxdefiant.it",
+    "name": "XDefiant Italia"
+  },
+  "publisher": {
+    '@type': 'Organization',
+    'name': 'XDefiant Italia',
+    'logo': '/header-images/logo.webp',
+    'keywords': 'xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord',
+    'founder': [{
+      '@type': 'Person',
+      'name': 'Gabriele Mario Tosto',
+      'description': 'CEO e Developer di XDefiant Italia, lavora attualmente come sviluppatore attivo.',
+      'jobTitle': 'Software Engineer',
+      'givenName': 'Gabriele',
+      'email': 'gabriele.tosto@outlook.com'
+    }]
+  }
 }
 
 
@@ -57,7 +69,7 @@ export default function RootLayout({ children }) {
         id="faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemaOrgs),
+          __html: JSON.stringify(schemaSite),
         }}
       />
       <body>{children}</body>
