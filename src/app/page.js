@@ -12,7 +12,7 @@ export default async function Home() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "url": "https://playxdefiant.it",
-    "image": '/header-images/logo.webp',
+    "image": '/header-images/logos1.jpg',
     "name": "XDefiant Italia - Community",
     "description": "Community italiana di XDefiant dal 2021. Su discord aggiorniamo i giocatori su novità, eventi e competizioni. Unisciti a noi per condividere esperienze, strategie e partecipare a tornei.",
     "isPartOf": {
