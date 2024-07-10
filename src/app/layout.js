@@ -9,7 +9,9 @@ import Script from "next/script";
 const schemaOrgs = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  'name': 'XDefiant Italia'
+  'name': 'XDefiant Italia',
+  'logo': '/public/header-images/logo.webp',
+  'keywords': 'xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord'
 }
 
 
