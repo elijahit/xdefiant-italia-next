@@ -6,7 +6,7 @@ import siteConfig from "../../siteConfig.json"
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from "next/script";
 
-const schemaSite = {
+const schemaOrgs = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   'name': 'XDefiant Italia',
@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
         id="faq-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemaSite),
+          __html: JSON.stringify(schemaOrgs),
         }}
       />
       <body>{children}</body>
