@@ -7,19 +7,24 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from "next/script";
 
 const schemaOrgs = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  'name': 'XDefiant Italia',
-  'logo': '/header-images/logo.webp',
-  'keywords': 'xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord',
-  'founder': [{
-    '@type': 'Person',
-    'name': 'Gabriele Mario Tosto',
-    'description': 'CEO e Developer di XDefiant Italia, lavora attualmente come sviluppatore attivo.',
-    'jobTitle': 'Software Engineer',
-    'givenName': 'Gabriele',
-    'email': 'gabriele.tosto@outlook.com'
-  }]
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "XDefiant Italia",
+  "url": "https://playxdefiant.it",
+  "logo": "/header-images/logo.webp",
+  "keywords": "xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord",
+  "founder": [{
+    "@type": "Person",
+    "name": "Gabriele Mario Tosto",
+    "description": "CEO e Developer di XDefiant Italia, lavora attualmente come sviluppatore attivo.",
+    "jobTitle": "Software Engineer",
+    "givenName": "Gabriele",
+    "email": "gabriele.tosto@outlook.com"
+  }],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "info@playxdefiant.it"
+  }
 }
 
 
