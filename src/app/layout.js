@@ -5,7 +5,6 @@ import "./globals.css";
 import siteConfig from "../../siteConfig.json"
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from "next/script";
-import { Organization } from 'schema-dts';
 
 const schemaOrgs = {
   '@context': 'https://schema.org',
