@@ -54,7 +54,13 @@ export default async function Home() {
     "contactPoint": {
       "@type": "ContactPoint",
       "email": "info@playxdefiant.it"
-    }
+    },
+    "sameAs": [
+      "https://x.com/PlayXDefiant_IT",
+      "https://www.tiktok.com/@playxdefiant_it",
+      "https://www.instagram.com/playxdefiant_IT/",
+      "https://www.facebook.com/PlayXDefiantIT/"
+    ]
   }
 
   return (
