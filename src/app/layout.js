@@ -4,6 +4,14 @@ import 'bootstrap-icons/font/bootstrap-icons.min.css';
 import "./globals.css";
 import siteConfig from "../../siteConfig.json"
 import { GoogleAnalytics } from '@next/third-parties/google'
+import Script from "next/script";
+import { Organization } from 'schema-dts';
+
+const schemaOrgs = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  'name': 'XDefiant Italia'
+}
 
 
 export const metadata = {
@@ -36,6 +44,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="it">
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schemaOrgs),
+        }}
+      />
       <body>{children}</body>
       <GoogleAnalytics gaId="G-4YW7FLVCPY" />
     </html>
