@@ -81,7 +81,7 @@ export default async function Page({ params }) {
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://playxdefiant.it/posts/${params}`
+      "@id": `https://playxdefiant.it/posts/${params.titolo}`
     },
     "image": {
       "@type": "ImageObject",
