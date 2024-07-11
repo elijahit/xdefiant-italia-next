@@ -45,9 +45,11 @@ export default function Home() {
         <h1 className="fs-2 text-center mt-3 mb-3">Tracker di XDefiant Italia</h1>
         <form action={"/api/trackerGetUsers"} method="get">
           <div className="contaienr mb-5">
-            <div className="row g-3 justify-content-center">
-              <div className="col-auto">
-                
+            <div className="row g-3 justify-content-center align-items-center">
+              <div className="col-auto d-flex gap-2">
+                <button className="btn btn-secondary"><i class="bi bi-pc"></i></button>
+                <button className="btn btn-secondary"><i class="bi bi-playstation"></i></button>
+                <button className="btn btn-secondary"><i class="bi bi-xbox"></i></button>
               </div>
               <div className="col-auto">
                 <input type="text" id="inputAccountSearch" name="username" className="form-control" />
