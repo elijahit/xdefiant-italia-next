@@ -1,0 +1,354 @@
+Profile Stats: {
+  nextToken: null,
+  stats: {
+    BattlepassCompleted: {
+      value: 'false',
+      startDate: '2024-05-20T17:23:31.357Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-02T15:33:29.029Z'
+    },
+    CurrentMatchStreak: {
+      value: '2',
+      startDate: '2023-11-16T16:40:55.199Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:58:11.685Z'
+    },
+    CurrentRank: {
+      value: 'BRONZE 3',
+      startDate: '2023-05-25T19:36:01.154Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-04T15:12:04.425Z'
+    },
+    'CurrentWinStreak.IsPractice.false': {
+      value: '2',
+      startDate: '2023-09-29T18:19:14.301Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:58:11.685Z'
+    },
+    'FactionUse.Faction.Dedsec': {
+      value: '1976',
+      startDate: '2023-03-30T18:04:09.917Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:57:42.24Z'
+    },
+    'FactionUse.Faction.Echelon': {
+      value: '807',
+      startDate: '2023-03-30T18:04:09.917Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-06-01T12:48:54.728Z'
+    },
+    'FactionUse.Faction.Libertad': {
+      value: '2103',
+      startDate: '2023-03-30T18:04:09.917Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-07T15:00:26.277Z'
+    },
+    'FactionUse.Faction.Phantoms': {
+      value: '4',
+      startDate: '2023-03-30T18:04:09.917Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-06-10T19:34:26.636Z'
+    },
+    'FactionUseMatchLevel.Faction.Dedsec.FirstTimeUsingFaction.true.IsPractice.false': {
+      value: '19',
+      startDate: '2024-06-21T18:05:23.021Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:51:08.787Z'
+    },
+    'FactionUseMatchLevel.Faction.Libertad.FirstTimeUsingFaction.true.IsPractice.false': {
+      value: '11',
+      startDate: '2024-06-21T18:05:23.021Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-07T14:49:51.752Z'
+    },
+    'HighestWinStreak.IsPractice.false': {
+      value: '8',
+      startDate: '2023-08-21T17:29:49.661Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-06-13T15:35:26.906Z'
+    },
+    'KillsByWeaponCategory.IsPractice.false.WeaponCategory.AssaultRifle': {
+      value: '1952',
+      startDate: '2023-08-21T16:57:06.695Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:57:42.24Z'
+    },
+    'KillsByWeaponCategory.IsPractice.false.WeaponCategory.LightMachinegun': {
+      value: '1',
+      startDate: '2023-08-21T16:57:06.695Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-06-14T18:32:09.699Z'
+    },
+    'KillsByWeaponCategory.IsPractice.false.WeaponCategory.Pistol': {
+      value: '34',
+      startDate: '2023-08-21T16:57:06.695Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-07T14:56:54.88Z'
+    },
+    'KillsByWeaponCategory.IsPractice.false.WeaponCategory.Rifle': {
+      value: '3',
+      startDate: '2023-08-21T16:57:06.695Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-05-30T15:39:28.136Z'
+    },
+    'KillsByWeaponCategory.IsPractice.false.WeaponCategory.Shotgun': {
+      value: '1',
+      startDate: '2023-08-21T16:57:06.695Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-06-16T18:39:31.488Z'
+    },
+    'KillsByWeaponCategory.IsPractice.false.WeaponCategory.SniperRifle': {
+      value: '1',
+      startDate: '2023-08-21T16:57:06.695Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-06-10T19:31:25.804Z'
+    },
+    'KillsByWeaponCategory.IsPractice.false.WeaponCategory.SubMachinegun': {
+      value: '568',
+      startDate: '2023-08-21T16:57:06.695Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-07T14:55:54.325Z'
+    },
+    'MatchesCompleted.LeaveInProgress.0': {
+      value: '214',
+      startDate: '2023-07-03T17:56:56.305Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:58:11.685Z'
+    },
+    'MatchesCompleted.LeaveInProgress.1': {
+      value: '9',
+      startDate: '2023-07-03T17:56:56.305Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-04T20:08:56.505Z'
+    },
+    'MatchesWTL.IsPractice.false.Win.-1': {
+      value: '103',
+      startDate: '2023-08-30T15:58:16.625Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-07T15:00:26.277Z'
+    },
+    'MatchesWTL.IsPractice.false.Win.1': {
+      value: '119',
+      startDate: '2023-08-30T15:58:16.625Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:58:11.685Z'
+    },
+    'MatchesWTLbyGM.Win.-1.GameMode.Domination': {
+      value: '25',
+      startDate: '2023-08-03T16:50:35.373Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-05T19:13:35.665Z'
+    },
+    'MatchesWTLbyGM.Win.-1.GameMode.Escort': {
+      value: '15',
+      startDate: '2023-08-03T16:50:35.373Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-07T14:44:50.12Z'
+    },
+    'MatchesWTLbyGM.Win.-1.GameMode.Hot Shot': {
+      value: '2',
+      startDate: '2023-08-03T16:50:35.373Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-06-01T20:24:13.675Z'
+    },
+    'MatchesWTLbyGM.Win.-1.GameMode.Occupy': {
+      value: '36',
+      startDate: '2023-08-03T16:50:35.373Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-07T15:00:26.277Z'
+    },
+    'MatchesWTLbyGM.Win.-1.GameMode.Zone Control': {
+      value: '17',
+      startDate: '2023-08-03T16:50:35.373Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-05T19:26:11.155Z'
+    },
+    'MatchesWTLbyGM.Win.1.GameMode.Domination': {
+      value: '33',
+      startDate: '2023-08-03T16:50:35.373Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:58:11.685Z'
+    },
+    'MatchesWTLbyGM.Win.1.GameMode.Escort': {
+      value: '19',
+      startDate: '2023-08-03T16:50:35.373Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-07T14:22:11.445Z'
+    },
+    'MatchesWTLbyGM.Win.1.GameMode.Hot Shot': {
+      value: '5',
+      startDate: '2023-08-03T16:50:35.373Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-06-10T16:04:55.72Z'
+    },
+    'MatchesWTLbyGM.Win.1.GameMode.Occupy': {
+      value: '50',
+      startDate: '2023-08-03T16:50:35.373Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-05T15:06:15.396Z'
+    },
+    'MatchesWTLbyGM.Win.1.GameMode.Zone Control': {
+      value: '12',
+      startDate: '2023-08-03T16:50:35.373Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-05T18:10:28.997Z'
+    },
+    MatchStreak: {
+      value: '13',
+      startDate: '2023-03-30T16:03:05.965Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-06-01T17:30:38.949Z'
+    },
+    MaxBP: {
+      value: '49',
+      startDate: '2023-03-20T19:24:26.691Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-06-19T19:05:04.888Z'
+    },
+    'MVPCount.MedalMVP.true.IsPractice.false': {
+      value: '3',
+      startDate: '2024-01-10T15:34:50.735Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-06-14T18:15:02.995Z'
+    },
+    NumAssists: {
+      value: '2551',
+      startDate: '2023-08-23T15:36:41.861Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:58:11.685Z'
+    },
+    'PlayedRanked.IsRanked.true': {
+      value: '91',
+      startDate: '2023-05-08T18:54:20.291Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-07T15:00:26.277Z'
+    },
+    PlayerLevel: {
+      value: '58',
+      startDate: '2023-06-16T16:29:58.173Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:47:08.143Z'
+    },
+    PlayersLongestLifetime: {
+      value: '294662',
+      startDate: '2023-03-30T16:05:30.203Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-05-30T20:41:25.56Z'
+    },
+    PlayerTotalPlaytime: {
+      value: '130861',
+      startDate: '2023-04-24T16:51:53.079Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:58:11.685Z'
+    },
+    Playtime: {
+      value: '196966',
+      startDate: '2023-05-09T20:05:27.639Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:56:11.659Z'
+    },
+    'Score.IsPractice.false': {
+      value: '758185',
+      startDate: '2023-08-21T17:36:12.239Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:58:11.685Z'
+    },
+    'TotalKills.IsPractice.false': {
+      value: '4547',
+      startDate: '2023-08-30T14:36:40.483Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:58:11.685Z'
+    },
+    'UltimateUseCount.IsPractice.false.SkillType.Skill': {
+      value: '1507',
+      startDate: '2023-08-21T16:02:35.109Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:56:11.659Z'
+    },
+    'UltimateUseCount.IsPractice.false.SkillType.Ultimate': {
+      value: '130',
+      startDate: '2023-08-21T16:02:35.109Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-07T14:56:54.88Z'
+    },
+    'VisitPracticeRange.GameMode.Practice Facility': {
+      value: '1',
+      startDate: '2023-03-30T15:58:56.471Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-04T20:07:25.774Z'
+    },
+    'WasKilledBySkill.WasVictimKilledBySkill.true.IsPractice.false': {
+      value: '51',
+      startDate: '2023-08-21T18:06:12.178Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-07T14:14:39.22Z'
+    },
+    'WeaponDamageDealt.IsPractice.false': {
+      value: '567380',
+      startDate: '2023-08-24T17:58:20.016Z',
+      endDate: null,
+      obj: {},
+      lastModified: '2024-07-09T14:57:42.24Z'
+    }
+  }
+}
+
+
+Profile Stats: {
+  profiles: [
+    {
+      profileId: 'b67b8ca5-1ba7-4899-9d1d-beef4e0b1977',
+      userId: 'b67b8ca5-1ba7-4899-9d1d-beef4e0b1977',
+      platformType: 'uplay',
+      idOnPlatform: 'b67b8ca5-1ba7-4899-9d1d-beef4e0b1977',
+      nameOnPlatform: 'iiiTzElijah'
+    }
+  ]
+}

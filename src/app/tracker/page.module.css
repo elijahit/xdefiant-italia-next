@@ -1,0 +1,11 @@
+.allpost {
+  padding: 10px;
+  margin: 10px 50px;
+  background-color: #0E1931;
+}
+
+.allpostMobile {
+  padding: 10px 0;
+  margin: 10px 5px;
+  background-color: #0E1931;
+}
