@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import Hero from "../../../components/Hero";
+import { useState } from "react";
 
 export default function Home() {
   const schemaSite = {
@@ -32,6 +33,13 @@ export default function Home() {
       }]
     }
   }
+  const [platform, setPlatform] = useState(0);
+
+  function platformHandling(e, p) {
+    e.preventDefault();
+    setPlatform(p);
+
+  }
 
   return (
     <>
@@ -41,21 +49,22 @@ export default function Home() {
         {/* HERO SECTION */}
         <Hero />
         {/* FIRST SECTION */}
-        <h1 className="d-none">Tracker di XDefiant Italia</h1>
-        <h1 className="fs-2 text-center mt-3 mb-3">Tracker di XDefiant Italia</h1>
-        <form action={"/api/trackerGetUsers"} method="get">
-          <div className="contaienr mb-5">
+        <h1 className="d-none">XDEFIANT ITALIA TRACKER</h1>
+        <h1 className="fs-4 text-center mt-3 mb-3">XDEFIANT ITALIA TRACKER</h1>
+        <form action={"/api/statsGetUsers"} method="get">
+          <div className="container mb-5">
             <div className="row g-3 justify-content-center align-items-center">
-              <div className="col-auto d-flex gap-2">
-                <button className="btn btn-secondary"><i class="bi bi-pc"></i></button>
-                <button className="btn btn-secondary"><i class="bi bi-playstation"></i></button>
-                <button className="btn btn-secondary"><i class="bi bi-xbox"></i></button>
+              <div className={"col-auto d-flex gap-2 " + styles.searchbackground}>
+                <button onClick={(e) => platformHandling(e, 0)} className={platform == 0 ? styles.btnCustomActive : styles.btnCustom}><i class="bi bi-pc"></i></button>
+                <button onClick={(e) => platformHandling(e, 1)} className={platform == 1 ? styles.btnCustomActive : styles.btnCustom}><i class="bi bi-playstation"></i></button>
+                <button onClick={(e) => platformHandling(e, 2)} className={platform == 2 ? styles.btnCustomActive : styles.btnCustom}><i class="bi bi-xbox"></i></button>
               </div>
-              <div className="col-auto">
-                <input type="text" id="inputAccountSearch" name="username" className="form-control" />
-              </div>
-              <div className="col-auto">
-                <button className="btn btn-primary"> Cerca </button>
+              <div className="col-auto p-0">
+                <div class="input-group">
+                  <input onSubmit={() => true} type="text" id="inputAccountSearch" name="username" className="form-control rounded-0" />
+                  <span class="input-group-text"><i className="bi bi-search"></i></span>
+                  <input className="d-none" type="text" name="platform" value={platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""}/>
+                </div>
               </div>
             </div>
           </div>
