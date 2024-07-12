@@ -27,7 +27,7 @@ export async function GET(request) {
     body: JSON.stringify({
       email: email,
       password: password,
-      rememberMe: true,
+      rememberMe: false,
     }),
   })
     .then(response => response.json())

@@ -40,6 +40,96 @@ export default async function Stats(params) {
   const userId = params.searchParams?.userId;
   const username = params.searchParams?.username;
 
+  async function resolveRank() {
+    const rank = await getUserData(userId, "rank") != 0 ? (await getUserData(userId, "rank"))
+      .replace("BRONZE", "Bronzo")
+      .replace("SILVER", "Argento")
+      .replace("GOLD", "Oro")
+      .replace("RUBY", "Rubino")
+      .replace("EMERALD", "Smeraldo")
+      .replace("DIAMOND", "Diamante")
+      .replace("LEGENDS", "Leggenda") : "Non classificato"
+    let image;
+    if (rank != "Non classificato") {
+      switch (rank.split(" ")[0]) {
+        case "Bronzo":
+          image = "Bronzo.png";
+          break;
+        case "Argento":
+          image = "Argento.png";
+          break;
+        case "Oro":
+          image = "Oro.png";
+          break;
+        case "Rubino":
+          image = "Rubino.png";
+          break;
+        case "Smeraldo":
+          image = "Smeraldo.png";
+          break;
+        case "Diamante":
+          image = "Diamante.png";
+          break;
+        case "Leggenda":
+          image = "Leggenda.png";
+          break;
+      }
+
+    }
+
+    return { rank: rank, image: image };
+  }
+
+  async function getWinPercentage(userId) {
+    try {
+      // Ottieni i valori di win e lose dall'API
+      const win = await getUserData(userId, "win");
+      const lose = await getUserData(userId, "lose");
+  
+      // Converti i valori in numeri (caso in cui siano stringhe)
+      const winNum = Number(win);
+      const loseNum = Number(lose);
+  
+      // Calcola la percentuale di vittorie
+      const totalGames = winNum + loseNum;
+      const winPercentage = (winNum / totalGames) * 100;
+  
+      // Restituisci la percentuale di vittorie
+      return isNaN(winPercentage) ? 0 : winPercentage;
+    } catch (error) {
+      console.error("Errore nel calcolo della percentuale di vittorie:", error);
+      throw error; // Rilancia l'errore per la gestione esterna
+    }
+  }
+
+  async function getKillMatchRatio(userId) {
+    try {
+      // Ottieni i valori di kills e matches dall'API
+      const kills = await getUserData(userId, "kill");
+      const win = await getUserData(userId, "win");
+      const lose = await getUserData(userId, "lose");
+      const matches = +win + +lose;
+  
+      // Converti i valori in numeri (caso in cui siano stringhe)
+      const killsNum = Number(kills);
+      const matchesNum = Number(matches);
+  
+      // Controlla che matchesNum non sia zero per evitare divisione per zero
+      if (matchesNum === 0) {
+        return 0;
+      }
+  
+      // Calcola il rapporto Kill/Match
+      const killMatchRatio = killsNum / matchesNum;
+  
+      // Restituisci il rapporto Kill/Match
+      return killMatchRatio;
+    } catch (error) {
+      console.error("Errore nel calcolo del rapporto Kill/Match:", error);
+      throw error; // Rilancia l'errore per la gestione esterna
+    }
+  }
+
 
   // await getUserData(userId, "kill")
 
@@ -64,26 +154,165 @@ export default async function Stats(params) {
             <div className="container">
               <div className="row">
                 <div className="col-3">
-                  <h3 className="text-center">{username}</h3>
-                  <div className={styles.backgroundPrimary + " d-flex flex-column align-items-center pt-2 pb-2"}>
-                    <h4 className="fs-5">Rank attuale</h4>
-                    <svg width="48" height="1" viewBox="0 0 48 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <line y1="0.5" x2="48" y2="0.5" stroke="#DCC600" />
-                    </svg>
-                    <div>
-                      {await getUserData(userId, "rank") != 0 ? (await getUserData(userId, "rank"))
-                      .replace("BRONZE", "Bronzo")
-                      .replace("SILVER", "Argento")
-                      .replace("GOLD", "Gold")
-                      .replace("RUBY", "Ruby")
-                      .replace("EMERALD", "Smeraldo")
-                      .replace("DIAMOND", "Diamante")
-                      .replace("LEGENDS", "Leggenda") : "Non classificato"}
+                  <div id="rank" className="mb-3">
+                    <h3 className="text-center">{username}</h3>
+                    <div className={styles.backgroundPrimary + " d-flex flex-column align-items-center pt-2 pb-2 border"}>
+                      <h4 className="fs-5">Rank attuale</h4>
+                      <svg className="mb-2" width="48" height="1" viewBox="0 0 48 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line y1="0.5" x2="48" y2="0.5" stroke="#DCC600" />
+                      </svg>
+                      <div className="d-flex gap-2 align-items-center">
+                        {(await resolveRank()).rank != "Non classificato" ? <Image className="img-fluid" width={32} height={32} src={`/stats-images/${(await resolveRank()).image}`} alt="rank image"></Image> : ""}{(await resolveRank()).rank}
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.backgroundPrimary + " border"}>
+
+                    <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Modalità</h3>
+                    <div className="table-responsive">
+                      <table className={"table table-striped " + styles.table}>
+                        <thead>
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Vittorie</th>
+                            <th scope="col">Sconfitte</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {(await getUserData(userId, "mode")).occupy.win && (await getUserData(userId, "mode")).occupy.lose ?
+                            <>
+                              <tr>
+                                <td>Occupazione</td>
+                                <td>{(await getUserData(userId, "mode")).occupy.win}</td>
+                                <td>{(await getUserData(userId, "mode")).occupy.lose}</td>
+                              </tr>
+                            </>
+                            : ""}
+                          {(await getUserData(userId, "mode")).escort.win && (await getUserData(userId, "mode")).escort.lose ?
+                            <>
+                              <tr>
+                                <td>Scorta</td>
+                                <td>{(await getUserData(userId, "mode")).escort.win}</td>
+                                <td>{(await getUserData(userId, "mode")).escort.lose}</td>
+                              </tr>
+                            </>
+                            : ""}
+                          {(await getUserData(userId, "mode")).hotShot.win && (await getUserData(userId, "mode")).hotShot.lose ?
+                            <>
+                              <tr>
+                                <td>Fenomeno</td>
+                                <td>{(await getUserData(userId, "mode")).hotShot.win}</td>
+                                <td>{(await getUserData(userId, "mode")).hotShot.lose}</td>
+                              </tr>
+                            </>
+                            : ""}
+                          {(await getUserData(userId, "mode")).zoneControl.win && (await getUserData(userId, "mode")).zoneControl.lose ?
+                            <>
+                              <tr>
+                                <td>Controllo</td>
+                                <td>{(await getUserData(userId, "mode")).zoneControl.win}</td>
+                                <td>{(await getUserData(userId, "mode")).zoneControl.lose}</td>
+                              </tr>
+                            </>
+                            : ""}
+                          {(await getUserData(userId, "mode")).domination.win && (await getUserData(userId, "mode")).domination.lose ?
+                            <>
+                              <tr>
+                                <td>Dominio</td>
+                                <td>{(await getUserData(userId, "mode")).domination.win}</td>
+                                <td>{(await getUserData(userId, "mode")).domination.lose}</td>
+                              </tr>
+                            </>
+                            : ""}
+                          {(await getUserData(userId, "mode")).teamDeathmatch.win && (await getUserData(userId, "mode")).teamDeathmatch.lose ?
+                            <>
+                              <tr>
+                                <td>Team Deathmatch</td>
+                                <td>{(await getUserData(userId, "mode")).teamDeathmatch.win}</td>
+                                <td>{(await getUserData(userId, "mode")).teamDeathmatch.lose}</td>
+                              </tr>
+                            </>
+                            : ""}
+                          {(await getUserData(userId, "mode")).captureTheFlag.win && (await getUserData(userId, "mode")).captureTheFlag.lose ?
+                            <>
+                              <tr>
+                                <td>Cattura</td>
+                                <td>{(await getUserData(userId, "mode")).captureTheFlag.win}</td>
+                                <td>{(await getUserData(userId, "mode")).captureTheFlag.lose}</td>
+                              </tr>
+                            </>
+                            : ""}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
-                <div className="col-9">
-                  test
+                <div className="col-9 mt-5">
+                  <div className={styles.backgroundPrimary + " border"}>
+                    <div id="headerStats" className="d-flex align-items-center">
+                      <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Overview generale</h3>
+                      <div className="ms-auto me-3">
+                        <span id="hourPlay" className="me-3">
+                          <i className="bi bi-clock"></i> {(await getUserData(userId, "playTime") / 3600).toFixed()}h giocate
+                        </span>
+                        <span id="totalPlay" className="me-3">
+                          {+(await getUserData(userId, "win")) + +(await getUserData(userId, "lose"))} partite
+                        </span>
+                        <span id="level">
+                          Livello {(await getUserData(userId, "level"))}
+                        </span>
+                      </div>
+                    </div>
+                    <svg width="auto" height="2" viewBox="0 0 779 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <line y1="1" x2="779" y2="1" stroke="#132241" strokeWidth="2" />
+                    </svg>
+                    <div id="statistics" className="container ps-5 pe-5 d-flex flex-wrap gap-2">
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">Vittorie %</h4>
+                        <p className="text-center fs-5">{(await getWinPercentage(userId)).toFixed(2)}</p>
+                      </div>
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">Vittorie</h4>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "win")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                      </div>
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">Sconfitte</h4>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "lose")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                      </div>
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">Uccisioni/Partite %</h4>
+                        <p className="text-center fs-5">{(await getKillMatchRatio(userId)).toFixed(2)}</p>
+                      </div>
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">Kill</h4>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "kill")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                      </div>
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">Assist</h4>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "assist")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                      </div>
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">MVP</h4>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "mvp")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                      </div>
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">Score</h4>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "score")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                      </div>
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">Danno Armi</h4>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "weaponDamage")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                      </div>
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">Ultimate</h4>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "ultimateUse")).toLocaleString(undefined, {minimumFractionDigits: 0})} volte</p>
+                      </div>
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">Skill ultimate</h4>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "skillUsed")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -117,42 +346,45 @@ async function getUserData(user, value) {
 
   const dataAPI = await getData(user);
   const userData = {
-    battlessIsCompleted: dataAPI.stats.BattlepassCompleted?.value,
-    winStreak: dataAPI.stats.CurrentMatchStreak?.value,
-    bestWinStreak: dataAPI.stats['HighestWinStreak.IsPractice.false']?.value,
-    rank: dataAPI.stats.CurrentRank?.value,
+    battlessIsCompleted: dataAPI?.stats?.BattlepassCompleted?.value,
+    winStreak: dataAPI?.stats?.CurrentMatchStreak?.value,
+    bestWinStreak: dataAPI?.stats?.['HighestWinStreak.IsPractice.false']?.value,
+    rank: dataAPI?.stats?.CurrentRank?.value,
+    playTime: dataAPI?.stats?.Playtime?.value,
     faction: {
-      deadsec: dataAPI.stats['FactionUse.Faction.Dedsec']?.value,
-      echelon: dataAPI.stats['FactionUse.Faction.Echelon']?.value,
-      libertad: dataAPI.stats['FactionUse.Faction.Libertad']?.value,
-      phantoms: dataAPI.stats['FactionUse.Faction.Phantoms']?.value,
-      gsk: dataAPI.stats['FactionUse.Faction.GSK']?.value,
+      deadsec: dataAPI?.stats?.['FactionUse.Faction.Dedsec']?.value,
+      echelon: dataAPI?.stats?.['FactionUse.Faction.Echelon']?.value,
+      libertad: dataAPI?.stats?.['FactionUse.Faction.Libertad']?.value,
+      phantoms: dataAPI?.stats?.['FactionUse.Faction.Phantoms']?.value,
+      gsk: dataAPI?.stats?.['FactionUse.Faction.GSK']?.value,
     },
     weapons: {
-      assaultRifle: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.AssaultRifle']?.value,
-      lightMachineGun: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.LightMachinegun']?.value,
-      pistol: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.Pistol']?.value,
-      rifle: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.Rifle']?.value,
-      shotgun: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.Shotgun']?.value,
-      sniper: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.SniperRifle']?.value,
-      subMachineGun: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.SubMachinegun']?.value,
+      assaultRifle: dataAPI?.stats?.['KillsByWeaponCategory.IsPractice.false.WeaponCategory.AssaultRifle']?.value,
+      lightMachineGun: dataAPI?.stats?.['KillsByWeaponCategory.IsPractice.false.WeaponCategory.LightMachinegun']?.value,
+      pistol: dataAPI?.stats?.['KillsByWeaponCategory.IsPractice.false.WeaponCategory.Pistol']?.value,
+      rifle: dataAPI?.stats?.['KillsByWeaponCategory.IsPractice.false.WeaponCategory.Rifle']?.value,
+      shotgun: dataAPI?.stats?.['KillsByWeaponCategory.IsPractice.false.WeaponCategory.Shotgun']?.value,
+      sniper: dataAPI?.stats?.['KillsByWeaponCategory.IsPractice.false.WeaponCategory.SniperRifle']?.value,
+      subMachineGun: dataAPI?.stats?.['KillsByWeaponCategory.IsPractice.false.WeaponCategory.SubMachinegun']?.value,
     },
-    assist: dataAPI.stats.NumAssists?.value,
-    kill: dataAPI.stats['TotalKills.IsPractice.false']?.value,
-    level: dataAPI.stats.PlayerLevel?.value,
-    win: dataAPI.stats['MatchesWTL.IsPractice.false.Win.1']?.value,
-    lose: dataAPI.stats['MatchesWTL.IsPractice.false.Win.-1']?.value,
-    score: dataAPI.stats['Score.IsPractice.false']?.value,
-    ultimateUse: dataAPI.stats['UltimateUseCount.IsPractice.false.SkillType.Ultimate']?.value,
-    weaponDamage: dataAPI.stats['WeaponDamageDealt.IsPractice.false']?.value,
+    assist: dataAPI?.stats?.NumAssists?.value,
+    kill: dataAPI?.stats?.['TotalKills.IsPractice.false']?.value,
+    level: dataAPI?.stats?.PlayerLevel?.value,
+    win: dataAPI?.stats?.['MatchesWTL.IsPractice.false.Win.1']?.value,
+    lose: dataAPI?.stats?.['MatchesWTL.IsPractice.false.Win.-1']?.value,
+    score: dataAPI?.stats?.['Score.IsPractice.false']?.value,
+    ultimateUse: dataAPI?.stats?.['UltimateUseCount.IsPractice.false.SkillType.Ultimate']?.value,
+    skillUsed: dataAPI?.stats?.['UltimateUseCount.IsPractice.false.SkillType.Skill']?.value,
+    mvp: dataAPI?.stats?.['MVPCount.MedalMVP.true.IsPractice.false']?.value,
+    weaponDamage: dataAPI?.stats?.['WeaponDamageDealt.IsPractice.false']?.value,
     mode: {
-      occupy: { win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Occupy']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Occupy']?.value },
-      escort: { win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Escort']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Escort']?.value },
-      hotShot: { win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Hot Shot']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Hot Shot']?.value },
-      zoneControl: { win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Zone Control']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Zone Control']?.value },
-      domination: { win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Domination']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Domination']?.value },
-      teamDeathmatch: { win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Team Deathmatch']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Team Deathmatch']?.value },
-      captureTheFlag: { win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Capture the Flag']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Capture the Flag']?.value },
+      occupy: { win: dataAPI?.stats?.['MatchesWTLbyGM.Win.1.GameMode.Occupy']?.value, lose: dataAPI?.stats?.['MatchesWTLbyGM.Win.-1.GameMode.Occupy']?.value },
+      escort: { win: dataAPI?.stats?.['MatchesWTLbyGM.Win.1.GameMode.Escort']?.value, lose: dataAPI?.stats?.['MatchesWTLbyGM.Win.-1.GameMode.Escort']?.value },
+      hotShot: { win: dataAPI?.stats?.['MatchesWTLbyGM.Win.1.GameMode.Hot Shot']?.value, lose: dataAPI?.stats?.['MatchesWTLbyGM.Win.-1.GameMode.Hot Shot']?.value },
+      zoneControl: { win: dataAPI?.stats?.['MatchesWTLbyGM.Win.1.GameMode.Zone Control']?.value, lose: dataAPI?.stats?.['MatchesWTLbyGM.Win.-1.GameMode.Zone Control']?.value },
+      domination: { win: dataAPI?.stats?.['MatchesWTLbyGM.Win.1.GameMode.Domination']?.value, lose: dataAPI?.stats?.['MatchesWTLbyGM.Win.-1.GameMode.Domination']?.value },
+      teamDeathmatch: { win: dataAPI?.stats?.['MatchesWTLbyGM.Win.1.GameMode.Team Deathmatch']?.value, lose: dataAPI?.stats?.['MatchesWTLbyGM.Win.-1.GameMode.Team Deathmatch']?.value },
+      captureTheFlag: { win: dataAPI?.stats?.['MatchesWTLbyGM.Win.1.GameMode.Capture the Flag']?.value, lose: dataAPI?.stats?.['MatchesWTLbyGM.Win.-1.GameMode.Capture the Flag']?.value },
 
     }
 
@@ -181,7 +413,7 @@ async function getData(userId) {
     body: JSON.stringify({
       email: email,
       password: password,
-      rememberMe: true,
+      rememberMe: false,
     }),
   })
     .then(response => response.json())
@@ -196,7 +428,6 @@ async function getData(userId) {
     .catch(error => {
       console.error('Error:', error);
     });
-
   const urlData = `https://public-ubiservices.ubi.com/v1/profiles/${userId}/stats?spaceId=${spaceId}`;
   return await fetch(urlData, {
     method: 'GET',
