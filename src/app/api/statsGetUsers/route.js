@@ -28,6 +28,7 @@ export async function GET(request) {
       email: email,
       password: password,
     }),
+    next: { revalidate: 60 }
   })
     .then(response => {
       if (response.headers.has('Retry-After')) {
@@ -64,7 +65,8 @@ export async function GET(request) {
     headers: {
       'Authorization': `Ubi_v1 t=${ticketAuth}`,
       'Ubi-AppId': ubiAppId
-    }
+    },
+    next: { revalidate: 1 }
   })
     .then(response => response.json())
     .then(data => {
@@ -82,5 +84,4 @@ export async function GET(request) {
     .catch(error => {
       return NextResponse.json({"error": "Abbiamo riscontrato un errore, controlla di aver inserito tutti i campi, altrimenti contatta lo sviluppatore."})
     });
-  // return NextResponse.json({"res": "ciao"});
 }
