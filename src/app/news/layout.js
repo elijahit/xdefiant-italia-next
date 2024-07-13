@@ -1,5 +1,6 @@
 export const metadata = {
   title: "XDefiant Italia - News",
+  description: "Tutte le novità di XDefiant scritte da XDefiant Italia",
 };
 
 
