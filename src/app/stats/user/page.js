@@ -347,8 +347,8 @@ export default async function Stats(params) {
                   </div>
                   <div className="row">
                     <div className="col-lg-6 col-12">
-                      <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Fazioni</h3>
                       <div className={styles.backgroundPrimary + " border table-responsive"}>
+                      <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Fazioni</h3>
                         <table className={"table table-striped " + styles.table}>
                           <thead>
                             <tr className="text-end">
@@ -410,8 +410,8 @@ export default async function Stats(params) {
                       </div>
                     </div>
                     <div className="col-lg-6 col-12">
-                      <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Armi</h3>
                       <div className={styles.backgroundPrimary + " border table-responsive"}>
+                      <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Armi</h3>
                         <table className={"table table-striped " + styles.table}>
                           <thead>
                             <tr className="text-end">
