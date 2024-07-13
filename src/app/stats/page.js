@@ -6,6 +6,7 @@ import Hero from "../../../components/Hero";
 import { useEffect, useState } from "react";
 import CardNewsHeaderV2 from "../../../components/CardNewsV2";
 import Image from "next/image";
+import { redirect } from "next/dist/server/api-utils";
 
 export default function Stats(params) {
   const schemaSite = {
@@ -59,7 +60,7 @@ export default function Stats(params) {
   function handleSubmit(e) {
     e.preventDefault();
     if (timeOut == 0) {
-      fetch(`/api/statsGetUsers?username=${username}&platform=${platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""}`).then(value => console.log(value));
+      fetch(`/api/statsGetUsers?username=${username}&platform=${platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""}`).then(value => redirect(value.url));
       setTimeOut(1);
       setTimeout(() => {
         setTimeOut(0);
