@@ -30,7 +30,21 @@ export async function GET(request) {
       rememberMe: false,
     }),
   })
-    .then(response => response.json())
+    .then(response => {
+      if (response.headers.has('Retry-After')) {
+        console.log('Retry-After:', response.headers.get('Retry-After'));
+      }
+      if (response.headers.has('X-RateLimit-Limit')) {
+        console.log('X-RateLimit-Limit:', response.headers.get('X-RateLimit-Limit'));
+      }
+      if (response.headers.has('X-RateLimit-Remaining')) {
+        console.log('X-RateLimit-Remaining:', response.headers.get('X-RateLimit-Remaining'));
+      }
+      if (response.headers.has('X-RateLimit-Reset')) {
+        console.log('X-RateLimit-Reset:', response.headers.get('X-RateLimit-Reset'));
+      }
+      response.json()
+    })
     .then(data => {
       if (data.ticket) {
         ticketAuth = data.ticket;
