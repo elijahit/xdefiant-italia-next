@@ -40,7 +40,7 @@ export default function Stats(params) {
   const [username, setUsername] = useState("");
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(1);
-  const [error, setError] = useState(0);
+  const [error, setError] = useState("");
   const [timeOut, setTimeOut] = useState(0);
   const [submitClick, setSubmitClick] = useState(0);
 
@@ -59,11 +59,17 @@ export default function Stats(params) {
   }, [])
 
   function handleSubmit(e) {
-    console.log(params)
     e.preventDefault();
     setSubmitClick(submitClick+1);
     if (timeOut == 0) {
-      fetch(`/api/statsGetUsers?username=${username}&platform=${platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""}`).then(value => window.location.href = `${value.url}`);
+      fetch(`/api/statsGetUsers?username=${username}&platform=${platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""}`).then(response => response.json())
+      .then(value => {
+        if (value.error) {
+          setError(value.error);
+        } else {
+          window.location.href = `${value.url}`
+        }
+      })
       setTimeOut(1);
       setTimeout(() => {
         setTimeOut(0);
@@ -93,12 +99,11 @@ export default function Stats(params) {
                   <div className="input-group">
                     <input onChange={(e) => setUsername(e.target.value)} type="text" id="inputAccountSearch" name="username" className="form-control rounded-0" placeholder={platform == 0 ? "UBISOFT ID" : platform == 1 ? "PSN ID" : platform == 2 ? "XBOX ID" : ""} />
                     <button type="submit" className="input-group-text rounded-end-4"><i className="bi bi-search"></i></button>
-                    <input className="d-none" type="text" name="platform" defaultValue={platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""} />
+                    <input className="d-none" type="text" name="platform" />
                   </div>
                 </div>
               </div>
-              {error == 1 ? <p className="text-center text-danger">{params.searchParams.error}</p> : ""}
-              {submitClick > 1 ? <p className="text-center text-danger">Non puoi eseguire troppe richieste molto velocemente, attendi 60 secondi.</p> : ""}
+              {error.length > 0 ? <p className="text-center text-danger">{error}</p> : ""}
             </div>
           </form><div className="container d-flex flex-column align-items-center">
               <svg className="mb-2" xmlns="http://www.w3.org/2000/svg" width="494" height="1" viewBox="0 0 494 1" fill="none">

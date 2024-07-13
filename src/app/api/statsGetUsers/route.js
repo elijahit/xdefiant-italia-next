@@ -71,21 +71,17 @@ export async function GET(request) {
     .then(data => {
       console.log('Profile Stats:', data);
       if (data.profiles.length == 0) {
-        const errorUrl = new URL("/stats", "https://playxdefiant.it");
-        errorUrl.searchParams.set('error', "L\'utente non è stato trovato");
-        return NextResponse.redirect(errorUrl);
+        return NextResponse.json({"error": "L\'utente non è stato trovato"})
       } else {
         const successUrl = new URL("/stats/user", "https://playxdefiant.it");
         successUrl.searchParams.set('userId', data.profiles[0].userId);
         successUrl.searchParams.set('platform', data.profiles[0].platformType);
         successUrl.searchParams.set('username', username);
-        return NextResponse.redirect(successUrl);
+        return NextResponse.json({"url": `${successUrl}`})
       }
     })
     .catch(error => {
-      const errorUrl = new URL("/stats", "https://playxdefiant.it");
-      errorUrl.searchParams.set('error', "Abbiamo riscontrato un errore, controlla di aver inserito tutti i campi, altrimenti contatta lo sviluppatore.");
-      return NextResponse.redirect(errorUrl);
+      return NextResponse.json({"error": "Abbiamo riscontrato un errore, controlla di aver inserito tutti i campi, altrimenti contatta lo sviluppatore."})
     });
   // return NextResponse.json({"res": "ciao"});
 }

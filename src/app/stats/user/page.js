@@ -277,7 +277,7 @@ export default async function Stats(params) {
                 </div>
                 <div className="col-lg-9 col-12 mt-5">
                   <div className={styles.backgroundPrimary + " border mb-4"}>
-                    <div id="headerStats" className="d-block d-lg-flex align-items-center">
+                    <div id="headerStats" className="d-block d-lg-flex align-items-center mb-4">
                       <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Overview generale</h3>
                       <div className="ms-auto me-3 text-center text-lg-none">
                         <span id="hourPlay" className="me-3">
@@ -291,9 +291,6 @@ export default async function Stats(params) {
                         </span>
                       </div>
                     </div>
-                    <svg width="auto" height="2" viewBox="0 0 779 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <line y1="1" x2="779" y2="1" stroke="#132241" strokeWidth="2" />
-                    </svg>
                     <div id="statistics" className="container ps-5 pe-5  d-lg-flex flex-wrap gap-2 mb-5">
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">Vittorie %</h4>
