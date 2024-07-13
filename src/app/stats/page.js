@@ -59,7 +59,7 @@ export default function Stats(params) {
   }, [])
 
   function handleSubmit(e) {
-    console.log(params.searchParams.error)
+    console.log(params.searchParams)
     e.preventDefault();
     setSubmitClick(submitClick+1);
     if (timeOut == 0) {
