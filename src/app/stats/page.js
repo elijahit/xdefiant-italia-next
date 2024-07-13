@@ -65,6 +65,9 @@ export default function Stats(params) {
       fetch(`/api/statsGetUsers?username=${username}&platform=${platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""}`).then(response => response.json())
       .then(value => {
         if (value.error) {
+          setTimeout(() => {
+            setTimeOut(0);
+          }, 3000);
           setError(value.error);
         } else {
           window.location.href = `${value.url}`
