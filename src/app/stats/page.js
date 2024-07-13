@@ -48,10 +48,10 @@ export default function Stats(params) {
     getData().then(value => {
       setNews(value);
     });
-    setLoading(0);
     if(params.searchParams.error) {
       setError(1);
     }
+    setLoading(0);
   }, [])
 
   return (
