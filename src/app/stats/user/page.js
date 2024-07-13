@@ -170,7 +170,7 @@ export default async function Stats(params) {
         <Hero />
         {/* FIRST SECTION */}
         <>
-          <h1 className="fs-4 text-center mt-3 mb-3">XDEFIANT ITALIA TRACKER</h1>
+          <h1 className="fs-4 text-center mt-3 mb-3">XDEFIANT ITALIA TRACKER <span className="badge text-bg-warning">BETA</span></h1>
           <div className="container d-flex flex-column align-items-center">
             <svg className="mb-2" xmlns="http://www.w3.org/2000/svg" width="494" height="1" viewBox="0 0 494 1" fill="none">
               <line y1="0.5" x2="494" y2="0.5" stroke="#DCC600"></line>
