@@ -36,6 +36,7 @@ export default function Stats(params) {
     }
   }
   const [platform, setPlatform] = useState(0);
+  const [username, setUsername] = useState(null);
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState(0);
@@ -49,20 +50,23 @@ export default function Stats(params) {
     getData().then(value => {
       setNews(value);
     });
-    if(params.searchParams.error) {
+    if (params.searchParams.error) {
       setError(1);
     }
     setLoading(0);
   }, [])
 
-  function handleSubmit() {
-    if(timeOut == 0) {
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (timeOut == 0) {
+      fetch(`/api/statsGetUsers?username=${username}&platform=${platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""}`).then(value => console.log(value));
       setTimeOut(1);
       setTimeout(() => {
         setTimeOut(0);
       }, 60000);
-    } else {
-      return false;
+      if (timeOut == 1) {
+
+      }
     }
   }
 
@@ -76,7 +80,7 @@ export default function Stats(params) {
         <Hero />
         {/* FIRST SECTION */}
         {loading == 0 ? (
-          <><h1 className="fs-4 text-center mt-3 mb-3">XDEFIANT ITALIA TRACKER</h1><form onSubmit={() => handleSubmit()} action={"/api/statsGetUsers"} method="get">
+          <><h1 className="fs-4 text-center mt-3 mb-3">XDEFIANT ITALIA TRACKER</h1><form onSubmit={(e) => handleSubmit(e)} action={"/api/statsGetUsers"} method="get">
             <div className="container mb-3">
               <div className="row g-3 justify-content-center align-items-center">
                 <div className={"col-auto d-flex gap-2 rounded-start-3 " + styles.searchbackground}>
@@ -86,7 +90,7 @@ export default function Stats(params) {
                 </div>
                 <div className="col-auto p-0">
                   <div className="input-group">
-                    <input type="text" id="inputAccountSearch" name="username" className="form-control rounded-0" placeholder={platform == 0 ? "UBISOFT ID" : platform == 1 ? "PSN ID" : platform == 2 ? "XBOX ID" : ""} />
+                    <input onChange={(e) => setUsername(e.target.value)} type="text" id="inputAccountSearch" name="username" className="form-control rounded-0" placeholder={platform == 0 ? "UBISOFT ID" : platform == 1 ? "PSN ID" : platform == 2 ? "XBOX ID" : ""} />
                     <button type="submit" className="input-group-text rounded-end-4"><i className="bi bi-search"></i></button>
                     <input className="d-none" type="text" name="platform" defaultValue={platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""} />
                   </div>
@@ -104,16 +108,16 @@ export default function Stats(params) {
             </div><div className="container">
               <p className="fs-5 text-center">Benvenuto nel tracker ufficiale di XDefiant Italia! Questo è il tuo punto di riferimento per monitorare tutte le tue statistiche di gioco in XDefiant. Che tu sia un veterano della serie o un nuovo giocatore, qui troverai tutte le informazioni necessarie per analizzare le tue prestazioni, confrontarti con altri giocatori e migliorare le tue abilità. Scopri il numero di vittorie, le tue percentuali di precisione, i tuoi punteggi migliori e molto altro ancora. Con il nostro tracker, avrai sempre sotto controllo la tua evoluzione nel gioco. Unisciti alla community di XDefiant Italia e porta il tuo gioco al livello successivo!</p>
             </div>
-              <section className="mb-5">
-                <div className="d-none d-lg-block">
-                  <a href="https://discord.com/servers/xdefiant-italia-1124809941744619602" target="_blank"><Image src={"/home-images/discordbanner.png"} alt="Banner discord" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
-                </div>
+            <section className="mb-5">
+              <div className="d-none d-lg-block">
+                <a href="https://discord.com/servers/xdefiant-italia-1124809941744619602" target="_blank"><Image src={"/home-images/discordbanner.png"} alt="Banner discord" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
+              </div>
 
-                <div className="d-block d-lg-none">
-                  <a href="https://discord.com/servers/xdefiant-italia-1124809941744619602" target="_blank"><Image src={"/home-images/discordbannerMobile.png"} alt="Banner discord" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
-                </div>
-              </section>
-            </>
+              <div className="d-block d-lg-none">
+                <a href="https://discord.com/servers/xdefiant-italia-1124809941744619602" target="_blank"><Image src={"/home-images/discordbannerMobile.png"} alt="Banner discord" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
+              </div>
+            </section>
+          </>
         ) :
           <div className="d-flex justify-content-center mt-5"><div className="spinner-border text-warning" role="status">
             <span className="visually-hidden">Loading...</span>
@@ -136,7 +140,6 @@ export default function Stats(params) {
 async function getData() {
   try {
     const res = await fetch(`/api/postNews?limit=2`, { next: { revalidate: 1 } });
-    console.log(res)
 
     return await res.json();
   } catch (error) {

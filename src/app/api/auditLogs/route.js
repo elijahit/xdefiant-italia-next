@@ -24,8 +24,6 @@ export async function GET(request) {
   LEFT JOIN utente ur ON ar.id_utente = ur.id_utente
   LEFT JOIN utente up on a.id_utente_perform = up.id_utente
   ORDER BY a.id_admin_logs DESC LIMIT 20`);
-
-  console.log(res)
   
 
   return NextResponse.json(res, { status: 200 });

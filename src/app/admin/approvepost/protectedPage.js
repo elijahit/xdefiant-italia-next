@@ -386,7 +386,6 @@ export default function Post() {
 function getDataApproveAll() {
   try {
     const res = fetch(`/api/postNews?approved=0`, { next: { revalidate: 1 } });
-    console.log(res)
     return res;
   } catch (error) {
     notFound();
