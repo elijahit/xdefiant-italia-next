@@ -37,11 +37,12 @@ export default function Stats(params) {
     }
   }
   const [platform, setPlatform] = useState(0);
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState("");
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState(0);
   const [timeOut, setTimeOut] = useState(0);
+  const [submitClick, setSubmitClick] = useState(0);
 
   function platformHandling(e, p) {
     setPlatform(p);
@@ -59,6 +60,7 @@ export default function Stats(params) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setSubmitClick(submitClick+1);
     if (timeOut == 0) {
       fetch(`/api/statsGetUsers?username=${username}&platform=${platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""}`).then(value => window.location.href = `${value.url}`);
       setTimeOut(1);
@@ -95,7 +97,7 @@ export default function Stats(params) {
                 </div>
               </div>
               {error == 1 ? <p className="text-center text-danger">{params.searchParams.error}</p> : ""}
-              {timeOut == 1 ? <p className="text-center text-danger">Non puoi eseguire troppe richieste molto velocemente, attendi 60 secondi.</p> : ""}
+              {submitClick > 1 ? <p className="text-center text-danger">Non puoi eseguire troppe richieste molto velocemente, attendi 60 secondi.</p> : ""}
             </div>
           </form><div className="container d-flex flex-column align-items-center">
               <svg className="mb-2" xmlns="http://www.w3.org/2000/svg" width="494" height="1" viewBox="0 0 494 1" fill="none">
