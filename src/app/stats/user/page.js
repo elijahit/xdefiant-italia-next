@@ -4,6 +4,7 @@ import Footer from "../../../../components/Footer";
 import Hero from "../../../../components/Hero";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { Database } from "sqlite";
 
 export default async function Stats(params) {
   if (!params.searchParams?.userId) redirect("/stats");
@@ -85,15 +86,15 @@ export default async function Stats(params) {
       // Ottieni i valori di win e lose dall'API
       const win = await getUserData(userId, "win");
       const lose = await getUserData(userId, "lose");
-  
+
       // Converti i valori in numeri (caso in cui siano stringhe)
       const winNum = Number(win);
       const loseNum = Number(lose);
-  
+
       // Calcola la percentuale di vittorie
       const totalGames = winNum + loseNum;
       const winPercentage = (winNum / totalGames) * 100;
-  
+
       // Restituisci la percentuale di vittorie
       return isNaN(winPercentage) ? 0 : winPercentage;
     } catch (error) {
@@ -109,25 +110,51 @@ export default async function Stats(params) {
       const win = await getUserData(userId, "win");
       const lose = await getUserData(userId, "lose");
       const matches = +win + +lose;
-  
+
       // Converti i valori in numeri (caso in cui siano stringhe)
       const killsNum = Number(kills);
       const matchesNum = Number(matches);
-  
+
       // Controlla che matchesNum non sia zero per evitare divisione per zero
       if (matchesNum === 0) {
         return 0;
       }
-  
+
       // Calcola il rapporto Kill/Match
       const killMatchRatio = killsNum / matchesNum;
-  
+
       // Restituisci il rapporto Kill/Match
       return killMatchRatio;
     } catch (error) {
       console.error("Errore nel calcolo del rapporto Kill/Match:", error);
       throw error; // Rilancia l'errore per la gestione esterna
     }
+  }
+
+  function getHumanReadableMinutes(data) {
+    const milliseconds = Number(data);
+
+    // Calcola le ore, minuti, secondi e millisecondi
+    const hours = Math.floor(milliseconds / 3600000);
+    const minutes = Math.floor((milliseconds % 3600000) / 60000);
+    const seconds = Math.floor((milliseconds % 60000) / 1000);
+    const remainingMilliseconds = milliseconds % 1000;
+
+    // Formatta il risultato in una stringa leggibile
+    return `${minutes}m ${seconds}s`;
+  }
+
+  function getHumanReadableHourFaction(data) {
+    const milliseconds = Number(data);
+
+    // Calcola le ore, minuti, secondi e millisecondi
+    const hours = Math.floor(milliseconds / 60);
+    const minutes = Math.floor((milliseconds % 3600000) / 60000);
+    const seconds = Math.floor((milliseconds % 60000) / 1000);
+    const remainingMilliseconds = milliseconds % 1000;
+
+    // Formatta il risultato in una stringa leggibile
+    return `${hours}h`;
   }
 
 
@@ -153,9 +180,10 @@ export default async function Stats(params) {
           <section className="mb-5">
             <div className="container">
               <div className="row">
-                <div className="col-3">
+                <div className="col-lg-3 col-12">
                   <div id="rank" className="mb-3">
-                    <h3 className="text-center">{username}</h3>
+                    <div className="text-center fs-3 d-flex gap-2 align-items-center mb-3 justify-content-center justify-content-lg-start">
+                      <img className={styles.avatar} src={`https://ubisoft-avatars.akamaized.net/${userId}/default_146_146.png`} />{username}</div>
                     <div className={styles.backgroundPrimary + " d-flex flex-column align-items-center pt-2 pb-2 border"}>
                       <h4 className="fs-5">Rank attuale</h4>
                       <svg className="mb-2" width="48" height="1" viewBox="0 0 48 1" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -172,7 +200,7 @@ export default async function Stats(params) {
                     <div className="table-responsive">
                       <table className={"table table-striped " + styles.table}>
                         <thead>
-                          <tr>
+                          <tr className="text-end">
                             <th scope="col"></th>
                             <th scope="col">Vittorie</th>
                             <th scope="col">Sconfitte</th>
@@ -183,8 +211,8 @@ export default async function Stats(params) {
                             <>
                               <tr>
                                 <td>Occupazione</td>
-                                <td>{(await getUserData(userId, "mode")).occupy.win}</td>
-                                <td>{(await getUserData(userId, "mode")).occupy.lose}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).occupy.win}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).occupy.lose}</td>
                               </tr>
                             </>
                             : ""}
@@ -192,8 +220,8 @@ export default async function Stats(params) {
                             <>
                               <tr>
                                 <td>Scorta</td>
-                                <td>{(await getUserData(userId, "mode")).escort.win}</td>
-                                <td>{(await getUserData(userId, "mode")).escort.lose}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).escort.win}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).escort.lose}</td>
                               </tr>
                             </>
                             : ""}
@@ -201,8 +229,8 @@ export default async function Stats(params) {
                             <>
                               <tr>
                                 <td>Fenomeno</td>
-                                <td>{(await getUserData(userId, "mode")).hotShot.win}</td>
-                                <td>{(await getUserData(userId, "mode")).hotShot.lose}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).hotShot.win}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).hotShot.lose}</td>
                               </tr>
                             </>
                             : ""}
@@ -210,8 +238,8 @@ export default async function Stats(params) {
                             <>
                               <tr>
                                 <td>Controllo</td>
-                                <td>{(await getUserData(userId, "mode")).zoneControl.win}</td>
-                                <td>{(await getUserData(userId, "mode")).zoneControl.lose}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).zoneControl.win}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).zoneControl.lose}</td>
                               </tr>
                             </>
                             : ""}
@@ -219,8 +247,8 @@ export default async function Stats(params) {
                             <>
                               <tr>
                                 <td>Dominio</td>
-                                <td>{(await getUserData(userId, "mode")).domination.win}</td>
-                                <td>{(await getUserData(userId, "mode")).domination.lose}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).domination.win}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).domination.lose}</td>
                               </tr>
                             </>
                             : ""}
@@ -228,8 +256,8 @@ export default async function Stats(params) {
                             <>
                               <tr>
                                 <td>Team Deathmatch</td>
-                                <td>{(await getUserData(userId, "mode")).teamDeathmatch.win}</td>
-                                <td>{(await getUserData(userId, "mode")).teamDeathmatch.lose}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).teamDeathmatch.win}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).teamDeathmatch.lose}</td>
                               </tr>
                             </>
                             : ""}
@@ -237,8 +265,8 @@ export default async function Stats(params) {
                             <>
                               <tr>
                                 <td>Cattura</td>
-                                <td>{(await getUserData(userId, "mode")).captureTheFlag.win}</td>
-                                <td>{(await getUserData(userId, "mode")).captureTheFlag.lose}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).captureTheFlag.win}</td>
+                                <td className="text-end">{(await getUserData(userId, "mode")).captureTheFlag.lose}</td>
                               </tr>
                             </>
                             : ""}
@@ -247,37 +275,37 @@ export default async function Stats(params) {
                     </div>
                   </div>
                 </div>
-                <div className="col-9 mt-5">
+                <div className="col-lg-9 col-12 mt-5">
                   <div className={styles.backgroundPrimary + " border"}>
-                    <div id="headerStats" className="d-flex align-items-center">
+                    <div id="headerStats" className="d-block d-lg-flex align-items-center">
                       <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Overview generale</h3>
-                      <div className="ms-auto me-3">
+                      <div className="ms-auto me-3 text-center text-lg-none">
                         <span id="hourPlay" className="me-3">
-                          <i className="bi bi-clock"></i> {(await getUserData(userId, "playTime") / 3600).toFixed()}h giocate
+                          <i className="bi bi-clock"></i> {(await getUserData(userId, "playTime") / 3600).toFixed().toLocaleString(undefined, { minimumFractionDigits: 0 })}h giocate
                         </span>
                         <span id="totalPlay" className="me-3">
-                          {+(await getUserData(userId, "win")) + +(await getUserData(userId, "lose"))} partite
+                          {(+(await getUserData(userId, "win")) + +(await getUserData(userId, "lose"))).toLocaleString(undefined, { minimumFractionDigits: 0 })} partite
                         </span>
                         <span id="level">
-                          Livello {(await getUserData(userId, "level"))}
+                          Livello {(await getUserData(userId, "level")).toLocaleString(undefined, { minimumFractionDigits: 0 })}
                         </span>
                       </div>
                     </div>
                     <svg width="auto" height="2" viewBox="0 0 779 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <line y1="1" x2="779" y2="1" stroke="#132241" strokeWidth="2" />
                     </svg>
-                    <div id="statistics" className="container ps-5 pe-5 d-flex flex-wrap gap-2">
+                    <div id="statistics" className="container ps-5 pe-5  d-lg-flex flex-wrap gap-2 mb-5">
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">Vittorie %</h4>
                         <p className="text-center fs-5">{(await getWinPercentage(userId)).toFixed(2)}</p>
                       </div>
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">Vittorie</h4>
-                        <p className="text-center fs-5">{(+await getUserData(userId, "win")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "win")).toLocaleString(undefined, { minimumFractionDigits: 0 })}</p>
                       </div>
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">Sconfitte</h4>
-                        <p className="text-center fs-5">{(+await getUserData(userId, "lose")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "lose")).toLocaleString(undefined, { minimumFractionDigits: 0 })}</p>
                       </div>
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">Uccisioni/Partite %</h4>
@@ -285,31 +313,178 @@ export default async function Stats(params) {
                       </div>
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">Kill</h4>
-                        <p className="text-center fs-5">{(+await getUserData(userId, "kill")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "kill")).toLocaleString(undefined, { minimumFractionDigits: 0 })}</p>
                       </div>
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">Assist</h4>
-                        <p className="text-center fs-5">{(+await getUserData(userId, "assist")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "assist")).toLocaleString(undefined, { minimumFractionDigits: 0 })}</p>
                       </div>
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">MVP</h4>
-                        <p className="text-center fs-5">{(+await getUserData(userId, "mvp")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "mvp")).toLocaleString(undefined, { minimumFractionDigits: 0 })}</p>
                       </div>
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">Score</h4>
-                        <p className="text-center fs-5">{(+await getUserData(userId, "score")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "score")).toLocaleString(undefined, { minimumFractionDigits: 0 })}</p>
                       </div>
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">Danno Armi</h4>
-                        <p className="text-center fs-5">{(+await getUserData(userId, "weaponDamage")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "weaponDamage")).toLocaleString(undefined, { minimumFractionDigits: 0 })}</p>
                       </div>
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">Ultimate</h4>
-                        <p className="text-center fs-5">{(+await getUserData(userId, "ultimateUse")).toLocaleString(undefined, {minimumFractionDigits: 0})} volte</p>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "ultimateUse")).toLocaleString(undefined, { minimumFractionDigits: 0 })} volte</p>
                       </div>
                       <div className={styles.card}>
                         <h4 className="text-center fs-5">Skill ultimate</h4>
-                        <p className="text-center fs-5">{(+await getUserData(userId, "skillUsed")).toLocaleString(undefined, {minimumFractionDigits: 0})}</p>
+                        <p className="text-center fs-5">{(+await getUserData(userId, "skillUsed")).toLocaleString(undefined, { minimumFractionDigits: 0 })}</p>
+                      </div>
+                      <div className={styles.card}>
+                        <h4 className="text-center fs-5">Tempo in vita</h4>
+                        <p className="text-center fs-5">{getHumanReadableMinutes(await getUserData(userId, "longestLifetime"))}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-lg-6 col-12">
+                      <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Fazioni</h3>
+                      <div className={styles.backgroundPrimary + " border table-responsive"}>
+                        <table className={"table table-striped " + styles.table}>
+                          <thead>
+                            <tr className="text-end">
+                              <th scope="col"></th>
+                              <th scope="col">Tempo di gioco</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {(await getUserData(userId, "faction")).deadsec ?
+                              <>
+                                <tr>
+                                  <td>DedSec</td>
+                                  <td className="text-end">{getHumanReadableHourFaction((await getUserData(userId, "faction")).deadsec)}</td>
+                                </tr>
+                              </>
+                              : ""}
+                            {(await getUserData(userId, "faction")).phantoms ?
+                              <>
+                                <tr>
+                                  <td>Fantasmi</td>
+                                  <td className="text-end">{getHumanReadableHourFaction((await getUserData(userId, "faction")).phantoms)}</td>
+                                </tr>
+                              </>
+                              : ""}
+                            {(await getUserData(userId, "faction")).echelon ?
+                              <>
+                                <tr>
+                                  <td>Echelon</td>
+                                  <td className="text-end">{getHumanReadableHourFaction((await getUserData(userId, "faction")).echelon)}</td>
+                                </tr>
+                              </>
+                              : ""}
+                            {(await getUserData(userId, "faction")).cleaners ?
+                              <>
+                                <tr>
+                                  <td>Purificatori</td>
+                                  <td className="text-end">{getHumanReadableHourFaction((await getUserData(userId, "faction")).cleaners)}</td>
+                                </tr>
+                              </>
+                              : ""}
+                            {(await getUserData(userId, "faction")).libertad ?
+                              <>
+                                <tr>
+                                  <td>Libertad</td>
+                                  <td className="text-end">{getHumanReadableHourFaction((await getUserData(userId, "faction")).libertad)}</td>
+                                </tr>
+                              </>
+                              : ""}
+                            {(await getUserData(userId, "faction")).gsk ?
+                              <>
+                                <tr>
+                                  <td>GSK</td>
+                                  <td className="text-end">{getHumanReadableHourFaction((await getUserData(userId, "faction")).gsk)}</td>
+                                </tr>
+                              </>
+                              : ""}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div className="col-lg-6 col-12">
+                      <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Armi</h3>
+                      <div className={styles.backgroundPrimary + " border table-responsive"}>
+                        <table className={"table table-striped " + styles.table}>
+                          <thead>
+                            <tr className="text-end">
+                              <th scope="col"></th>
+                              <th scope="col">Kill</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {(await getUserData(userId, "weapons")).assaultRifle ?
+                              <>
+                                <tr>
+                                  <td>Assalto</td>
+                                  <td className="text-end">{(+(await getUserData(userId, "weapons")).assaultRifle).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>
+                                </tr>
+                              </>
+                              : ""}
+
+                            {(await getUserData(userId, "weapons")).lightMachineGun ?
+                              <>
+                                <tr>
+                                  <td>Mitragliatrice Leggera</td>
+                                  <td className="text-end">{(+(await getUserData(userId, "weapons")).lightMachineGun).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>
+                                </tr>
+                              </>
+                              : ""}
+
+                            {(await getUserData(userId, "weapons")).pistol ?
+                              <>
+                                <tr>
+                                  <td>Pistola</td>
+                                  <td className="text-end">{(+(await getUserData(userId, "weapons")).pistol).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>
+                                </tr>
+                              </>
+                              : ""}
+
+                            {(await getUserData(userId, "weapons")).rifle ?
+                              <>
+                                <tr>
+                                  <td>Fucile</td>
+                                  <td className="text-end">{(+(await getUserData(userId, "weapons")).rifle).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>
+                                </tr>
+                              </>
+                              : ""}
+
+                            {(await getUserData(userId, "weapons")).shotgun ?
+                              <>
+                                <tr>
+                                  <td>Shotgun</td>
+                                  <td className="text-end">{(+(await getUserData(userId, "weapons")).shotgun).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>
+                                </tr>
+                              </>
+                              : ""}
+
+                            {(await getUserData(userId, "weapons")).sniper ?
+                              <>
+                                <tr>
+                                  <td>Cecchino</td>
+                                  <td className="text-end">{(+(await getUserData(userId, "weapons")).sniper).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>
+                                </tr>
+                              </>
+                              : ""}
+
+                            {(await getUserData(userId, "weapons")).subMachineGun ?
+                              <>
+                                <tr>
+                                  <td>SMG</td>
+                                  <td className="text-end">{(+(await getUserData(userId, "weapons")).subMachineGun).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>
+                                </tr>
+                              </>
+                              : ""}
+
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
@@ -328,9 +503,9 @@ export default async function Stats(params) {
             </div>
           </section>
         </>
-      </main>
+      </main >
       {/* FOOTER */}
-      <Footer />
+      < Footer />
       <script
         id="page-schema"
         type="application/ld+json"
@@ -356,6 +531,7 @@ async function getUserData(user, value) {
       echelon: dataAPI?.stats?.['FactionUse.Faction.Echelon']?.value,
       libertad: dataAPI?.stats?.['FactionUse.Faction.Libertad']?.value,
       phantoms: dataAPI?.stats?.['FactionUse.Faction.Phantoms']?.value,
+      cleaners: dataAPI?.stats?.['FactionUse.Faction.cleaners']?.value,
       gsk: dataAPI?.stats?.['FactionUse.Faction.GSK']?.value,
     },
     weapons: {
@@ -375,6 +551,7 @@ async function getUserData(user, value) {
     score: dataAPI?.stats?.['Score.IsPractice.false']?.value,
     ultimateUse: dataAPI?.stats?.['UltimateUseCount.IsPractice.false.SkillType.Ultimate']?.value,
     skillUsed: dataAPI?.stats?.['UltimateUseCount.IsPractice.false.SkillType.Skill']?.value,
+    longestLifetime: dataAPI?.stats?.PlayersLongestLifetime?.value,
     mvp: dataAPI?.stats?.['MVPCount.MedalMVP.true.IsPractice.false']?.value,
     weaponDamage: dataAPI?.stats?.['WeaponDamageDealt.IsPractice.false']?.value,
     mode: {
@@ -394,8 +571,8 @@ async function getUserData(user, value) {
 
 async function getData(userId) {
   // AGGIORNO IL TICKET
-  const email = 'gabriele.tosto@outlook.com';
-  const password = 'Ubuntu019@';
+  const email = 'info@playxdefiant.it';
+  const password = 'Samsungs16!';
   const spaceId = 'e3014688-25dd-4a03-ae5a-82e80eb5053c';
   let ticketAuth;
 

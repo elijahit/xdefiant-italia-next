@@ -8,8 +8,8 @@ export async function GET(request) {
   let platform = searchParams.get('platform');
 
   // AGGIORNO IL TICKET
-  const email = 'gabriele.tosto@outlook.com';
-  const password = 'Ubuntu019@';
+  const email = 'info@playxdefiant.it';
+  const password = 'Samsungs16!';
   let ticketAuth;
 
   const spaceId = 'e3014688-25dd-4a03-ae5a-82e80eb5053c';
