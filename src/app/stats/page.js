@@ -39,6 +39,7 @@ export default function Stats(params) {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState(0);
+  const [timeOut, setTimeOut] = useState(0);
 
   function platformHandling(e, p) {
     setPlatform(p);
@@ -54,6 +55,17 @@ export default function Stats(params) {
     setLoading(0);
   }, [])
 
+  function handleSubmit() {
+    if(timeOut == 0) {
+      setTimeOut(1);
+      setTimeout(() => {
+        setTimeOut(0);
+      }, 60000);
+    } else {
+      return false;
+    }
+  }
+
   return (
     <>
       {/* HEADER */}
@@ -64,7 +76,7 @@ export default function Stats(params) {
         <Hero />
         {/* FIRST SECTION */}
         {loading == 0 ? (
-          <><h1 className="fs-4 text-center mt-3 mb-3">XDEFIANT ITALIA TRACKER</h1><form action={"/api/statsGetUsers"} method="get">
+          <><h1 className="fs-4 text-center mt-3 mb-3">XDEFIANT ITALIA TRACKER</h1><form onSubmit={() => handleSubmit()} action={"/api/statsGetUsers"} method="get">
             <div className="container mb-3">
               <div className="row g-3 justify-content-center align-items-center">
                 <div className={"col-auto d-flex gap-2 rounded-start-3 " + styles.searchbackground}>
