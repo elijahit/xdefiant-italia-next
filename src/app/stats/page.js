@@ -87,12 +87,13 @@ export default function Stats(params) {
       {/* HEADER */}
       <Header isPage="tracker"></Header>
       <main>
-        <h1 className="d-none">XDEFIANT ITALIA TRACKER <span class="badge badge-warning">BETA</span></h1>
+        <h1 className="d-none">XDEFIANT ITALIA TRACKER</h1>
         {/* HERO SECTION */}
         <Hero />
         {/* FIRST SECTION */}
         {loading == 0 ? (
-          <><h1 className="fs-4 text-center mt-3 mb-3">XDEFIANT ITALIA TRACKER</h1><form onSubmit={(e) => handleSubmit(e)} action={"/api/statsGetUsers"} method="get">
+          <><h1 className="fs-4 text-center mt-3 mb-3">XDEFIANT ITALIA TRACKER <span className="badge text-bg-warning">BETA</span></h1>
+          <form onSubmit={(e) => handleSubmit(e)} action={"/api/statsGetUsers"} method="get">
             <div className="container mb-3">
               <div className="row g-3 justify-content-center align-items-center">
                 <div className={"col-auto d-flex gap-2 rounded-start-3 " + styles.searchbackground}>
