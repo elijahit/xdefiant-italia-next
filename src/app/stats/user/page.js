@@ -587,7 +587,6 @@ async function getData(userId) {
     body: JSON.stringify({
       email: email,
       password: password,
-      rememberMe: false,
     }),
   })
     .then(response => response.json())
@@ -612,6 +611,7 @@ async function getData(userId) {
   })
     .then(response => response.json())
     .then(data => {
+      // console.log(data, ticketAuth)
       return data;
     })
     .catch(error => {
