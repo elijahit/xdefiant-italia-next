@@ -599,7 +599,7 @@ async function getData(userId) {
             'Authorization': `Ubi_v1 t=${data.ticket}`,
             'Ubi-AppId': ubiAppId
           },
-          next: { revalidate: 60 }
+          next: { revalidate: 1 }
         })
           .then(response => response.json())
           .then(dataX => {
