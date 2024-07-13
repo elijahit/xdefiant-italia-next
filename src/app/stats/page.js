@@ -65,9 +65,6 @@ export default function Stats(params) {
       setTimeout(() => {
         setTimeOut(0);
       }, 60000);
-      if (timeOut == 1) {
-
-      }
     }
   }
 
@@ -98,6 +95,7 @@ export default function Stats(params) {
                 </div>
               </div>
               {error == 1 ? <p className="text-center text-danger">{params.searchParams.error}</p> : ""}
+              {timeOut == 1 ? <p className="text-center text-danger">Non puoi eseguire troppe richieste molto velocemente, attendi 60 secondi.</p> : ""}
             </div>
           </form><div className="container d-flex flex-column align-items-center">
               <svg className="mb-2" xmlns="http://www.w3.org/2000/svg" width="494" height="1" viewBox="0 0 494 1" fill="none">
