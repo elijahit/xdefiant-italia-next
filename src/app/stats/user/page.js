@@ -528,7 +528,7 @@ async function getUserData(user, value) {
       echelon: dataAPI?.stats?.['FactionUse.Faction.Echelon']?.value,
       libertad: dataAPI?.stats?.['FactionUse.Faction.Libertad']?.value,
       phantoms: dataAPI?.stats?.['FactionUse.Faction.Phantoms']?.value,
-      cleaners: dataAPI?.stats?.['FactionUse.Faction.cleaners']?.value,
+      cleaners: dataAPI?.stats?.['FactionUse.Faction.Cleaners']?.value,
       gsk: dataAPI?.stats?.['FactionUse.Faction.GSK']?.value,
     },
     weapons: {
