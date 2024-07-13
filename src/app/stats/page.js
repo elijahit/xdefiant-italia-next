@@ -55,6 +55,8 @@ export default function Stats(params) {
     if (params.searchParams.error) {
       setError(1);
     }
+    setTimeOut(0);
+    setSubmitClick(0);
     setLoading(0);
   }, [])
 
