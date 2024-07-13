@@ -276,7 +276,7 @@ export default async function Stats(params) {
                   </div>
                 </div>
                 <div className="col-lg-9 col-12 mt-5">
-                  <div className={styles.backgroundPrimary + " border"}>
+                  <div className={styles.backgroundPrimary + " border mb-4"}>
                     <div id="headerStats" className="d-block d-lg-flex align-items-center">
                       <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Overview generale</h3>
                       <div className="ms-auto me-3 text-center text-lg-none">
@@ -346,7 +346,7 @@ export default async function Stats(params) {
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-lg-6 col-12">
+                    <div className="col-lg-6 col-12 mb-4 mb-lg-0">
                       <div className={styles.backgroundPrimary + " border table-responsive"}>
                       <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Fazioni</h3>
                         <table className={"table table-striped " + styles.table}>
@@ -409,7 +409,7 @@ export default async function Stats(params) {
                         </table>
                       </div>
                     </div>
-                    <div className="col-lg-6 col-12">
+                    <div className="col-lg-6 col-12 mb-4 mb-lg-0">
                       <div className={styles.backgroundPrimary + " border table-responsive"}>
                       <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Armi</h3>
                         <table className={"table table-striped " + styles.table}>
