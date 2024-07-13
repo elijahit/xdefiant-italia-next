@@ -571,8 +571,8 @@ async function getUserData(user, value) {
 
 async function getData(userId) {
   // AGGIORNO IL TICKET
-  const email = 'info@playxdefiant.it';
-  const password = 'Samsungs16!';
+  const email = 'gabriele.tosto@outlook.com';
+  const password = 'Ubuntu019@';
   const spaceId = 'e3014688-25dd-4a03-ae5a-82e80eb5053c';
   let ticketAuth;
 

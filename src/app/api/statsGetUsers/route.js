@@ -8,8 +8,8 @@ export async function GET(request) {
   let platform = searchParams.get('platform');
 
   // AGGIORNO IL TICKET
-  const email = 'info@playxdefiant.it';
-  const password = 'Samsungs16!';
+  const email = 'gabriele.tosto@outlook.com';
+  const password = 'Ubuntu019@';
   let ticketAuth;
 
   const spaceId = 'e3014688-25dd-4a03-ae5a-82e80eb5053c';
@@ -57,11 +57,11 @@ export async function GET(request) {
     .then(data => {
       console.log('Profile Stats:', data);
       if (data.profiles.length == 0) {
-        const errorUrl = new URL("/stats", request.url);
+        const errorUrl = new URL("/stats", "https://playxdefiant.it");
         errorUrl.searchParams.set('error', "L\'utente non è stato trovato");
         return NextResponse.redirect(errorUrl);
       } else {
-        const successUrl = new URL("/stats/user", request.url);
+        const successUrl = new URL("/stats/user", "https://playxdefiant.it");
         successUrl.searchParams.set('userId', data.profiles[0].userId);
         successUrl.searchParams.set('platform', data.profiles[0].platformType);
         successUrl.searchParams.set('username', username);
@@ -69,7 +69,7 @@ export async function GET(request) {
       }
     })
     .catch(error => {
-      const errorUrl = new URL("/stats", request.url);
+      const errorUrl = new URL("/stats", "https://playxdefiant.it");
       errorUrl.searchParams.set('error', "Abbiamo riscontrato un errore, controlla di aver inserito tutti i campi, altrimenti contatta lo sviluppatore.");
       return NextResponse.redirect(errorUrl);
     });
