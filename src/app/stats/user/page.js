@@ -345,7 +345,7 @@ export default async function Stats(params) {
                   <div className="row">
                     <div className="col-lg-6 col-12 mb-4 mb-lg-0">
                       <div className={styles.backgroundPrimary + " border table-responsive"}>
-                      <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Fazioni</h3>
+                        <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Fazioni</h3>
                         <table className={"table table-striped " + styles.table}>
                           <thead>
                             <tr className="text-end">
@@ -408,7 +408,7 @@ export default async function Stats(params) {
                     </div>
                     <div className="col-lg-6 col-12 mb-4 mb-lg-0">
                       <div className={styles.backgroundPrimary + " border table-responsive"}>
-                      <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Armi</h3>
+                        <h3 className="pt-2 ps-2 fs-4"><i className="bi bi-globe"></i> Armi</h3>
                         <table className={"table table-striped " + styles.table}>
                           <thead>
                             <tr className="text-end">
@@ -571,13 +571,12 @@ async function getData(userId) {
   const email = 'gabriele.tosto@outlook.com';
   const password = 'Ubuntu019@';
   const spaceId = 'e3014688-25dd-4a03-ae5a-82e80eb5053c';
-  let ticketAuth;
 
   const ubiAppId = '4bc245f2-b998-4574-9574-6ab93ec9e44c';
 
   const urlGetTicket = 'https://public-ubiservices.ubi.com/v3/profiles/sessions';
 
-  await fetch(urlGetTicket, {
+  return await fetch(urlGetTicket, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -588,12 +587,27 @@ async function getData(userId) {
       email: email,
       password: password,
     }),
+    next: { revalidate: 1 }
   })
     .then(response => response.json())
     .then(data => {
       if (data.ticket) {
-        ticketAuth = data.ticket;
-        // Puoi salvare il ticket per usi successivi
+        const urlData = `https://public-ubiservices.ubi.com/v1/profiles/${userId}/stats?spaceId=${spaceId}`;
+        return fetch(urlData, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Ubi_v1 t=${data.ticket}`,
+            'Ubi-AppId': ubiAppId
+          },
+          next: { revalidate: 1 }
+        })
+          .then(response => response.json())
+          .then(dataX => {
+            return dataX;
+          })
+          .catch(error => {
+            console.error('Error fetching profile stats:', error);
+          });
       } else {
         console.error('Failed to get Ubisoft Ticket:', data);
       }
@@ -601,20 +615,5 @@ async function getData(userId) {
     .catch(error => {
       console.error('Error:', error);
     });
-  const urlData = `https://public-ubiservices.ubi.com/v1/profiles/${userId}/stats?spaceId=${spaceId}`;
-  return await fetch(urlData, {
-    method: 'GET',
-    headers: {
-      'Authorization': `Ubi_v1 t=${ticketAuth}`,
-      'Ubi-AppId': ubiAppId
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-      // console.log(data, ticketAuth)
-      return data;
-    })
-    .catch(error => {
-      console.error('Error fetching profile stats:', error);
-    });
+
 }
