@@ -43,7 +43,7 @@ export async function GET(request) {
       if (response.headers.has('X-RateLimit-Reset')) {
         console.log('X-RateLimit-Reset:', response.headers.get('X-RateLimit-Reset'));
       }
-      response.json()
+      return response.json()
     })
     .then(data => {
       if (data.ticket) {
