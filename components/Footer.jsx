@@ -23,6 +23,9 @@ function Footer() {
                 <li>
                   <a href="/discord">Discord</a>
                 </li>
+                <li>
+                  <a href="/stats">Stats</a>
+                </li>
               </ul>
               </nav>
           </div>

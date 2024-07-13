@@ -1,0 +1,41 @@
+const userData = {
+  battlessIsCompleted: dataAPI.stats.BattlepassCompleted?.value,
+  winStreak: dataAPI.stats.CurrentMatchStreak?.value,
+  bestWinStreak: dataAPI.stats['HighestWinStreak.IsPractice.false']?.value,
+  rank: dataAPI.stats.CurrentRank?.value,
+  faction: {
+    deadsec: dataAPI.stats['FactionUse.Faction.Dedsec']?.value,
+    echelon: dataAPI.stats['FactionUse.Faction.Echelon']?.value,
+    libertad: dataAPI.stats['FactionUse.Faction.Libertad']?.value,
+    phantoms: dataAPI.stats['FactionUse.Faction.Phantoms']?.value,
+    gsk: dataAPI.stats['FactionUse.Faction.GSK']?.value,
+  },
+  weapons: {
+    assaultRifle: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.AssaultRifle']?.value,
+    lightMachineGun: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.LightMachinegun']?.value,
+    pistol: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.Pistol']?.value,
+    rifle: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.Rifle']?.value,
+    shotgun: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.Shotgun']?.value,
+    sniper: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.SniperRifle']?.value,
+    subMachineGun: dataAPI.stats['KillsByWeaponCategory.IsPractice.false.WeaponCategory.SubMachinegun']?.value,
+  },
+  assist: dataAPI.stats.NumAssists?.value,
+  kill: dataAPI.stats['TotalKills.IsPractice.false']?.value,
+  level: dataAPI.stats.PlayerLevel?.value,
+  win: dataAPI.stats['MatchesWTL.IsPractice.false.Win.1']?.value,
+  lose: dataAPI.stats['MatchesWTL.IsPractice.false.Win.-1']?.value,
+  score: dataAPI.stats['Score.IsPractice.false']?.value,
+  ultimateUse: dataAPI.stats['UltimateUseCount.IsPractice.false.SkillType.Ultimate']?.value,
+  weaponDamage: dataAPI.stats['WeaponDamageDealt.IsPractice.false']?.value,
+  mode: {
+    occupy: {win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Occupy']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Occupy']?.value},
+    escort: {win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Escort']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Escort']?.value},
+    hotShot: {win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Hot Shot']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Hot Shot']?.value},
+    zoneControl: {win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Zone Control']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Zone Control']?.value},
+    domination: {win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Domination']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Domination']?.value},
+    teamDeathmatch: {win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Team Deathmatch']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Team Deathmatch']?.value},
+    captureTheFlag: {win: dataAPI.stats['MatchesWTLbyGM.Win.1.GameMode.Capture the Flag']?.value, lose: dataAPI.stats['MatchesWTLbyGM.Win.-1.GameMode.Capture the Flag']?.value},
+
+  }
+
+}

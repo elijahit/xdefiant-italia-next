@@ -48,6 +48,9 @@ export default function Header({ isPage }) {
                 <li className="nav-item">
                   <a className={isPage == "discord" ? "nav-link active" : "nav-link"} href="/discord">Discord</a>
                 </li>
+                <li className="nav-item">
+                  <a className={isPage == "tracker" ? "nav-link active" : "nav-link"} href="/stats">Stats</a>
+                </li>
               </ul>
               <div className="align-lg-self-center align-self-end mb-2 mb-lg-0">
                 {adminLevel == 0 ? <button onClick={() => router.push("/admin/login")} className="login">
