@@ -38,6 +38,7 @@ export default function Stats(params) {
   const [platform, setPlatform] = useState(0);
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(1);
+  const [error, setError] = useState(0);
 
   function platformHandling(e, p) {
     setPlatform(p);
@@ -48,6 +49,9 @@ export default function Stats(params) {
       setNews(value);
     });
     setLoading(0);
+    if(params.searchParams.error) {
+      setError(1);
+    }
   }, [])
 
   return (
@@ -76,7 +80,7 @@ export default function Stats(params) {
                   </div>
                 </div>
               </div>
-              {params.searchParams.error ? <p className="text-center text-danger">{params.searchParams.error}</p> : ""}
+              {error == 1 ? <p className="text-center text-danger">{params.searchParams.error}</p> : ""}
             </div>
           </form><div className="container d-flex flex-column align-items-center">
               <svg className="mb-2" xmlns="http://www.w3.org/2000/svg" width="494" height="1" viewBox="0 0 494 1" fill="none">
