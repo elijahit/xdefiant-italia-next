@@ -87,7 +87,7 @@ export default function Stats(params) {
       {/* HEADER */}
       <Header isPage="tracker"></Header>
       <main>
-        <h1 className="d-none">XDEFIANT ITALIA TRACKER</h1>
+        <h1 className="d-none">XDEFIANT ITALIA TRACKER <span class="badge badge-warning">BETA</span></h1>
         {/* HERO SECTION */}
         <Hero />
         {/* FIRST SECTION */}
