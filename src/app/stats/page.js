@@ -79,6 +79,9 @@ export default function Stats(params) {
       setTimeout(() => {
         setTimeOut(0);
       }, 60000);
+    if(timeOut == 1) {
+      setError("Hai eseguito troppe richieste, attendi 60 secondi e riprova.");
+    }
     }
   }
 
