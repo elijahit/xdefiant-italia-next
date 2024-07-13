@@ -42,7 +42,6 @@ export default function Stats(params) {
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState("");
   const [timeOut, setTimeOut] = useState(0);
-  const [submitClick, setSubmitClick] = useState(0);
 
   function platformHandling(e, p) {
     setPlatform(p);
@@ -56,14 +55,13 @@ export default function Stats(params) {
       setError(1);
     }
     setTimeOut(0);
-    setSubmitClick(0);
     setLoading(0);
   }, [])
 
   function handleSubmit(e) {
     e.preventDefault();
-    setSubmitClick(submitClick+1);
     if (timeOut == 0) {
+      setTimeOut(1);
       fetch(`/api/statsGetUsers?username=${username}&platform=${platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""}`).then(response => response.json())
       .then(value => {
         if (value.error) {
@@ -75,13 +73,12 @@ export default function Stats(params) {
           window.location.href = `${value.url}`
         }
       })
-      setTimeOut(1);
       setTimeout(() => {
         setTimeOut(0);
       }, 60000);
-    if(timeOut == 1) {
-      setError("Hai eseguito troppe richieste, attendi 60 secondi e riprova.");
     }
+    else if(timeOut == 1) {
+      setError("Hai eseguito troppe richieste, attendi 60 secondi e riprova.");
     }
   }
 
