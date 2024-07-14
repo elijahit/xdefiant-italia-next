@@ -95,11 +95,11 @@ export default async function Home() {
         </section>
         <section className="mb-5">
           <div className="d-none d-lg-block">
-            <a href="/stats"><Image src={"/home-images/tracker.png"} alt="Banner discord" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
+            <a href="/stats"><Image src={"/home-images/tracker.png"} alt="Tracker XDefiant Italia" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
           </div>
 
           <div className="d-block d-lg-none">
-            <a href="/stats"><Image src={"/home-images/trackerMobile.png"} alt="Banner discord" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
+            <a href="/stats"><Image src={"/home-images/trackerMobile.png"} alt="Tracker XDefiant Italia" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
           </div>
         </section>
         <section className="mb-5">
