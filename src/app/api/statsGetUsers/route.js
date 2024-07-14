@@ -10,14 +10,12 @@ export async function GET(request) {
   // AGGIORNO IL TICKET
   const email = 'gabriele.tosto@outlook.com';
   const password = 'Ubuntu019@';
-  let ticketAuth;
 
-  const spaceId = 'e3014688-25dd-4a03-ae5a-82e80eb5053c';
   const ubiAppId = '4bc245f2-b998-4574-9574-6ab93ec9e44c';
 
   const urlGetTicket = 'https://public-ubiservices.ubi.com/v3/profiles/sessions';
 
-  await fetch(urlGetTicket, {
+  return await fetch(urlGetTicket, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -45,43 +43,40 @@ export async function GET(request) {
       }
       return response.json()
     })
-    .then(data => {
+    .then(async data => {
       if (data.ticket) {
-        ticketAuth = data.ticket;
-        // Puoi salvare il ticket per usi successivi
+        const urlGetProfiles = `https://public-ubiservices.ubi.com/v1/profiles?platformType=${platform}&namesOnPlatform=${username}`;
+
+        return fetch(urlGetProfiles, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Ubi_v1 t=${data.ticket}`,
+            'Ubi-AppId': ubiAppId
+          },
+          next: { revalidate: 60 }
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Profile Stats:', data);
+            if (data.profiles.length == 0) {
+              return NextResponse.json({ "error": "L\'utente non è stato trovato" })
+            } else {
+              const successUrl = new URL("/stats/user", "https://playxdefiant.it");
+              successUrl.searchParams.set('userId', data.profiles[0].userId);
+              successUrl.searchParams.set('platform', data.profiles[0].platformType);
+              successUrl.searchParams.set('username', username);
+              return NextResponse.json({ "url": `${successUrl}` })
+            }
+          })
+          .catch(error => {
+            console.log(error);
+            return NextResponse.json({ "error": "Abbiamo riscontrato un errore, controlla di aver inserito tutti i campi, altrimenti contatta lo sviluppatore." })
+          });
       } else {
         console.error('Failed to get Ubisoft Ticket:', data);
       }
     })
     .catch(error => {
       console.error('Error:', error);
-    });
-
-
-  const urlGetProfiles = `https://public-ubiservices.ubi.com/v1/profiles?platformType=${platform}&namesOnPlatform=${username}`;
-
-  return await fetch(urlGetProfiles, {
-    method: 'GET',
-    headers: {
-      'Authorization': `Ubi_v1 t=${ticketAuth}`,
-      'Ubi-AppId': ubiAppId
-    },
-    next: { revalidate: 60 }
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Profile Stats:', data);
-      if (data.profiles.length == 0) {
-        return NextResponse.json({"error": "L\'utente non è stato trovato"})
-      } else {
-        const successUrl = new URL("/stats/user", "https://playxdefiant.it");
-        successUrl.searchParams.set('userId', data.profiles[0].userId);
-        successUrl.searchParams.set('platform', data.profiles[0].platformType);
-        successUrl.searchParams.set('username', username);
-        return NextResponse.json({"url": `${successUrl}`})
-      }
-    })
-    .catch(error => {
-      return NextResponse.json({"error": "Abbiamo riscontrato un errore, controlla di aver inserito tutti i campi, altrimenti contatta lo sviluppatore."})
     });
 }

@@ -590,7 +590,7 @@ async function getData(userId) {
     next: { revalidate: 60 }
   })
     .then(response => response.json())
-    .then(data => {
+    .then(async data => {
       if (data.ticket) {
         const urlData = `https://public-ubiservices.ubi.com/v1/profiles/${userId}/stats?spaceId=${spaceId}`;
         return fetch(urlData, {
