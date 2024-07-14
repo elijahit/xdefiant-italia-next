@@ -182,7 +182,7 @@ export default async function Stats(params) {
               <div className="row">
                 <div className="col-lg-3 col-12">
                   <div id="rank" className="mb-3">
-                    <div className="text-center fs-3 d-flex gap-2 align-items-center mb-3 justify-content-center justify-content-lg-start">
+                    <div className="text-center fs-3 d-flex gap-2 align-items-center mb-3 justify-content-center justify-content-lg-start text-wrap">
                       <img className={styles.avatar} src={`https://ubisoft-avatars.akamaized.net/${userId}/default_146_146.png`} />{username}</div>
                     <div className={styles.backgroundPrimary + " d-flex flex-column align-items-center pt-2 pb-2 border"}>
                       <h4 className="fs-5">Rank attuale</h4>
