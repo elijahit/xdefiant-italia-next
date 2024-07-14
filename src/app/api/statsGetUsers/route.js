@@ -26,7 +26,7 @@ export async function GET(request) {
       email: email,
       password: password,
     }),
-    next: { revalidate: 1 }
+    next: { revalidate: 60 }
   })
     .then(response => {
       if (response.headers.has('Retry-After')) {
