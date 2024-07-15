@@ -46,3 +46,10 @@
   width: 100px;
   border: 1px solid #fff;
 }
+
+.discordSection {
+  color: black;
+  padding: 5px 0;
+  font-weight: 700;
+  background-color: #DCC600;
+}
