@@ -123,7 +123,7 @@ export default function Stats(params) {
             </div>
             <section className="mb-5">
               <div className="d-none d-lg-block">
-                <a href="https://discord.com/servers/xdefiant-italia-1124809941744619602" target="_blank"><Image src={"/stats-images/discordbanner.png"} alt="Banner discord" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
+                <a href="https://discord.com/servers/xdefiant-italia-1124809941744619602" target="_blank"><Image src={"/stats-images/discordBanner.png"} alt="Banner discord" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
               </div>
 
               <div className="d-block d-lg-none">
