@@ -196,7 +196,7 @@ export default async function Stats(params) {
                   </div>
                   <div className={styles.backgroundPrimary + " border"}>
 
-                  <h3 className="pt-2 ps-2 fs-4 d-flex justify-content-center justify-content-lg-start gap-2"><Image src={"/stats-images/mode.png"} width={30} height={30}></Image> Modalità</h3>
+                  <h3 className="pt-2 ps-2 fs-4 d-flex justify-content-center justify-content-lg-start gap-2"><Image src={"/stats-images/mode.png"} width={30} height={30} alt="Modalità"></Image> Modalità</h3>
                     <div className="table-responsive">
                       <table className={"table table-striped " + styles.table}>
                         <thead>
@@ -278,7 +278,7 @@ export default async function Stats(params) {
                 <div className="col-lg-9 col-12 mt-5">
                   <div className={styles.backgroundPrimary + " border mb-4"}>
                     <div id="headerStats" className="d-block d-lg-flex align-items-center mb-4">
-                      <h3 className="pt-2 ps-2 fs-4 d-flex justify-content-center gap-2"><Image src={"/stats-images/overview.png"} width={30} height={30}></Image> Overview generale</h3>
+                      <h3 className="pt-2 ps-2 fs-4 d-flex justify-content-center gap-2"><Image src={"/stats-images/overview.png"} width={30} height={30} alt="Overview"></Image> Overview generale</h3>
                       <div className="ms-auto me-3 text-center text-lg-none">
                         <span id="hourPlay" className="me-3">
                           <i className="bi bi-clock"></i> {(await getUserData(userId, "playTime") / 3600).toFixed().toLocaleString(undefined, { minimumFractionDigits: 0 })}h giocate
@@ -345,7 +345,7 @@ export default async function Stats(params) {
                   <div className="row">
                     <div className="col-lg-6 col-12 mb-4 mb-lg-0">
                       <div className={styles.backgroundPrimary + " border table-responsive"}>
-                        <h3 className="pt-2 ps-2 fs-4 d-flex justify-content-center justify-content-lg-start gap-2"><Image src={"/stats-images/faction.png"} width={30} height={30}></Image> Fazioni</h3>
+                        <h3 className="pt-2 ps-2 fs-4 d-flex justify-content-center justify-content-lg-start gap-2"><Image src={"/stats-images/faction.png"} width={30} height={30} alt="Fazioni"></Image> Fazioni</h3>
                         <table className={"table table-striped " + styles.table}>
                           <thead>
                             <tr className="text-end">
@@ -408,7 +408,7 @@ export default async function Stats(params) {
                     </div>
                     <div className="col-lg-6 col-12 mb-4 mb-lg-0">
                       <div className={styles.backgroundPrimary + " border table-responsive"}>
-                      <h3 className="pt-2 ps-2 fs-4 d-flex justify-content-center justify-content-lg-start gap-2"><Image src={"/stats-images/weapon.png"} width={30} height={30}></Image> Armi</h3>
+                      <h3 className="pt-2 ps-2 fs-4 d-flex justify-content-center justify-content-lg-start gap-2"><Image src={"/stats-images/weapon.png"} width={30} height={30} alt="Armi"></Image> Armi</h3>
                         <table className={"table table-striped " + styles.table}>
                           <thead>
                             <tr className="text-end">
