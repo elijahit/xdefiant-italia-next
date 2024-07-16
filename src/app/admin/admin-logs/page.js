@@ -3,7 +3,6 @@ import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
 import Hero from "../../../../components/Hero";
 import Image from "next/image";
-import CardNewsHeader from "../../../../components/CardNews"
 import { notFound, redirect } from "next/navigation";
 import ProtectedPage from "./protectedPage";
 import { cookies } from "next/headers";
