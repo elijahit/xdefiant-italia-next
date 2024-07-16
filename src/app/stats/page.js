@@ -43,7 +43,7 @@ export default function Stats(params) {
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState("");
   const [timeOut, setTimeOut] = useState(0);
-
+-
   function platformHandling(e, p) {
     setPlatform(p);
   }
@@ -55,9 +55,6 @@ export default function Stats(params) {
     getDataMobile().then(value => {
       setNewsMobile(value);
     });
-    if (params.searchParams.error) {
-      setError(1);
-    }
     setTimeOut(0);
     setLoading(0);
   }, [])

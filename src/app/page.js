@@ -77,7 +77,7 @@ export default async function Home() {
           <div className="container">
             <div className="row">
               <div className="d-none col-lg-3 d-lg-flex justify-content-end align-items-baseline">
-                <Image src={"/home-images/soilder.png"} width={184} height={184} className="img-fluid" ></Image>
+                <Image src={"/home-images/soilder.png"} width={184} height={184} className="img-fluid" alt="Soldier avatar"></Image>
               </div>
               <div className="col-12 col-lg-9">
                 <p className="text-center text-lg-start mb-5 fs-4">
