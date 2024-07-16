@@ -1,6 +1,6 @@
 export const metadata = {
   title: "XDefiant Italia - News",
-  description: "Tutte le novità di XDefiant scritte da XDefiant Italia",
+  description: "Rimani aggiornato su tutte le novità di XDefiant con gli articoli esclusivi di XDefiant Italia. Scopri le ultime news, aggiornamenti e approfondimenti sul tuo gioco preferito!",
 };
 
 
