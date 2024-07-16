@@ -490,7 +490,7 @@ export default async function Stats(params) {
             </div>
           </section>
           <section className={styles.discordSection + " mb-5"}>
-            <p className="text-center m-0">Visita il nostro server discord: <a href="https://discord.gg/playxdefiant.it">discord.gg/playxdefiant.it</a></p>
+            <p className="text-center m-0">Visita il nostro server discord: <a href="https://discord.gg/playxdefiantit">discord.gg/playxdefiantit</a></p>
           </section>
         </>
       </main >
