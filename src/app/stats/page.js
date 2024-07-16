@@ -43,10 +43,6 @@ export default function Stats(params) {
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState("");
   const [timeOut, setTimeOut] = useState(0);
--
-  function platformHandling(e, p) {
-    setPlatform(p);
-  }
 
   useEffect(() => {
     getData().then(value => {
@@ -98,9 +94,9 @@ export default function Stats(params) {
               <div className="container mb-3">
                 <div className="row g-3 justify-content-center align-items-center">
                   <div className={"col-auto d-flex gap-2 rounded-start-3 " + styles.searchbackground}>
-                    <div onClick={(e) => platformHandling(e, 0)} className={platform == 0 ? styles.btnCustomActive : styles.btnCustom}><i className="bi bi-pc"></i></div>
-                    <div onClick={(e) => platformHandling(e, 1)} className={platform == 1 ? styles.btnCustomActive : styles.btnCustom}><i className="bi bi-playstation"></i></div>
-                    <div onClick={(e) => platformHandling(e, 2)} className={platform == 2 ? styles.btnCustomActive : styles.btnCustom}><i className="bi bi-xbox"></i></div>
+                    <div onClick={(e) => setPlatform(0)} className={platform == 0 ? styles.btnCustomActive : styles.btnCustom}><i className="bi bi-pc"></i></div>
+                    <div onClick={(e) => setPlatform(1)} className={platform == 1 ? styles.btnCustomActive : styles.btnCustom}><i className="bi bi-playstation"></i></div>
+                    <div onClick={(e) => setPlatform(2)} className={platform == 2 ? styles.btnCustomActive : styles.btnCustom}><i className="bi bi-xbox"></i></div>
                   </div>
                   <div className="col-auto p-0">
                     <div className="input-group">
