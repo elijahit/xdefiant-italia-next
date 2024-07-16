@@ -4,7 +4,7 @@ import "./CardNewsV3.css";
 export default function CardNewsHeaderV2({ image, title, uri }) {
   return (
     <>
-      <div className="imgContainer d-none d-lg-block">
+      <div className="imgContainerV3 d-none d-lg-block">
         <div className="position-relative d-none d-lg-block">
           <a href={"/posts/" + uri}>
             <Image className="rounded-3" alt="Immagine post" src={image} width={630} height={350} unoptimized ></Image>
