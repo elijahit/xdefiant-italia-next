@@ -4,7 +4,7 @@ import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import Hero from "../../../components/Hero";
 import { useEffect, useState } from "react";
-import CardNewsHeaderV3 from "../../../components/CardNews/CardNewsV3";
+import CardNewsHeaderV3 from "../../../components/CardComponents/CardNewsV3";
 import Image from "next/image";
 import { redirect } from "next/dist/server/api-utils";
 
