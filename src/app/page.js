@@ -125,12 +125,12 @@ export default async function Home() {
         <section className={styles.partner}>
           <ul className="list-unstyled p-0 m-0 d-flex justify-content-center align-items-center gap-3">
             <li>
-              <a href="https://xdi.gg/">
+              <a href="https://xdi.gg/" target="_blank">
                 <Image className="img-fluid" width={100} height={0} src={"/home-images/partner/xdi.png"} alt="Banner XDI"></Image>
               </a>
             </li>
             <li>
-              <a href="https://xdloadout.pro//">
+              <a href="https://xdloadout.pro/" target="_blank">
                 <Image className="img-fluid" width={184} height={0} src={"/home-images/partner/xdloadout.png"} alt="Banner XDLoadout"></Image>
               </a>
             </li>
