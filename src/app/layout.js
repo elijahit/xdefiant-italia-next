@@ -8,7 +8,7 @@ import Script from "next/script";
 
 
 export const metadata = {
-  title: "XDefiant Italia - Community Italiana",
+  title: "XDefiant Italia",
   description: "Community italiana di XDefiant dal 2021. Su discord aggiorniamo i giocatori su novità, eventi e competizioni. Unisciti a noi per condividere esperienze, strategie e partecipare a tornei",
   keywords: ['xdefiant', 'xdefiant italia', 'ubisoft italia', 'ubisoft'],
   openGraph: {

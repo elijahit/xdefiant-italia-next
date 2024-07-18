@@ -14,7 +14,7 @@ export default async function Home() {
     "@type": "WebPage",
     "url": "https://playxdefiant.it",
     "image": '/header-images/logos1.jpg',
-    "name": "XDefiant Italia - Community",
+    "name": "XDefiant Italia",
     "description": "Community italiana di XDefiant dal 2021. Su discord aggiorniamo i giocatori su novità, eventi e competizioni. Unisciti a noi per condividere esperienze, strategie e partecipare a tornei.",
     "isPartOf": {
       "@type": "WebSite",
@@ -25,7 +25,7 @@ export default async function Home() {
       '@type': 'Organization',
       'name': 'XDefiant Italia',
       'logo': '/header-images/logos1.jpg',
-      'keywords': 'xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord',
+      'keywords': 'xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord, XDefiant Italia',
       'founder': [{
         '@type': 'Person',
         'name': 'Gabriele Mario Tosto',
@@ -88,7 +88,7 @@ export default async function Home() {
           </div>
         </section>
         <section>
-          <div className="d-none d-lg-flex container-fluid mb-5 flex-column align-items-center bg-secondary-custom pt-4 pb-4">
+          <div className="d-none d-lg-flex container-fluid flex-column align-items-center bg-secondary-custom pt-4 pb-4">
             <h3 className="fs-5 text-center mb-4">LE ULTIME NEWS</h3>
             <div className="flex-column flex-lg-row d-flex gap-5 justify-content-center align-items-center mb-5">
               {postData.map((object, i) => <CardNewsHeader key={i} image={object.image_url} title={object.titolo.length > 39 ? object.titolo.slice(0, 39) + "..." : object.titolo} uri={object.uri_article} />)}
@@ -120,6 +120,21 @@ export default async function Home() {
           <div className="d-block d-lg-none">
             <a href="https://discord.com/servers/xdefiant-italia-1124809941744619602" target="_blank"><Image src={"/home-images/discordbannerMobile.png"} alt="Banner discord" className="img-fluid" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }}></Image> </a>
           </div>
+        </section>
+
+        <section className={styles.partner}>
+          <ul className="list-unstyled p-0 m-0 d-flex justify-content-center align-items-center gap-3">
+            <li>
+              <a href="https://xdi.gg/">
+                <Image className="img-fluid" width={100} height={0} src={"/home-images/partner/xdi.png"}></Image>
+              </a>
+            </li>
+            <li>
+              <a href="https://xdloadout.pro//">
+                <Image className="img-fluid" width={184} height={0} src={"/home-images/partner/xdloadout.png"}></Image>
+              </a>
+            </li>
+          </ul>
         </section>
       </main>
       {/* FOOTER */}
