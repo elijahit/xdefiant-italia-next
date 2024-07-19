@@ -68,6 +68,11 @@ export default function AuditLogAccordion({ auditId, azioneId, username, timesta
       textAction = "ha approvato la modifica dell\'articolo";
       textSpoiler = `${username} ha approvato la modifica dell\'articolo di ${utentePerform}`
       break;
+    case 9:
+      iconElements = <i className="bi bi-device-ssd"></i>;
+      textAction = "è stato cercato nel tracker";
+      textSpoiler = `${username} è stato cercato nel tracker di XDefiant`
+      break;
 
   }
 

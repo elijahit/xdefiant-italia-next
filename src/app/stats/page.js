@@ -43,6 +43,7 @@ export default function Stats(params) {
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState("");
   const [timeOut, setTimeOut] = useState(0);
+  const [checkClick, setCheckClick] = useState(0);
 
   useEffect(() => {
     getData().then(value => {
@@ -57,8 +58,8 @@ export default function Stats(params) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setCheckClick(checkClick+1);
     if (timeOut == 0) {
-      setTimeOut(1);
       fetch(`/api/statsGetUsers?username=${username}&platform=${platform == 0 ? "uplay" : platform == 1 ? "psn" : platform == 2 ? "xbl" : ""}`).then(response => response.json())
         .then(value => {
           if (value.error) {
@@ -70,11 +71,32 @@ export default function Stats(params) {
             window.location.href = `${value.url}`
           }
         })
-      setTimeout(() => {
-        setTimeOut(0);
-      }, 60000);
+      if(checkClick > 2 && checkClick < 5) {
+        setTimeOut(1);
+        setTimeout(() => {
+          setTimeOut(0);
+        }, 3000);
+      }
+      if(checkClick > 5 && checkClick < 10) {
+        setTimeOut(1);
+        setTimeout(() => {
+          setTimeOut(0);
+        }, 3000);
+      }
+      if(checkClick > 10) {
+        setTimeOut(1);
+        setTimeout(() => {
+          setTimeOut(0);
+        }, 60000);
+      }
     }
-    else if (timeOut == 1) {
+    else if (checkClick > 2 && checkClick < 5) {
+      setError("Hai eseguito troppe richieste, attendi 3 secondi e riprova.");
+    }
+    else if (checkClick > 5 && checkClick < 10) {
+      setError("Hai eseguito troppe richieste, attendi 10 secondi e riprova.");
+    }
+    else if (checkClick > 10) {
       setError("Hai eseguito troppe richieste, attendi 60 secondi e riprova.");
     }
   }
