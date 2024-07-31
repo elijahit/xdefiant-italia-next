@@ -45,7 +45,7 @@ export default async function Home() {
   return (
     <>
       {/* HEADER */}
-      <Header isPage="discord"></Header>
+      <Header></Header>
       <main>
         {/* HERO SECTION */}
         <Hero />
