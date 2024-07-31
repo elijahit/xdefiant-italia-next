@@ -13,7 +13,7 @@ function Footer() {
           <div className="col-2 d-none d-lg-block">
             <h6>Navigazione</h6>
             <nav aria-label="footer">
-              <ul className="list-unstyled">
+              <ul className="list-unstyled mb-3">
                 <li>
                   <a href="/">Home</a>
                 </li>
@@ -26,6 +26,8 @@ function Footer() {
                 <li>
                   <a href="/stats">Stats</a>
                 </li>
+              </ul>
+              <ul className="list-unstyled">
                 <li>
                   <a href="/privacy">Privacy Policy</a>
                 </li>
