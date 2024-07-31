@@ -108,7 +108,7 @@ export default async function Home() {
           <h2>5. Limitazione di Responsabilità</h2>
           <h3>5.1. Esclusione di Garanzie</h3>
           <p>
-            I servizi sono forniti "così come sono" e "come disponibili". Non
+            I servizi sono forniti &quot;così come sono&quot; e &quot;come disponibili&quot;. Non
             garantiamo che i servizi saranno ininterrotti o privi di errori.
           </p>
 
@@ -165,7 +165,7 @@ export default async function Home() {
           <h2>10. Contatti</h2>
           <p>
             Per domande o chiarimenti riguardanti questi Termini, contattaci
-            all&apos;indirizzo info@playxdefiant.it.
+            all&apos;indirizzo support@playxdefiant.it.
           </p>
         </section>
       </main>
