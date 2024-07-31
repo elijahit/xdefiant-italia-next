@@ -13,6 +13,7 @@ const cspHeader = `
 `;
 
 const nextConfig = {
+  
   async redirects() {
     return [
       {
@@ -41,6 +42,10 @@ const nextConfig = {
                 {
                   key: 'Content-Security-Policy',
                   value: cspHeader.replace(/\n/g, ''),
+                },
+                {
+                  key: 'Referrer-Policy',
+                  value: 'origin-when-cross-origin'
                 },
             ]
         }
