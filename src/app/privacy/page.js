@@ -14,9 +14,9 @@ export default async function Home() {
     "@type": "WebPage",
     url: "https://playxdefiant.it/news",
     image: "/header-images/logo.webp",
-    name: "XDefiant Italia - Discord",
+    name: "XDefiant Italia - Privacy Policy",
     description:
-      "Discod ufficiale di XDefiant Italia, vieni subito e trova i tuoi teammate per le tue partite sul titolo!",
+      "Privacy Policy di Servizio di XDefiant Italia",
     isPartOf: {
       "@type": "WebSite",
       url: "https://playxdefiant.it",
