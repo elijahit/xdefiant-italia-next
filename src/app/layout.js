@@ -5,6 +5,7 @@ import "./globals.css";
 import siteConfig from "../../siteConfig.json"
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from "next/script";
+import GoogleAdsense from '../../components/GoogleAdsense';
 
 
 export const metadata = {
@@ -37,7 +38,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="it">
-      <Script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5871152138430543' crossOrigin='anonymous'></Script>
+      <GoogleAdsense pId={5871152138430543}/>
       <body>{children}</body>
       <GoogleAnalytics gaId="G-4YW7FLVCPY" />
     </html>
