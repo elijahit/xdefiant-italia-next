@@ -5,7 +5,7 @@ import { convert } from 'url-slug'
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 
-import request from "request";
+import requests from "request";
 import { google } from "googleapis";
 
 const keyGoogle = {
@@ -76,7 +76,7 @@ export async function POST(request) {
         "type": "URL_UPDATED"
       }
     };
-    request(options, function (error, response, body) {
+    requests(options, function (error, response, body) {
       // Handle the response
       console.log(body);
     });
