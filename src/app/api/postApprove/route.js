@@ -72,7 +72,7 @@ export async function POST(request) {
       auth: { "bearer": tokens.access_token },
       // Define contents here. The structure of the content is described in the next step.
       json: {
-        "url": "https://playxdefiant.it/posts/${uri_article}",
+        "url": `https://playxdefiant.it/posts/${uri_article}`,
         "type": "URL_UPDATED"
       }
     };
