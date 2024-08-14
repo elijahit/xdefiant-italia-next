@@ -4,6 +4,7 @@ import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
 import { remark } from 'remark';
 import html from 'remark-html';
+import strip from 'strip-markdown';
 import Hero from "../../../../components/Hero";
 import { cookies } from "next/headers";
 import Article from "./Components/Article";
@@ -28,11 +29,11 @@ export async function generateMetadata({ params, }) {
 
     return {
       title: articleObject.titolo,
-      description: articleObject.testo,
+      description: await remark().use(strip).process(articleObject.testo),
       copyright: articleObject.author,
       openGraph: {
         title: articleObject.titolo,
-        description: articleObject.testo,
+        description: await remark().use(strip).process(articleObject.testo),
         url: siteConfig.site.baseUri,
         siteName: 'XDefiant Italia - Community',
         images: [
