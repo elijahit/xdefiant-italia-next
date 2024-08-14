@@ -7,6 +7,8 @@ import html from 'remark-html';
 import Hero from "../../../../components/Hero";
 import { cookies } from "next/headers";
 import Article from "./Components/Article";
+import siteConfig from "../../../../siteConfig.json"
+
 
 export async function generateMetadata({ params, }) {
   try {
