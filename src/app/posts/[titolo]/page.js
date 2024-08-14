@@ -27,7 +27,28 @@ export async function generateMetadata({ params, }) {
     return {
       title: articleObject.titolo,
       description: articleObject.testo,
-      copyright: articleObject.author
+      copyright: articleObject.author,
+      openGraph: {
+        title: articleObject.titolo,
+        description: articleObject.testo,
+        url: siteConfig.site.baseUri,
+        siteName: 'XDefiant Italia - Community',
+        images: [
+          {
+            url: articleObject.imageUrl, // Must be an absolute URL
+            width: 800,
+            height: 600,
+          },
+          {
+            url: articleObject.imageUrl, // Must be an absolute URL
+            width: 1800,
+            height: 1600,
+            alt: 'Background XDefiant Italia',
+          },
+        ],
+        locale: 'it_IT',
+        type: 'website',
+      },
     }
   }
   catch {
