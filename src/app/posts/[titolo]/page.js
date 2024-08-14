@@ -31,6 +31,7 @@ export async function generateMetadata({ params, }) {
       title: articleObject.titolo,
       description: await remark().use(strip).process(articleObject.testo),
       copyright: articleObject.author,
+      creator: articleObject.author,
       openGraph: {
         title: articleObject.titolo,
         description: await remark().use(strip).process(articleObject.testo),
