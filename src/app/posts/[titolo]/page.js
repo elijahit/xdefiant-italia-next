@@ -51,7 +51,8 @@ export async function generateMetadata({ params, }) {
       },
     }
   }
-  catch {
+  catch (error) {
+    console.log(error)
     notFound();
   }
 }
