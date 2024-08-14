@@ -3,6 +3,10 @@ import db from "../../../../scripts/database";
 import { cookies, headers } from "next/headers";
 import { unlink } from 'fs';
 
+import requests from "request";
+import { google } from "googleapis";
+import keyGoogle from "../../../../googleIndexingConfig.json";
+
 export async function GET() {
   const email = cookies().get('email');
   const auth = cookies().get('authToken');
@@ -78,11 +82,45 @@ export async function POST(request) {
   const ip = headersList.get("x-forwarded-for");
 
   await db.run("INSERT INTO admin_logs (id_utente, id_utente_perform, azione, timestamp, ip) VALUES(?, ?, 7, ?, ?)", id_utente, idUtenteRichiesta, new Date().getTime(), ip);
+  const article = await db.get("SELECT * FROM article WHERE id_article = ?", idPost);
 
   db.run("DELETE FROM actions_article WHERE id_article = ? AND id_utente = ?", idPost, idUtenteRichiesta);
   db.run("DELETE FROM article WHERE id_article = ?", idPost);
 
-
+    // GOOGLE INDEXING
+    const jwtClient = new google.auth.JWT(
+      keyGoogle.client_email,
+      null,
+      keyGoogle.private_key,
+      ["https://www.googleapis.com/auth/indexing"],
+      null
+    );
+  
+    jwtClient.authorize(function (err, tokens) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      let options = {
+        url: "https://indexing.googleapis.com/v3/urlNotifications:publish",
+        method: "POST",
+        // Your options, which must include the Content-Type and auth headers
+        headers: {
+          "Content-Type": "application/json"
+        },
+        auth: { "bearer": tokens.access_token },
+        // Define contents here. The structure of the content is described in the next step.
+        json: {
+          "url": `https://playxdefiant.it/posts/${article.uri_article}`,
+          "type": "URL_DELETED"
+        }
+      };
+      requests(options, function (error, response, body) {
+        // Handle the response
+        console.log(body);
+      });
+    });
+  
   return NextResponse.json({ text: "L'articolo è stato eliminato.", success: 1 }, { status: 200 });
 
 

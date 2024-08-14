@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "xdefiant-italia",
+  "private_key_id": "06c442f58797221d717e3d0f70b52043a2a64b7c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCqavAhe96EfOp4\nC+qNjp3uSu1bCbCyWladjofpg0udS0mocFb+D/eBxMSGX5zw8XCIfVOP4a6B9GW0\nlQiFfyrTCGyUAg/3Ox+piZBgPSAB1lV1jpuuY4+fbbOKPRSM+NLPzfmwA9pBNc4i\nmR+oAsIXkC3Rx98j/UrrftKWfzjgvBzvaX2JwLK+RDQmJiTlz7k873q+5DFLksUq\nNpYmwjhwHLQ3zkhezvZbHHZmQZGW7dFwT7P4YrO5BgYUabwWgevZiU7MHa6u+fzU\nwLy8UITS0tDM0hIom+s+PZK3OetKanyx42V/kSPTjDyn8crDHr2xb/LwmzibynR/\ntOVAYG9XAgMBAAECggEAHHaT+OO5fKNoffhviokhc6VsE2KA8qkIAnTF2oilXnYu\nrUVmIjUEf9YfhNn/WnbY9tMH2+YzwVzSh+DEdZeRzYGAsQ/PHtnvJd/mD0zmRahI\nycOx2OSkHlqyPAqLnigI/dBHPdDG6VFVRo4QrX0YcdsQ7BLYACjUFJUwExbYpyA+\nYRGULGUg1j1hILF+DlBAssWt7r256s9q5hDa/6bEZ8JdiwWN0pxw/y8d6od0bZ4a\nur8Zc6QGt/lMs4mK5M3TxNNAExoZqOeTI6QMkgTRZiDlJFnW5/06uBTOZWYr9BUT\nEsri7HDY1YAgoL9OyhUpcdgSXd5ywENM/zhwTwUaUQKBgQDWcXD8/vdcO9Rn8eK3\nOQwMSe5DZAG3z5W5+oPQOdfWiFt3BgCN5vhAQqbRJIcC3HTvMe9pdfc9XI/+tKJn\nVVu+mUoc8+lnNNHjR7Ipoak57Ii1M/Lh7J7G3yF6rgzYzSGoCXoQ2v/4dX2ZVI+5\nhfcbvWScRYO+9eSP5tXiMGjU6wKBgQDLcWOigF85JkjlRh3xrb1KXsQEmB8IapqK\nzQI4F3CIM6cbq9Br7cyd9+bEypt5+2Iwkm9ZFgHh8aBYLpDIAAt0bWhh68yDpzgM\nkN1cv/iN8/DgxZDbh1ce6jrcWJY83JaLOV5MYR9t65N56Mi/3VBWh0G7qDgoDkCD\netrQLwokRQKBgGJnqEvQzL48jlosu7cMrKSvAHFYYRlyXuj7NqXFBXDjHeXekT6M\n8Pq8G0T6GCKN+/MP3SduBMjZwxJE3gnBN9qdCU+D9mVv7aj4a5+DGd8E1i8g6aIX\nLT1hg0GCwU5zw7ASuTsm5DOl5r8H+PRPr3fBT3wOwkhNGleWvCuRv2mFAoGAQYyb\nSbSK+eL4AceBxmjwYJIAHmrVNOUEPkyntmL3AyuBYE0PrnbEQvGpDScqyTbSAExu\nTAnnOWGdBEycoZRCHJVT2JkdIB401PeoG0ZPU42Rwxpk/haxX2ig5nY0kg+RAfLO\nC1YPxl7s+Y6jgA5S4E5cQ5aD4YQWDUb8Ua+WWPECgYEAml69Dkzq//tU5nKj1JUa\nWSFVq61gBwFP9U4JOdzeleKKD7sp3wPIibD+UddF1xHlObTZtHwb367tVOrVlQIA\nGYzimXac1yf2dvix6+7cK+LZsqpJBca1TFvY0owS0umylHNNY7y/h9exqkAbO+7b\nR7v+aNDzdyiX6frUsSak2/E=\n-----END PRIVATE KEY-----\n",
+  "client_email": "xdefiant-italia-web@xdefiant-italia.iam.gserviceaccount.com",
+  "client_id": "108821009777582223268",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/xdefiant-italia-web%40xdefiant-italia.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
