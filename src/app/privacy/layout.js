@@ -1,3 +1,6 @@
+import siteConfig from "../../../siteConfig.json"
+
+
 export const metadata = {
   title: "XDefiant Italia - Privacy",
   description: "Scopri tutto sulla privacy policy che viene adottata in XDefiant Italia!",

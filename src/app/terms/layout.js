@@ -1,3 +1,6 @@
+import siteConfig from "../../../siteConfig.json"
+
+
 export const metadata = {
   title: "XDefiant Italia - Termini di Servizio",
   description: "Scopri tutto sui termini di servizio adottati da XDefiant Italia!",
