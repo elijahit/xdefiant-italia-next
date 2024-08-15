@@ -29,12 +29,12 @@ export async function generateMetadata({ params, }) {
 
     return {
       title: articleObject.titolo,
-      description: await remark().use(strip).process(articleObject.testo.slice(0, 160)),
+      description: await remark().use(strip).process(articleObject.testo.slice(0, 160)+"..."),
       copyright: articleObject.author,
       creator: articleObject.author,
       openGraph: {
         title: articleObject.titolo,
-        description: await remark().use(strip).process(articleObject.testo.slice(0, 160)),
+        description: await remark().use(strip).process(articleObject.testo.slice(0, 160)+"..."),
         url: siteConfig.site.baseUri,
         siteName: 'XDefiant Italia - Community',
         images: [
