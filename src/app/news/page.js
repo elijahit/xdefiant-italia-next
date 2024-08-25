@@ -10,32 +10,49 @@ export default async function Home() {
   const postData = await getData();
   const postDataAll = await getDataAll();
   const schemaSite = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "url": "https://playxdefiant.it/news",
-  "image": '/header-images/logo.webp',
-  "name": "XDefiant Italia - News",
-  "description": "Notizie sul gioco di XDefiant e approfondimenti forniti dalla redazione di XDefiant Italia",
-  "isPartOf": {
-    "@type": "WebSite",
-    "url": "https://playxdefiant.it",
-    "name": "XDefiant Italia"
-  },
-  "publisher": {
-    '@type': 'Organization',
-    'name': 'XDefiant Italia',
-    'logo': '/header-images/logo.webp',
-    'keywords': 'xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord',
-    'founder': [{
-      '@type': 'Person',
-      'name': 'Gabriele Mario Tosto',
-      'description': 'CEO e Developer di XDefiant Italia, lavora attualmente come sviluppatore attivo.',
-      'jobTitle': 'Software Engineer',
-      'givenName': 'Gabriele',
-      'email': 'gabriele.tosto@outlook.com'
-    }]
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "https://playxdefiant.it/news",
+    "image": '/header-images/logo.webp',
+    "name": "XDefiant Italia - News",
+    "description": "Notizie sul gioco di XDefiant e approfondimenti forniti dalla redazione di XDefiant Italia",
+    "isPartOf": {
+      "@type": "WebSite",
+      "url": "https://playxdefiant.it",
+      "name": "XDefiant Italia"
+    },
+    "publisher": {
+      '@type': 'Organization',
+      'name': 'XDefiant Italia',
+      'logo': '/header-images/logo.webp',
+      'keywords': 'xdefiant italia, xdefiant, news xdefiant italia, news, tornei, community, discord',
+      'founder': [{
+        '@type': 'Person',
+        'name': 'Gabriele Mario Tosto',
+        'description': 'CEO e Developer di XDefiant Italia, lavora attualmente come sviluppatore attivo.',
+        'jobTitle': 'Software Engineer',
+        'givenName': 'Gabriele',
+        'email': 'gabriele.tosto@outlook.com'
+      }]
+    }
   }
-}
+
+  function DateFormat(timestamp) {
+    const date = new Date(timestamp);
+
+    let day = date.getDate();
+    let month = date.getMonth();
+
+    if (day < 10) {
+      day = '0' + day;
+    }
+
+    if (month < 10) {
+      month = `0${month}`;
+    }
+
+    return `${day}/${month}/${date.getFullYear()}`;
+  }
 
   return (
     <>
@@ -60,9 +77,14 @@ export default async function Home() {
             <h3 className="fs-5 text-center mb-4">TUTTI I NOSTRI ARTICOLI</h3>
             {postDataAll.map((object, i) =>
               <div className={styles.allpost + " row"} key={i}>
-                <div className="d-flex align-items-center">
-                  <span>
+                <div className="col-10">
+                  <div className="d-flex align-items-center">
                     <span className="me-3"> • </span> <a className="fs-5" href={`/posts/${object.uri_article}`}>{object.titolo}</a>
+                  </div>
+                </div>
+                <div className="col-2 d-flex align-items-center">
+                  <span className="ms-auto">
+                    {DateFormat(+object.created_at)}
                   </span>
                 </div>
               </div>)}
