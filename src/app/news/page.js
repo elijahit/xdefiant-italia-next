@@ -6,9 +6,10 @@ import Image from "next/image";
 import CardNewsHeader from "../../../components/CardComponents/CardNewsV2"
 import { notFound } from "next/navigation";
 
-export default async function Home() {
+export default async function Home(params) {
+  let searchParams = params.searchParams;
   const postData = await getData();
-  const postDataAll = await getDataAll();
+  const postDataAll = await getDataAll(searchParams.pag ? +(searchParams.pag) * 10 - 10 : 0);
   const schemaSite = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -41,7 +42,7 @@ export default async function Home() {
     const date = new Date(timestamp);
 
     let day = date.getDate();
-    let month = date.getMonth()+1;
+    let month = date.getMonth() + 1;
 
     if (day < 10) {
       day = '0' + day;
@@ -75,7 +76,7 @@ export default async function Home() {
         <section className="mb-5 d-none d-lg-block">
           <div className="container">
             <h3 className="fs-5 text-center mb-4">TUTTI I NOSTRI ARTICOLI</h3>
-            {postDataAll.map((object, i) =>
+            {postDataAll['data'].map((object, i) =>
               <div className={styles.allpost + " row"} key={i}>
                 <div className="col-10">
                   <div className="d-flex align-items-center">
@@ -88,18 +89,36 @@ export default async function Home() {
                   </span>
                 </div>
               </div>)}
+            <nav aria-label="Page navigation" className="d-flex justify-content-center mt-3">
+              <ul className="pagination">
+                {[...Array(Math.ceil(postDataAll['count'] / 10))].map((_, i) => (
+                  <div key={i}>
+                    <li className="page-item ms-1 me-1"><a className="page-link" href={`?pag=${i + 1}`}>{i + 1}</a></li>
+                  </div>
+                ))}
+              </ul>
+            </nav>
           </div>
         </section>
         {/* MOBILE VIEW */}
         <section className="mb-5 d-block d-lg-none">
           <div className="container">
             <h3 className="fs-5 text-center mb-4">TUTTI I NOSTRI ARTICOLI</h3>
-            {postDataAll.map((object, i) =>
+            {postDataAll['data'].map((object, i) =>
               <div className={styles.allpostMobile + " row"} key={i}>
                 <div className="d-flex align-items-center">
                   <span className="me-3"> • </span><a className="fs-5" href={`/posts/${object.uri_article}`}>{object.titolo}</a>
                 </div>
               </div>)}
+            <nav aria-label="Page navigation" className="d-flex justify-content-center mt-3">
+              <ul className="pagination">
+                {[...Array(Math.ceil(postDataAll['count'] / 10))].map((_, i) => (
+                  <div key={i}>
+                    <li className="page-item ms-1 me-1"><a className="page-link" href={`?pag=${i + 1}`}>{i + 1}</a></li>
+                  </div>
+                ))}
+              </ul>
+            </nav>
           </div>
         </section>
       </main>
@@ -127,11 +146,12 @@ async function getData() {
   }
 }
 
-async function getDataAll() {
+async function getDataAll(pag) {
   try {
-    const res = await fetch(`http://localhost:3000/api/postNews`, { next: { revalidate: 1 } });
+    const res = await fetch(`http://localhost:3000/api/postNews?limit=10&pag=${pag}`, { next: { revalidate: 1 } });
+    const resCount = await fetch(`http://localhost:3000/api/postNews`, { next: { revalidate: 1 } });
 
-    return await res.json();
+    return { "data": await res.json(), "count": Object.keys(await resCount.json()).length };
   } catch {
     notFound();
   }
