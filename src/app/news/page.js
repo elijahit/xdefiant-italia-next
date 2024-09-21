@@ -11,7 +11,7 @@ export default async function Home(params) {
   searchParams?.pag ? searchParams.pag : searchParams.pag = 1;
   const postData = await getData();
   const postDataAll = await getDataAll(searchParams.pag ? +(searchParams.pag) * 10 - 10 : 0);
-  const currentPage = +searchParams.pag; // Pagina corrente
+  const currentPage = +searchParams.pag;
   const schemaSite = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -68,13 +68,7 @@ export default async function Home(params) {
       }
     } else {
       // Mostra i primi 3, l'ultimo e puntini in mezzo
-      if (currentPage <= 0) {
-        pages = [1, 2, 3, '...', totalPages];
-      } else if (currentPage > totalPages - 3) {
-        pages = [1, '...', totalPages - 2, totalPages - 1, totalPages];
-      } else {
-        pages = [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
-      }
+      pages = [(currentPage - 1) == 0 ? null : currentPage -1 , currentPage, currentPage + 1, '...', totalPages];
     }
 
     return pages;
@@ -116,10 +110,14 @@ export default async function Home(params) {
               </div>)}
             <nav aria-label="Page navigation" className="d-flex justify-content-center mt-3">
               <ul className="pagination">
-                {[...Array(Math.ceil(postDataAll['count'] / 10))].map((_, i) => (
-                  <div key={i}>
-                    <li className={i + 1 == (+searchParams.pag) ? "page-item ms-1 me-1 active" : "page-item ms-1 me-1"}><a className="page-link" href={`?pag=${i + 1}`}>{i + 1}</a></li>
-                  </div>
+              {generatePages().map((page, i) => (
+                  <li key={i} className={page === currentPage ? "page-item ms-1 me-1 active" : "page-item ms-1 me-1"}>
+                    {page == null ? "" : page === '...' ? (
+                      <span className="page-link">...</span>
+                    ) : (
+                      <a className="page-link" href={`?pag=${page}`}>{page}</a>
+                    )}
+                  </li>
                 ))}
               </ul>
             </nav>
@@ -139,7 +137,7 @@ export default async function Home(params) {
               <ul className="pagination">
                 {generatePages().map((page, i) => (
                   <li key={i} className={page === currentPage ? "page-item ms-1 me-1 active" : "page-item ms-1 me-1"}>
-                    {page === '...' ? (
+                    {page == null ? "" : page === '...' ? (
                       <span className="page-link">...</span>
                     ) : (
                       <a className="page-link" href={`?pag=${page}`}>{page}</a>
