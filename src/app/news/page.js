@@ -68,7 +68,7 @@ export default async function Home(params) {
       }
     } else {
       // Mostra i primi 3, l'ultimo e puntini in mezzo
-      pages = [(currentPage - 1) == 0 ? null : currentPage -1 , currentPage, currentPage + 1, '...', totalPages];
+      pages = [(currentPage - 1) == 0 ? null : currentPage -1 , currentPage, currentPage == totalPages ? null : currentPage + 1, '...', totalPages];
     }
 
     return pages;
