@@ -62,13 +62,13 @@ export default async function Home(params) {
     let totalPages = postDataAll['count'];
 
     // Mostra tutte le pagine se sono 5 o meno
-    if (totalPages <= 5) {
+    if (totalPages <= 3) {
       for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
       }
     } else {
       // Mostra i primi 3, l'ultimo e puntini in mezzo
-      if (currentPage <= 3) {
+      if (currentPage <= 4) {
         pages = [1, 2, 3, '...', totalPages];
       } else if (currentPage > totalPages - 3) {
         pages = [1, '...', totalPages - 2, totalPages - 1, totalPages];
