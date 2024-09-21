@@ -68,7 +68,7 @@ export default async function Home(params) {
       }
     } else {
       // Mostra i primi 3, l'ultimo e puntini in mezzo
-      if (currentPage <= 4) {
+      if (currentPage <= 0) {
         pages = [1, 2, 3, '...', totalPages];
       } else if (currentPage > totalPages - 3) {
         pages = [1, '...', totalPages - 2, totalPages - 1, totalPages];
