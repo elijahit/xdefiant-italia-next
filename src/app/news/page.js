@@ -59,7 +59,7 @@ export default async function Home(params) {
 
   const generatePages = () => {
     let pages = [];
-    let totalPages = postDataAll['count'];
+    let totalPages = Math.ceil(postDataAll['count']/10);
 
     // Mostra tutte le pagine se sono 5 o meno
     if (totalPages <= 3) {
