@@ -58,6 +58,10 @@ export async function GET(request) {
         })
           .then(response => response.json())
           .then(data => {
+            if(data?.message == "Ticket is invalid") {
+              GET(request);
+              return;
+            }
             console.log('Profile Stats:', data);
             if (data.profiles.length == 0) {
               return NextResponse.json({ "error": "L\'utente non è stato trovato" })
