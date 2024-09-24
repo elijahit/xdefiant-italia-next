@@ -44,6 +44,7 @@ export default function Stats(params) {
   const [error, setError] = useState("");
   const [timeOut, setTimeOut] = useState(0);
   const [checkClick, setCheckClick] = useState(0);
+  const [checkError, setCheckError] = useState(0);
 
   useEffect(() => {
     getData().then(value => {
@@ -66,7 +67,13 @@ export default function Stats(params) {
             setTimeout(() => {
               setTimeOut(0);
             }, 3000);
-            setError(value.error);
+            if(checkError == 1) {
+              setError(value.error);
+              setCheckError(0);
+            } else {
+              setCheckError(1);
+              handleSubmit(e);
+            }
           } else {
             window.location.href = `${value.url}`
           }
@@ -111,7 +118,7 @@ export default function Stats(params) {
         <Hero />
         {/* FIRST SECTION */}
         {loading == 0 ? (
-          <><h1 className="fs-4 text-center mt-3 mb-3">XDEFIANT ITALIA TRACKER <span className="badge text-bg-warning">BETA</span></h1>
+          <><h1 className="fs-4 text-center mt-3 mb-3">XDEFIANT ITALIA TRACKER</h1>
             <form onSubmit={(e) => handleSubmit(e)} action={"/api/statsGetUsers"} method="get">
               <div className="container mb-3">
                 <div className="row g-3 justify-content-center align-items-center">

@@ -59,7 +59,6 @@ export async function GET(request) {
           .then(response => response.json())
           .then(data => {
             if(data?.message == "Ticket is invalid") {
-              GET(request);
               return;
             }
             console.log('Profile Stats:', data);
