@@ -6,6 +6,7 @@ import siteConfig from "../../siteConfig.json"
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from "next/script";
 import GoogleAdsense from '../../components/GoogleAdsense';
+import Clarity from '../../components/Clarity';
 
 
 export const metadata = {
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="it">
       <GoogleAdsense pId={5871152138430543}/>
+      <Clarity/>
       <body>{children}</body>
       <GoogleAnalytics gaId="G-4YW7FLVCPY" />
     </html>
