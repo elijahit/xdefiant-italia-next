@@ -7,11 +7,12 @@ import { notFound, redirect } from "next/navigation";
 import ProtectedPage from "./protectedPage";
 import { cookies } from "next/headers";
 
-export default async function newPost() {
+export default async function newsPrePage(params) {
   await getData();
+  let pag = params.searchParams ? params.searchParams : 1;
   
   return (
-    <ProtectedPage />
+    <ProtectedPage data-pag={pag} />
   )
 }
 

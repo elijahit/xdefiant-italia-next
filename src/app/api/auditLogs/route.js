@@ -10,6 +10,9 @@ export async function GET(request) {
   const email = cookies().get('email');
   const auth = cookies().get('authToken');
 
+  const searchParams = request.nextUrl.searchParams;
+  let pag = searchParams.get('pag') ? searchParams.get('pag') : 0;
+
   if(!email && !auth) return NextResponse.json({ text: "Non hai i permessi necessari per utilizzare questa funzione.", success: 0 }, { status: 400 });
 
 
@@ -23,9 +26,8 @@ export async function GET(request) {
   LEFT JOIN article ar ON a.id_article = ar.id_article
   LEFT JOIN utente ur ON ar.id_utente = ur.id_utente
   LEFT JOIN utente up on a.id_utente_perform = up.id_utente
-  ORDER BY a.id_admin_logs DESC LIMIT 20`);
+  ORDER BY a.id_admin_logs DESC LIMIT ? OFFSET ?`, 10, +pag == 1 ? 1 : +pag * 10);
   
-
   return NextResponse.json(res, { status: 200 });
 
   

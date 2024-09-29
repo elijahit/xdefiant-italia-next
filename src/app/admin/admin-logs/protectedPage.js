@@ -23,15 +23,16 @@ import Image from "next/image";
 */
 
 
-export default function AdminLogs() {
-  const [data, setData] = useState(null);
+export default function AdminLogs(props) {
+  const [data, setData] = useState(null)
+  let pag = props['data-pag'].pag ? +props['data-pag'].pag : 1;
   useEffect(() => {
-    getDataAllByLimit().then( async value => {
+    getDataAllByLimit(pag).then( async value => {
       let res = await value.json();
       setData(res);
     })
 
-  }, [])
+  }, [pag])
 
   return (
     <>
@@ -56,9 +57,9 @@ export default function AdminLogs() {
   );
 }
 
-async function getDataAllByLimit() {
+async function getDataAllByLimit(pag) {
   try {
-    const res = await fetch(`/api/auditLogs`, { next: { revalidate: 1 } });
+    const res = await fetch(`/api/auditLogs?pag=${pag}`, { next: { revalidate: 1 } });
     if(res.status == 400) {
       return "";
     }
