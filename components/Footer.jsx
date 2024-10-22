@@ -29,7 +29,10 @@ function Footer() {
               </ul>
               <ul className="list-unstyled">
                 <li>
-                  <a href="/privacy">Privacy Policy</a>
+                  <a href="https://www.iubenda.com/privacy-policy/89596576">Privacy Policy</a>
+                </li>
+                <li>
+                  <a href="https://www.iubenda.com/privacy-policy/89596576/cookie-policy">Cookie Policy</a>
                 </li>
                 <li>
                   <a href="/terms">Terms of Service</a>

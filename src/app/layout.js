@@ -7,6 +7,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from "next/script";
 import GoogleAdsense from '../../components/GoogleAdsense';
 import Clarity from '../../components/Clarity';
+import Iubenda from '../../components/Iubenda';
 
 
 export const metadata = {
@@ -43,6 +44,7 @@ export default function RootLayout({ children }) {
       <Clarity/>
       <body>{children}</body>
       <GoogleAnalytics gaId="G-4YW7FLVCPY" />
+      <Iubenda />
     </html>
   );
 }
