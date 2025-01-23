@@ -1,6 +1,8 @@
 ## XDefiant Italy
 A simple next/react project for the Italian XDefiant community.
 
+![preview](https://mir-s3-cdn-cf.behance.net/project_modules/fs/2f7b92201675839.66793ad0ad887.jpg)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
