@@ -2,6 +2,7 @@
 A simple next/react project for the Italian XDefiant community.
 
 (Preview by Gabuzz (UI/UX))
+
 [!] This preview is out of date, there are many more features: Dashboard admin (post management - post approval and deletion approval), post editing by the author directly on the article, post creation via dashboard with markdown, tracker system for XDefiant User.
 ![preview](https://mir-s3-cdn-cf.behance.net/project_modules/fs/2f7b92201675839.66793ad0ad887.jpg)
 
