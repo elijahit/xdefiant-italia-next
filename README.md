@@ -1,6 +1,9 @@
 ## XDefiant Italy
 A simple next/react project for the Italian XDefiant community.
 
+[Internet Archive Preview](https://web.archive.org/web/20241206015749/https://playxdefiant.it/)
+
+
 (Preview by Gabuzz (UI/UX))
 
 [!] This preview is out of date, there are many more features: Dashboard admin (post management - post approval and deletion approval), post editing by the author directly on the article, post creation via dashboard with markdown, tracker system for XDefiant User.
